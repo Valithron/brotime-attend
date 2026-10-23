@@ -43,7 +43,7 @@ function initialState(demo) {
   return {
     seasons: demo ? demoSeasons() : [emptySeason('cur', String(new Date().getFullYear()))],
     viewId: null, view: 'board', memberId: 's',
-    histFilter: 'all', ledgerFilter: 'owed', openId: null, menu: null,
+    histFilter: 'all', historyMode: 'live', ledgerFilter: 'owed', openId: null, menu: null,
     confirmNew: false, confirmDel: false, toast: null,
     form: blankForm(today), nextId: 5000, today: today
   };

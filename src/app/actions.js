@@ -26,6 +26,7 @@ const ACTIONS = {
   openGathering: (S, p) => ({ patch: { view: 'history', openId: p.id, histFilter: 'all' } }),
   toggleGathering: (S, p) => ({ patch: { openId: S.openId === p.id ? null : p.id } }),
   filterHistory: (S, p) => ({ patch: { histFilter: S.histFilter === p.id ? 'all' : p.id } }),
+  setHistoryMode: (S, p) => ({ patch: { historyMode: p.mode, histFilter: 'all', openId: null } }),
   filterLedger: (S, p) => ({ patch: { ledgerFilter: p.key } }),
 
   setField: (S, p) => {

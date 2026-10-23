@@ -364,62 +364,72 @@
     <!-- ============ HISTORY ============ -->
     <sc-if value="{{isHistory}}" hint-placeholder-val="{{ false }}">
       <section class="page narrow" data-view-root="history" aria-label="History">
-        <div class="chips">
-          <sc-for list="{{histFilters}}" as="f" hint-placeholder-count="6">
-            <button class="chip {{f.cls}}" sc-camel-on-click="{{f.pick}}" aria-label="{{f.aria}}" aria-pressed="{{f.on}}" data-action="filter-history" data-filter="{{f.key}}">
-              <sc-if value="{{f.hasAvatar}}" hint-placeholder-val="{{ false }}"><span class="avatar gone">{{f.initial}}</span></sc-if>
-              {{f.label}}
-            </button>
+        <div class="chips" role="group" aria-label="History source">
+          <sc-for list="{{historyModes}}" as="m" hint-placeholder-count="2">
+            <button class="chip {{m.cls}}" sc-camel-on-click="{{m.pick}}" aria-pressed="{{m.on}}" data-action="history-mode" data-mode="{{m.key}}">{{m.label}}</button>
           </sc-for>
         </div>
-        <div class="tl">
-          <sc-for list="{{history}}" as="r" hint-placeholder-count="5">
-            <sc-if value="{{r.isHead}}" hint-placeholder-val="{{ false }}"><h3 class="mhd">{{r.label}}</h3></sc-if>
-            <sc-if value="{{r.isRow}}" hint-placeholder-val="{{ true }}">
-              <div class="tl-item {{r.rowCls}}" data-gathering="{{r.id}}" data-open="{{r.open}}">
-                <span class="dot {{r.dotCls}}" aria-hidden="true"></span>
-                <button class="row-head" sc-camel-on-click="{{r.toggle}}" aria-expanded="{{r.open}}" aria-label="{{r.aria}}" data-action="toggle-gathering" data-gathering="{{r.id}}">
-                  <span class="date"><span class="d">{{r.d}}</span><span class="mo">{{r.mo}}</span></span>
-                  <span class="row-main">
-                    <span class="act">{{r.activity}}</span>
-                    <sc-if value="{{r.hasEventMeta}}" hint-placeholder-val="{{ false }}"><span class="act-meta">{{r.eventMeta}}</span></sc-if>
-                  </span>
-                  <span class="rcs" aria-hidden="true">
-                    <sc-for list="{{r.chips}}" as="c" hint-placeholder-count="5"><span class="rc {{c.cls}}" title="{{c.tip}}">{{c.initial}}</span></sc-for>
-                  </span>
-                </button>
-                <sc-if value="{{r.open}}" hint-placeholder-val="{{ false }}">
-                  <div class="detail">
-                    <sc-for list="{{r.effects}}" as="e" hint-placeholder-count="0">
-                      <div class="eff" data-member="{{e.id}}" aria-label="{{e.aria}}">
-                        <span class="nm">{{e.name}}</span>
-                        <span class="pips" aria-hidden="true">
-                          <sc-for list="{{e.pips}}" as="p" hint-placeholder-count="5"><span class="pip {{p.cls}}"></span></sc-for>
-                        </span>
-                        <sc-if value="{{e.beer}}" hint-placeholder-val="{{ false }}"><span class="pint" aria-hidden="true"><svg><use href="#i-pint"></use></svg></span></sc-if>
-                      </div>
-                    </sc-for>
-                    <sc-if value="{{r.hasNotes}}" hint-placeholder-val="{{ false }}"><div class="note">{{r.notes}}</div></sc-if>
-                    <sc-if value="{{r.canEdit}}" hint-placeholder-val="{{ false }}">
-                      <div class="actions">
-                        <button class="btn" sc-camel-on-click="{{r.edit}}" data-action="edit-gathering" data-gathering="{{r.id}}">
-                          <svg class="i" aria-hidden="true"><use href="#i-edit"></use></svg>
-                          Edit
-                        </button>
-                      </div>
-                    </sc-if>
-                  </div>
-                </sc-if>
+        <sc-if value="{{showLiveHistory}}" hint-placeholder-val="{{ true }}">
+          <div class="chips">
+            <sc-for list="{{histFilters}}" as="f" hint-placeholder-count="6">
+              <button class="chip {{f.cls}}" sc-camel-on-click="{{f.pick}}" aria-label="{{f.aria}}" aria-pressed="{{f.on}}" data-action="filter-history" data-filter="{{f.key}}">
+                <sc-if value="{{f.hasAvatar}}" hint-placeholder-val="{{ false }}"><span class="avatar gone">{{f.initial}}</span></sc-if>
+                {{f.label}}
+              </button>
+            </sc-for>
+          </div>
+          <div class="tl">
+            <sc-for list="{{history}}" as="r" hint-placeholder-count="5">
+              <sc-if value="{{r.isHead}}" hint-placeholder-val="{{ false }}"><h3 class="mhd">{{r.label}}</h3></sc-if>
+              <sc-if value="{{r.isRow}}" hint-placeholder-val="{{ true }}">
+                <div class="tl-item {{r.rowCls}}" data-gathering="{{r.id}}" data-open="{{r.open}}">
+                  <span class="dot {{r.dotCls}}" aria-hidden="true"></span>
+                  <button class="row-head" sc-camel-on-click="{{r.toggle}}" aria-expanded="{{r.open}}" aria-label="{{r.aria}}" data-action="toggle-gathering" data-gathering="{{r.id}}">
+                    <span class="date"><span class="d">{{r.d}}</span><span class="mo">{{r.mo}}</span></span>
+                    <span class="row-main">
+                      <span class="act">{{r.activity}}</span>
+                      <sc-if value="{{r.hasEventMeta}}" hint-placeholder-val="{{ false }}"><span class="act-meta">{{r.eventMeta}}</span></sc-if>
+                    </span>
+                    <span class="rcs" aria-hidden="true">
+                      <sc-for list="{{r.chips}}" as="c" hint-placeholder-count="5"><span class="rc {{c.cls}}" title="{{c.tip}}">{{c.initial}}</span></sc-for>
+                    </span>
+                  </button>
+                  <sc-if value="{{r.open}}" hint-placeholder-val="{{ false }}">
+                    <div class="detail">
+                      <sc-for list="{{r.effects}}" as="e" hint-placeholder-count="0">
+                        <div class="eff" data-member="{{e.id}}" aria-label="{{e.aria}}">
+                          <span class="nm">{{e.name}}</span>
+                          <span class="pips" aria-hidden="true">
+                            <sc-for list="{{e.pips}}" as="p" hint-placeholder-count="5"><span class="pip {{p.cls}}"></span></sc-for>
+                          </span>
+                          <sc-if value="{{e.beer}}" hint-placeholder-val="{{ false }}"><span class="pint" aria-hidden="true"><svg><use href="#i-pint"></use></svg></span></sc-if>
+                        </div>
+                      </sc-for>
+                      <sc-if value="{{r.hasNotes}}" hint-placeholder-val="{{ false }}"><div class="note">{{r.notes}}</div></sc-if>
+                      <sc-if value="{{r.canEdit}}" hint-placeholder-val="{{ false }}">
+                        <div class="actions">
+                          <button class="btn" sc-camel-on-click="{{r.edit}}" data-action="edit-gathering" data-gathering="{{r.id}}">
+                            <svg class="i" aria-hidden="true"><use href="#i-edit"></use></svg>
+                            Edit
+                          </button>
+                        </div>
+                      </sc-if>
+                    </div>
+                  </sc-if>
+                </div>
+              </sc-if>
+            </sc-for>
+            <sc-if value="{{historyEmpty}}" hint-placeholder-val="{{ false }}">
+              <div class="empty">
+                <svg class="i" aria-hidden="true"><use href="#i-cal"></use></svg>
+                <sc-if value="{{canEdit}}" hint-placeholder-val="{{ true }}"><button class="btn pri big" sc-camel-on-click="{{goRecord}}" data-action="nav" data-target="record">Record gathering</button></sc-if>
               </div>
             </sc-if>
-          </sc-for>
-          <sc-if value="{{historyEmpty}}" hint-placeholder-val="{{ false }}">
-            <div class="empty">
-              <svg class="i" aria-hidden="true"><use href="#i-cal"></use></svg>
-              <sc-if value="{{canEdit}}" hint-placeholder-val="{{ true }}"><button class="btn pri big" sc-camel-on-click="{{goRecord}}" data-action="nav" data-target="record">Record gathering</button></sc-if>
-            </div>
-          </sc-if>
-        </div>
+          </div>
+        </sc-if>
+        <sc-if value="{{showDiscordHistory}}" hint-placeholder-val="{{ false }}">
+          <pre class="discord-archive" aria-label="Imported Discord attendance log">{{discordArchiveText}}</pre>
+        </sc-if>
       </section>
     </sc-if>
 

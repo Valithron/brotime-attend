@@ -30,6 +30,8 @@ Open `http://localhost:8000`. The source runner fetches its files over HTTP, so 
 
 The live app reads the current year and its attendance from Cloudflare D1. Gatherings record a category, game when the category is Video Games, and a location. Gathering edits, removals, year starts, and beer payments are written to D1 and reload from the server.
 
+History has a separate, read-only Discord archive containing the original attendance log from September 2024 through June 2026. It preserves the cumulative snapshots and notes without changing current D1 attendance, strikes, or beer totals.
+
 Anyone with the public Pages URL can view and edit the tracker. It has no sign-in gate.
 
 ## Cloudflare Pages setup

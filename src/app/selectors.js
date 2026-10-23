@@ -254,6 +254,7 @@ const SELECTORS = {
   history(ctx, bind) {
     const hf = ctx.S.histFilter;
     const rows = [...ctx.C.rows].reverse().filter((r) => hf === 'all' || !r.s.att[hf]);
+    const historyMode = ctx.S.historyMode || 'live';
     const history = [];
     let month = '';
     rows.forEach((r) => {
@@ -266,7 +267,15 @@ const SELECTORS = {
     });
     const histFilters = [{ key: 'all', label: 'All', aria: 'All gatherings', on: hf === 'all', hasAvatar: false, initial: '', cls: hf === 'all' ? 'on' : '', pick: bind('filterHistory', { id: 'all' }) }]
       .concat(MEMBERS.map((m) => ({ key: m.id, label: m.name, aria: 'Gatherings missed by ' + m.name, on: hf === m.id, hasAvatar: true, initial: m.name[0], cls: hf === m.id ? 'on' : '', pick: bind('filterHistory', { id: m.id }) })));
-    return { histFilters: histFilters, history: history, historyEmpty: rows.length === 0 };
+    return {
+      historyModes: [
+        { key: 'live', label: 'Gatherings', cls: historyMode === 'live' ? 'on' : '', on: historyMode === 'live', pick: bind('setHistoryMode', { mode: 'live' }) },
+        { key: 'discord', label: 'Discord archive', cls: historyMode === 'discord' ? 'on' : '', on: historyMode === 'discord', pick: bind('setHistoryMode', { mode: 'discord' }) }
+      ],
+      showLiveHistory: historyMode === 'live', showDiscordHistory: historyMode === 'discord',
+      discordArchiveText: DISCORD_ARCHIVE_TEXT,
+      histFilters: histFilters, history: history, historyEmpty: rows.length === 0
+    };
   },
 
   member(ctx, bind) {

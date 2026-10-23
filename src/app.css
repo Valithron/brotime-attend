@@ -246,6 +246,7 @@ button{cursor:pointer;background:none;border:0;padding:0;text-align:left}
 .menu hr{border:0;border-top:1px solid var(--line);margin:4px 0;width:100%}
 .menu .pair{display:flex;gap:4px}
 .menu .pair button{justify-content:center}
+.discord-archive{margin:0;padding:18px;max-height:calc(100vh - 260px);overflow:auto;border:1px solid var(--line);border-radius:var(--r);background:var(--s2);color:var(--tx);font:500 14px/1.55 var(--f-body);white-space:pre-wrap;overflow-wrap:anywhere}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
 .chip{min-height:44px;padding:0 14px;border-radius:99px;border:1px solid var(--line);background:var(--s2);display:inline-flex;align-items:center;gap:8px;font-weight:600;white-space:nowrap}
 .chip:hover{background:var(--s3)}

@@ -19,7 +19,7 @@
    DATA SHAPES
      Season   { id, name, closed, imported, sessions:[Session], paid:{memberId:[isoDate]} }
      Session  { id:number, date:'YYYY-MM-DD', activity, game, location, notes, att:{memberId:boolean} }
-     State    { seasons, viewId|null, view, memberId, histFilter,
+   State    { seasons, viewId|null, view, memberId, histFilter, historyMode,
                 ledgerFilter, openId, menu, confirmNew, confirmDel, toast,
                 form, nextId, today }
      view     'board' | 'member' | 'record' | 'ledger' | 'history'
@@ -57,7 +57,8 @@
        closeMenu               pickSeason {id|null}    askNewSeason
        cancelNewSeason         startSeason
        openMember {id}         openGathering {id}      toggleGathering {id}
-       filterHistory {id}      filterLedger {key}      setField {field,value}
+       filterHistory {id}      setHistoryMode {mode}   filterLedger {key}
+       setField {field,value}
        setAttendance {id,value:boolean}                setAllAttendance {value}
        startEdit {id}          cancelEdit              saveGathering
        deleteGathering (call twice: arm, then confirm) settleBeer {id}
