@@ -91,7 +91,7 @@ const SELECTORS = {
       cls: (ctx.view === t.key ? 'on ' : '') + (t.cta ? 'cta' : ''), current: ctx.view === t.key ? 'page' : 'false',
       hasBadge: !!t.badge, badge: t.badge || 0, go: bind('nav', { view: t.key })
     }));
-    const seasonList = [...S.seasons].reverse().map((s) => ({
+    const seasonList = [...S.seasons].filter((s) => !s.imported).reverse().map((s) => ({
       key: s.id, name: s.name, count: s.sessions.length,
       aria: s.name + ', ' + plural(s.sessions.length, 'gathering', 'gatherings') + (s.closed ? ', archived' : ''),
       cls: ctx.season.id === s.id ? 'on' : '',
@@ -267,13 +267,85 @@ const SELECTORS = {
     });
     const histFilters = [{ key: 'all', label: 'All', aria: 'All gatherings', on: hf === 'all', hasAvatar: false, initial: '', cls: hf === 'all' ? 'on' : '', pick: bind('filterHistory', { id: 'all' }) }]
       .concat(MEMBERS.map((m) => ({ key: m.id, label: m.name, aria: 'Gatherings missed by ' + m.name, on: hf === m.id, hasAvatar: true, initial: m.name[0], cls: hf === m.id ? 'on' : '', pick: bind('filterHistory', { id: m.id }) })));
+    const archiveMembers = ctx.S.discordMembers || [];
+    const archiveRows = [];
+    const entries = [
+      ...(ctx.S.discordEvents || []).map((event) => ({ kind: 'event', date: event.date, id: event.id, event: event })),
+      ...(ctx.S.discordNotes || []).map((note) => ({ kind: 'note', date: note.date, id: 'note-' + note.id, note: note }))
+    ].sort((a, b) => b.date.localeCompare(a.date) || String(b.id).localeCompare(String(a.id)));
+    let archiveYear = '';
+    const confidenceLabel = (value) => ({
+      explicit: 'Date stated in Discord',
+      'post-date': 'Date taken from Discord post',
+      'inferred-weekly': 'Date inferred from weekly update',
+      'inferred-post-date': 'Date inferred from update',
+      'source-order-conflict': 'Source order conflicts with event date',
+      'source-date-conflict': 'Event date conflicts with post timestamp'
+    }[value] || 'Date source unclear');
+    entries.forEach((entry) => {
+      const year = entry.date.slice(0, 4);
+      if (year !== archiveYear) {
+        archiveYear = year;
+        archiveRows.push({ isHead: true, isRow: false, label: year, id: 0 });
+      }
+      if (entry.kind === 'note') {
+        const note = entry.note;
+        const noteDate = fmtDate(note.date);
+        const noteMembers = archiveMembers.map((m) => {
+          const tally = note.tallies && note.tallies[m.id];
+          return {
+            id: m.id, name: m.name, statusText: 'Starting balance', strikesText: tally ? tally.strikes + ' strikes' : 'No tally',
+            beerText: tally && tally.beerMarkers ? tally.beerMarkers : 'No beer marker in source'
+          };
+        }).filter((m) => note.tallies && note.tallies[m.id]);
+        archiveRows.push({
+          isHead: false, isRow: true, isNote: true, isEvent: false, id: entry.id, open: ctx.S.openId === entry.id,
+          rowCls: ctx.S.openId === entry.id ? 'open' : '', dotCls: 'archive-note',
+          day: noteDate.d, month: noteDate.mo, date: noteDate.when, title: note.type === 'baseline' ? 'Starting tally' : (note.type === 'status' ? 'Status note' : 'Discord note'),
+          meta: note.text, sourcePostedAt: note.sourcePostedAt || '', confidence: '', chips: [], members: noteMembers,
+          hasMembers: noteMembers.length > 0, hasSourceNote: false, sourceNote: '',
+          toggle: bind('toggleDiscordRecord', { id: entry.id }), aria: note.type + ', ' + fmtDate(note.date).when + ', ' + note.text
+        });
+        return;
+      }
+      const event = entry.event;
+      const eventDate = fmtDate(event.date);
+      const states = archiveMembers.map((member) => {
+        const status = event.attendance && event.attendance[member.id] ? event.attendance[member.id].status : 'unknown';
+        const source = event.attendance && event.attendance[member.id] ? event.attendance[member.id] : {};
+        const statusText = status === 'present' ? 'Present' : (status === 'absent' ? 'Absent' : 'Unknown');
+        return {
+          id: member.id, name: member.name, initial: member.name[0], status: status,
+          statusText: statusText, cls: status === 'present' ? 'here' : (status === 'absent' ? 'gone' : 'unknown'),
+          strikesText: source.strikes == null ? 'No tally in source' : source.strikes + ' strikes after event',
+          beerText: source.beerMarkers || 'No beer marker in source snapshot',
+          tip: member.name + ': ' + statusText + (source.strikes == null ? '' : ', ' + source.strikes + ' strikes') + (source.beerMarkers ? ', ' + source.beerMarkers : '')
+        };
+      });
+      const presentCount = states.filter((m) => m.status === 'present').length;
+      const absentCount = states.filter((m) => m.status === 'absent').length;
+      const unknownCount = states.filter((m) => m.status === 'unknown').length;
+      const eventMeta = [event.activity, event.game, event.location].filter(Boolean).join(' · ');
+      archiveRows.push({
+        isHead: false, isRow: true, isNote: false, isEvent: true, id: event.id, open: ctx.S.openId === event.id,
+        rowCls: ctx.S.openId === event.id ? 'open' : '', dotCls: 'archive-event',
+        day: eventDate.d, month: eventDate.mo, date: eventDate.when, title: event.title, eventMeta: eventMeta, hasEventMeta: !!eventMeta,
+        countText: presentCount + ' present · ' + absentCount + ' absent · ' + unknownCount + ' unknown',
+        confidence: confidenceLabel(event.dateConfidence), sourcePostedAt: event.sourcePostedAt || '',
+        chips: states.map((m) => ({ initial: m.initial, cls: m.cls, tip: m.tip })),
+        members: states, hasMembers: states.length > 0, hasSourceNote: !!event.sourceNote, sourceNote: event.sourceNote || '',
+        toggle: bind('toggleDiscordRecord', { id: event.id }),
+        aria: event.title + ', ' + fmtDate(event.date).when + ', ' + presentCount + ' present, ' + absentCount + ' absent, ' + unknownCount + ' unknown'
+      });
+    });
     return {
       historyModes: [
         { key: 'live', label: 'Gatherings', cls: historyMode === 'live' ? 'on' : '', on: historyMode === 'live', pick: bind('setHistoryMode', { mode: 'live' }) },
-        { key: 'discord', label: 'Discord archive', cls: historyMode === 'discord' ? 'on' : '', on: historyMode === 'discord', pick: bind('setHistoryMode', { mode: 'discord' }) }
+        { key: 'discord', label: 'Discord records', cls: historyMode === 'discord' ? 'on' : '', on: historyMode === 'discord', pick: bind('setHistoryMode', { mode: 'discord' }) }
       ],
       showLiveHistory: historyMode === 'live', showDiscordHistory: historyMode === 'discord',
-      discordArchiveText: DISCORD_ARCHIVE_TEXT,
+      discordHistory: archiveRows, discordHistoryEmpty: (ctx.S.discordEvents || []).length === 0 && (ctx.S.discordNotes || []).length === 0,
+      discordCount: (ctx.S.discordEvents || []).length,
       histFilters: histFilters, history: history, historyEmpty: rows.length === 0
     };
   },

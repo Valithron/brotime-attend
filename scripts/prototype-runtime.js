@@ -52,7 +52,6 @@ document.addEventListener('DOMContentLoaded', async function() {
       loadText('./src/app/config.js'),
       loadText('./src/app/rules.js'),
       loadText('./src/app/data.js'),
-      loadText('./src/app/discord-archive.js'),
       loadText('./src/app/actions.js'),
       loadText('./src/app/selectors.js'),
       loadText('./src/app/component.js')

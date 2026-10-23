@@ -246,7 +246,11 @@ button{cursor:pointer;background:none;border:0;padding:0;text-align:left}
 .menu hr{border:0;border-top:1px solid var(--line);margin:4px 0;width:100%}
 .menu .pair{display:flex;gap:4px}
 .menu .pair button{justify-content:center}
-.discord-archive{margin:0;padding:18px;max-height:calc(100vh - 260px);overflow:auto;border:1px solid var(--line);border-radius:var(--r);background:var(--s2);color:var(--tx);font:500 14px/1.55 var(--f-body);white-space:pre-wrap;overflow-wrap:anywhere}
+.archive-intro{margin:12px 0 18px;padding:14px 16px;border:1px solid var(--line);border-radius:var(--r);background:var(--s1);color:var(--mu);line-height:1.5}
+.archive-intro b{color:var(--tx);font:700 20px var(--f-disp)}
+.archive-note-tag{padding:5px 9px;border:1px solid var(--line-2);border-radius:99px;color:var(--mu);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+.archive-count{color:var(--mu);font-size:12px;white-space:nowrap}
+.rc.unknown{border:1px dashed var(--line-2);color:var(--mu)}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
 .chip{min-height:44px;padding:0 14px;border-radius:99px;border:1px solid var(--line);background:var(--s2);display:inline-flex;align-items:center;gap:8px;font-weight:600;white-space:nowrap}
 .chip:hover{background:var(--s3)}
@@ -356,7 +360,18 @@ button.mx-label:hover{color:var(--am-lt)}
 .dot{position:absolute;left:-27px;top:24px;width:14px;height:14px;border-radius:50%;background:var(--bg);border:2px solid var(--line-2)}
 .dot.full{background:var(--am);border-color:var(--am)}
 .dot.beer{background:var(--co);border-color:var(--co)}
+.dot.archive-note{background:var(--s3);border-color:var(--am)}
+.dot.archive-event{background:var(--am);border-color:var(--am)}
 .detail{border-top:1px solid var(--line);padding:14px 16px;display:flex;flex-direction:column;gap:12px}
+.discord-row{align-items:center}
+.discord-meta{color:var(--mu);font-size:13px;line-height:1.5;overflow-wrap:anywhere}
+.discord-attendance{display:flex;flex-direction:column;gap:6px}
+.discord-person{display:grid;grid-template-columns:minmax(100px,1fr) minmax(80px,.8fr) minmax(150px,1.2fr) minmax(120px,1fr);align-items:center;gap:10px;padding:8px 10px;border-radius:10px;background:var(--s2);font-size:13px}
+.discord-person .nm{font-weight:700}
+.discord-person.gone .discord-state{color:var(--mu)}
+.discord-person.unknown .discord-state{color:var(--am)}
+.discord-strikes,.discord-beer{color:var(--mu)}
+.discord-detail .note{overflow-wrap:anywhere}
 .eff{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 .eff .nm{font:700 20px var(--f-disp);text-transform:uppercase;letter-spacing:.04em;min-width:96px}
 .pips{display:inline-flex;gap:6px;align-items:center}
@@ -526,6 +541,9 @@ button.mx-label:hover{color:var(--am-lt)}
   .ring{width:112px;height:112px}
   .ring-pct{font-size:28px}
   .row-head{gap:12px;padding:12px}
+  .discord-person{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:5px 10px}
+  .discord-person .nm{grid-column:1/-1}
+  .discord-row .archive-count{flex:1 1 100%}
 }
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}

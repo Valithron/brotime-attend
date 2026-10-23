@@ -19,8 +19,10 @@
    DATA SHAPES
      Season   { id, name, closed, imported, sessions:[Session], paid:{memberId:[isoDate]} }
      Session  { id:number, date:'YYYY-MM-DD', activity, game, location, notes, att:{memberId:boolean} }
+     Discord  { date, activity, game, location, attendance:{memberId:{status,strikes,beerMarkers}} }
    State    { seasons, viewId|null, view, memberId, histFilter, historyMode,
-                ledgerFilter, openId, menu, confirmNew, confirmDel, toast,
+                ledgerFilter, discordMembers, discordEvents, discordNotes,
+                openId, menu, confirmNew, confirmDel, toast,
                 form, nextId, today }
      view     'board' | 'member' | 'record' | 'ledger' | 'history'
 

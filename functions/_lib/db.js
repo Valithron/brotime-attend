@@ -1,13 +1,16 @@
 import { ApiError } from "./http.js";
 
 export async function loadAppState(db) {
-  const [seasonRows, memberRows, attendanceRows, paymentRows] = await Promise.all([
+  const [seasonRows, memberRows, attendanceRows, paymentRows, discordRows, discordNoteRows] = await Promise.all([
     db.prepare("SELECT id, name, closed, imported, is_current FROM seasons ORDER BY id").all(),
-    db.prepare("SELECT id, name FROM members WHERE is_active = 1 ORDER BY sort_order").all(),
+    db.prepare("SELECT id, name, is_active FROM members ORDER BY sort_order").all(),
     db.prepare("SELECT g.id, g.season_id, g.date, g.activity, g.notes, g.game, g.location, a.member_id, a.present FROM gatherings g LEFT JOIN attendance a ON a.gathering_id = g.id ORDER BY g.date, g.id, a.member_id").all(),
-    db.prepare("SELECT season_id, member_id, paid_on FROM beer_payments WHERE reversed_at IS NULL ORDER BY paid_on, id").all()
+    db.prepare("SELECT season_id, member_id, paid_on FROM beer_payments WHERE reversed_at IS NULL ORDER BY paid_on, id").all(),
+    loadDiscordRecords(db),
+    loadDiscordNotes(db)
   ]);
-  const members = memberRows.results || [];
+  const allMembers = memberRows.results || [];
+  const members = allMembers.filter((member) => member.is_active == null || Number(member.is_active) !== 0);
   const seasons = new Map((seasonRows.results || []).map((row) => [row.id, {
     id: row.id,
     name: row.name,
@@ -32,11 +35,84 @@ export async function loadAppState(db) {
     if (season && season.paid[row.member_id]) season.paid[row.member_id].push(row.paid_on);
   }
   for (const season of seasons.values()) season.sessions.sort((a, b) => a.date.localeCompare(b.date) || a.id - b.id);
+  const discordEvents = new Map();
+  for (const row of discordRows) {
+    let event = discordEvents.get(row.id);
+    if (!event) {
+      event = {
+        id: row.id,
+        year: row.year,
+        date: row.date,
+        activity: row.activity,
+        game: row.game || "",
+        location: row.location || "",
+        notes: row.notes || "",
+        title: row.event_title,
+        eventLabel: row.event_label || "",
+        sourcePostedAt: row.source_posted_at || "",
+        dateConfidence: row.date_confidence,
+        sourceNote: row.source_note || "",
+        attendance: {}
+      };
+      discordEvents.set(row.id, event);
+    }
+    if (row.member_id) {
+      event.attendance[row.member_id] = {
+        status: row.status,
+        strikes: row.source_strikes == null ? null : Number(row.source_strikes),
+        beerMarkers: row.beer_markers || ""
+      };
+    }
+  }
+  const discordNotes = new Map();
+  for (const row of discordNoteRows) {
+    let note = discordNotes.get(row.id);
+    if (!note) {
+      note = { id: row.id, date: row.note_date, type: row.note_type, text: row.body, sourcePostedAt: row.source_posted_at || "", tallies: {} };
+      discordNotes.set(row.id, note);
+    }
+    if (row.member_id) {
+      note.tallies[row.member_id] = {
+        strikes: Number(row.source_strikes),
+        beerMarkers: row.beer_markers || ""
+      };
+    }
+  }
   return {
     seasons: [...seasons.values()],
     members,
+    discordMembers: allMembers.map(({ id, name }) => ({ id, name })).sort((a, b) => {
+      const order = { a: 0, n: 1, john: 2, j: 3, s: 4, i: 5 };
+      return (order[a.id] ?? 99) - (order[b.id] ?? 99);
+    }),
+    discordEvents: [...discordEvents.values()],
+    discordNotes: [...discordNotes.values()],
     currentSeasonId: ((seasonRows.results || []).find((row) => row.is_current) || {}).id || null
   };
+}
+
+async function loadDiscordRecords(db) {
+  try {
+    const result = await db.prepare(
+      "SELECT g.id, s.name AS year, g.date, g.activity, g.notes, g.game, g.location, m.event_title, m.event_label, m.source_posted_at, m.date_confidence, m.source_note, a.member_id, a.status, a.source_strikes, a.beer_markers FROM seasons s JOIN gatherings g ON g.season_id = s.id JOIN discord_record_metadata m ON m.gathering_id = g.id LEFT JOIN discord_attendance a ON a.gathering_id = g.id WHERE s.imported = 1 ORDER BY g.date, g.id, a.member_id"
+    ).all();
+    return result.results || [];
+  } catch (error) {
+    if (/no such table: discord_(record_metadata|attendance)/i.test(String(error?.message || error))) return [];
+    throw error;
+  }
+}
+
+async function loadDiscordNotes(db) {
+  try {
+    const result = await db.prepare(
+      "SELECT n.id, n.note_date, n.note_type, n.body, n.source_posted_at, t.member_id, t.source_strikes, t.beer_markers FROM discord_archive_notes n LEFT JOIN discord_archive_note_tallies t ON t.note_id = n.id ORDER BY n.note_date, n.id, t.member_id"
+    ).all();
+    return result.results || [];
+  } catch (error) {
+    if (/no such table: discord_archive_(notes|note_tallies)/i.test(String(error?.message || error))) return [];
+    throw error;
+  }
 }
 
 export async function currentSeason(db) {

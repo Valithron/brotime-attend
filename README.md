@@ -30,13 +30,13 @@ Open `http://localhost:8000`. The source runner fetches its files over HTTP, so 
 
 The live app reads the current year and its attendance from Cloudflare D1. Gatherings record a category, game when the category is Video Games, and a location. Gathering edits, removals, year starts, and beer payments are written to D1 and reload from the server.
 
-History has a separate, read-only Discord archive containing the original attendance log from September 2024 through June 2026. It preserves the cumulative snapshots and notes without changing current D1 attendance, strikes, or beer totals.
+History has a separate, read-only Discord records view for 68 gatherings from September 2024 through April 2026, plus the opening tally and follow-up notes. Attendance is reconstructed from consecutive strike snapshots where possible; each record also keeps the original strike and beer markers. Dates inferred from weekly updates and attendance that cannot be established are labeled. These records live in closed imported years and do not change the current tracker's attendance, strikes, or beer totals.
 
 Anyone with the public Pages URL can view and edit the tracker. It has no sign-in gate.
 
 ## Cloudflare Pages setup
 
-The project is a static site with Pages Functions. It has no framework build step or dependencies, so the Pages build command is blank and the output directory is the repository root. Bind the D1 database to the Pages Function using the binding name `DB`. Apply `migrations/0002_event_details_and_years.sql` once to add game and location fields and rename the current season to its year.
+The project is a static site with Pages Functions. It has no framework build step or dependencies, so the Pages build command is blank and the output directory is the repository root. Bind the D1 database to the Pages Function using the binding name `DB`. Apply `migrations/0002_event_details_and_years.sql` once to add game and location fields and rename the current season to its year. Apply `migrations/0003_discord_history.sql` once to insert the parsed Discord records into separate closed imported years.
 
 ## Checks
 

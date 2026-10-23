@@ -1,0 +1,3024 @@
+{
+  "members": [
+    {
+      "id": "a",
+      "name": "Adam",
+      "sortOrder": 1,
+      "active": true
+    },
+    {
+      "id": "n",
+      "name": "Nathan",
+      "sortOrder": 2,
+      "active": true
+    },
+    {
+      "id": "john",
+      "name": "John",
+      "sortOrder": 3,
+      "active": false
+    },
+    {
+      "id": "j",
+      "name": "Julian",
+      "sortOrder": 4,
+      "active": true
+    },
+    {
+      "id": "s",
+      "name": "Sterling",
+      "sortOrder": 5,
+      "active": true
+    },
+    {
+      "id": "i",
+      "name": "Isaiah",
+      "sortOrder": 6,
+      "active": true
+    }
+  ],
+  "events": [
+    {
+      "date": "2024-09-22",
+      "title": "Weekly Brotime",
+      "activity": "Other",
+      "game": "",
+      "location": "",
+      "eventLabel": "",
+      "sourceNote": "Attendance rule clarified: you have to be present to avoid a strike.",
+      "dateConfidence": "post-date",
+      "sourcePostedAt": "2024-09-22 20:20",
+      "attendance": {
+        "a": {
+          "status": "absent",
+          "strikes": 1,
+          "beerMarkers": ""
+        },
+        "n": {
+          "status": "present",
+          "strikes": 0,
+          "beerMarkers": ""
+        },
+        "john": {
+          "status": "present",
+          "strikes": 0,
+          "beerMarkers": ""
+        },
+        "j": {
+          "status": "absent",
+          "strikes": 2,
+          "beerMarkers": ""
+        },
+        "s": {
+          "status": "absent",
+          "strikes": 1,
+          "beerMarkers": ""
+        },
+        "i": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": ""
+        }
+      }
+    },
+    {
+      "date": "2024-09-29",
+      "title": "Weekly Brotime",
+      "activity": "Other",
+      "game": "",
+      "location": "",
+      "eventLabel": "",
+      "sourceNote": "",
+      "dateConfidence": "post-date",
+      "sourcePostedAt": "2024-09-29 18:58",
+      "attendance": {
+        "a": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": ""
+        },
+        "n": {
+          "status": "absent",
+          "strikes": 1,
+          "beerMarkers": ""
+        },
+        "john": {
+          "status": "absent",
+          "strikes": 1,
+          "beerMarkers": ""
+        },
+        "j": {
+          "status": "present",
+          "strikes": 2,
+          "beerMarkers": ""
+        },
+        "s": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": ""
+        },
+        "i": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": ""
+        }
+      }
+    },
+    {
+      "date": "2024-10-06",
+      "title": "Weekly Brotime",
+      "activity": "Other",
+      "game": "",
+      "location": "",
+      "eventLabel": "",
+      "sourceNote": "",
+      "dateConfidence": "post-date",
+      "sourcePostedAt": "2024-10-06 19:37",
+      "attendance": {
+        "a": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": ""
+        },
+        "n": {
+          "status": "absent",
+          "strikes": 2,
+          "beerMarkers": ""
+        },
+        "john": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": ""
+        },
+        "j": {
+          "status": "present",
+          "strikes": 2,
+          "beerMarkers": ""
+        },
+        "s": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": ""
+        },
+        "i": {
+          "status": "absent",
+          "strikes": 2,
+          "beerMarkers": ""
+        }
+      }
+    },
+    {
+      "date": "2024-10-13",
+      "title": "No absences this week",
+      "activity": "Other",
+      "game": "",
+      "location": "",
+      "eventLabel": "",
+      "sourceNote": "No absences this week.",
+      "dateConfidence": "post-date",
+      "sourcePostedAt": "2024-10-13 22:51",
+      "attendance": {
+        "a": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": ""
+        },
+        "n": {
+          "status": "present",
+          "strikes": 2,
+          "beerMarkers": ""
+        },
+        "john": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": ""
+        },
+        "j": {
+          "status": "present",
+          "strikes": 2,
+          "beerMarkers": ""
+        },
+        "s": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": ""
+        },
+        "i": {
+          "status": "present",
+          "strikes": 2,
+          "beerMarkers": ""
+        }
+      }
+    },
+    {
+      "date": "2024-10-20",
+      "title": "Weekly Brotime",
+      "activity": "Other",
+      "game": "",
+      "location": "",
+      "eventLabel": "",
+      "sourceNote": "",
+      "dateConfidence": "post-date",
+      "sourcePostedAt": "2024-10-20 20:52",
+      "attendance": {
+        "a": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": ""
+        },
+        "n": {
+          "status": "absent",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "john": {
+          "status": "absent",
+          "strikes": 2,
+          "beerMarkers": ""
+        },
+        "j": {
+          "status": "present",
+          "strikes": 2,
+          "beerMarkers": ""
+        },
+        "s": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": ""
+        },
+        "i": {
+          "status": "absent",
+          "strikes": 3,
+          "beerMarkers": ""
+        }
+      }
+    },
+    {
+      "date": "2024-10-27",
+      "title": "Weekly Brotime",
+      "activity": "Other",
+      "game": "",
+      "location": "",
+      "eventLabel": "",
+      "sourceNote": "Event date inferred as the Sunday before the Monday Discord update.",
+      "dateConfidence": "inferred-weekly",
+      "sourcePostedAt": "2024-10-28 10:17",
+      "attendance": {
+        "a": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": ""
+        },
+        "n": {
+          "status": "absent",
+          "strikes": 4,
+          "beerMarkers": ""
+        },
+        "john": {
+          "status": "absent",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "j": {
+          "status": "absent",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "s": {
+          "status": "absent",
+          "strikes": 2,
+          "beerMarkers": ""
+        },
+        "i": {
+          "status": "absent",
+          "strikes": 4,
+          "beerMarkers": ""
+        }
+      }
+    },
+    {
+      "date": "2024-11-03",
+      "title": "Weekly Brotime",
+      "activity": "Other",
+      "game": "",
+      "location": "",
+      "eventLabel": "",
+      "sourceNote": "",
+      "dateConfidence": "post-date",
+      "sourcePostedAt": "2024-11-03 22:21",
+      "attendance": {
+        "a": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": ""
+        },
+        "n": {
+          "status": "absent",
+          "strikes": 5,
+          "beerMarkers": "🍻❌"
+        },
+        "john": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "j": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "s": {
+          "status": "present",
+          "strikes": 2,
+          "beerMarkers": ""
+        },
+        "i": {
+          "status": "present",
+          "strikes": 4,
+          "beerMarkers": ""
+        }
+      }
+    },
+    {
+      "date": "2024-11-10",
+      "title": "No absences",
+      "activity": "Other",
+      "game": "",
+      "location": "",
+      "eventLabel": "",
+      "sourceNote": "No absences.",
+      "dateConfidence": "post-date",
+      "sourcePostedAt": "2024-11-10 21:41",
+      "attendance": {
+        "a": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": ""
+        },
+        "n": {
+          "status": "present",
+          "strikes": 0,
+          "beerMarkers": "🍻❌"
+        },
+        "john": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "j": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "s": {
+          "status": "present",
+          "strikes": 2,
+          "beerMarkers": ""
+        },
+        "i": {
+          "status": "present",
+          "strikes": 4,
+          "beerMarkers": ""
+        }
+      }
+    },
+    {
+      "date": "2024-11-17",
+      "title": "No absences",
+      "activity": "Other",
+      "game": "",
+      "location": "",
+      "eventLabel": "",
+      "sourceNote": "No absences.",
+      "dateConfidence": "post-date",
+      "sourcePostedAt": "2024-11-17 22:15",
+      "attendance": {
+        "a": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": ""
+        },
+        "n": {
+          "status": "present",
+          "strikes": 0,
+          "beerMarkers": "🍻❌"
+        },
+        "john": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "j": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "s": {
+          "status": "present",
+          "strikes": 2,
+          "beerMarkers": ""
+        },
+        "i": {
+          "status": "present",
+          "strikes": 4,
+          "beerMarkers": ""
+        }
+      }
+    },
+    {
+      "date": "2024-11-25",
+      "title": "Poker Night",
+      "activity": "Poker",
+      "game": "",
+      "location": "",
+      "eventLabel": "Poker Night",
+      "sourceNote": "Poker Night.",
+      "dateConfidence": "explicit",
+      "sourcePostedAt": "2024-11-30 18:17",
+      "attendance": {
+        "a": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": ""
+        },
+        "n": {
+          "status": "absent",
+          "strikes": 1,
+          "beerMarkers": "🍻❌"
+        },
+        "john": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "j": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "s": {
+          "status": "present",
+          "strikes": 2,
+          "beerMarkers": ""
+        },
+        "i": {
+          "status": "present",
+          "strikes": 4,
+          "beerMarkers": ""
+        }
+      }
+    },
+    {
+      "date": "2024-12-01",
+      "title": "Weekly Brotime",
+      "activity": "Other",
+      "game": "",
+      "location": "",
+      "eventLabel": "",
+      "sourceNote": "Event date inferred as the Sunday before the Tuesday Discord update.",
+      "dateConfidence": "inferred-weekly",
+      "sourcePostedAt": "2024-12-02 20:33",
+      "attendance": {
+        "a": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": ""
+        },
+        "n": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": "🍻✅"
+        },
+        "john": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "j": {
+          "status": "absent",
+          "strikes": 4,
+          "beerMarkers": ""
+        },
+        "s": {
+          "status": "present",
+          "strikes": 2,
+          "beerMarkers": ""
+        },
+        "i": {
+          "status": "present",
+          "strikes": 4,
+          "beerMarkers": ""
+        }
+      }
+    },
+    {
+      "date": "2024-12-08",
+      "title": "Weekly Brotime",
+      "activity": "Other",
+      "game": "",
+      "location": "",
+      "eventLabel": "",
+      "sourceNote": "Event date inferred as the Sunday before the Tuesday Discord update.",
+      "dateConfidence": "inferred-weekly",
+      "sourcePostedAt": "2024-12-10 07:48",
+      "attendance": {
+        "a": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": ""
+        },
+        "n": {
+          "status": "absent",
+          "strikes": 2,
+          "beerMarkers": ""
+        },
+        "john": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "j": {
+          "status": "present",
+          "strikes": 4,
+          "beerMarkers": ""
+        },
+        "s": {
+          "status": "present",
+          "strikes": 2,
+          "beerMarkers": ""
+        },
+        "i": {
+          "status": "present",
+          "strikes": 4,
+          "beerMarkers": ""
+        }
+      }
+    },
+    {
+      "date": "2024-12-15",
+      "title": "Weekly Brotime",
+      "activity": "Other",
+      "game": "",
+      "location": "",
+      "eventLabel": "",
+      "sourceNote": "Event date inferred as the Sunday before the Tuesday Discord update.",
+      "dateConfidence": "inferred-weekly",
+      "sourcePostedAt": "2024-12-17 15:50",
+      "attendance": {
+        "a": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": ""
+        },
+        "n": {
+          "status": "present",
+          "strikes": 2,
+          "beerMarkers": ""
+        },
+        "john": {
+          "status": "absent",
+          "strikes": 4,
+          "beerMarkers": ""
+        },
+        "j": {
+          "status": "present",
+          "strikes": 4,
+          "beerMarkers": ""
+        },
+        "s": {
+          "status": "absent",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "i": {
+          "status": "absent",
+          "strikes": 5,
+          "beerMarkers": "🍻❌"
+        }
+      }
+    },
+    {
+      "date": "2024-12-22",
+      "title": "Weekly Brotime",
+      "activity": "Other",
+      "game": "",
+      "location": "",
+      "eventLabel": "",
+      "sourceNote": "Event date inferred as the Sunday before the Monday Discord update.",
+      "dateConfidence": "inferred-weekly",
+      "sourcePostedAt": "2024-12-23 19:25",
+      "attendance": {
+        "a": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": ""
+        },
+        "n": {
+          "status": "absent",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "john": {
+          "status": "absent",
+          "strikes": 5,
+          "beerMarkers": "🍻❌"
+        },
+        "j": {
+          "status": "present",
+          "strikes": 4,
+          "beerMarkers": ""
+        },
+        "s": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "i": {
+          "status": "present",
+          "strikes": 0,
+          "beerMarkers": "🍻❌"
+        }
+      }
+    },
+    {
+      "date": "2024-12-29",
+      "title": "Krampus",
+      "activity": "Other",
+      "game": "",
+      "location": "",
+      "eventLabel": "Krampus",
+      "sourceNote": "Krampus.",
+      "dateConfidence": "inferred-weekly",
+      "sourcePostedAt": "2024-12-30 21:40",
+      "attendance": {
+        "a": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": ""
+        },
+        "n": {
+          "status": "absent",
+          "strikes": 4,
+          "beerMarkers": ""
+        },
+        "john": {
+          "status": "present",
+          "strikes": 0,
+          "beerMarkers": "🍻✅"
+        },
+        "j": {
+          "status": "present",
+          "strikes": 4,
+          "beerMarkers": ""
+        },
+        "s": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "i": {
+          "status": "absent",
+          "strikes": 1,
+          "beerMarkers": "🍻❌"
+        }
+      }
+    },
+    {
+      "date": "2025-01-06",
+      "title": "No absences",
+      "activity": "Other",
+      "game": "",
+      "location": "",
+      "eventLabel": "No absences 1/6/25",
+      "sourceNote": "No absences, 1/6/25.",
+      "dateConfidence": "explicit",
+      "sourcePostedAt": "2025-01-13 16:27",
+      "attendance": {
+        "a": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": ""
+        },
+        "n": {
+          "status": "present",
+          "strikes": 4,
+          "beerMarkers": ""
+        },
+        "john": {
+          "status": "present",
+          "strikes": 0,
+          "beerMarkers": ""
+        },
+        "j": {
+          "status": "present",
+          "strikes": 4,
+          "beerMarkers": ""
+        },
+        "s": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "i": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": "🍻❌"
+        }
+      }
+    },
+    {
+      "date": "2025-01-13",
+      "title": "Weekly Brotime",
+      "activity": "Other",
+      "game": "",
+      "location": "",
+      "eventLabel": "Adam: I was there in spirit.",
+      "sourceNote": "Adam: I was there in spirit.",
+      "dateConfidence": "explicit",
+      "sourcePostedAt": "2025-01-19 13:26",
+      "attendance": {
+        "a": {
+          "status": "absent",
+          "strikes": 2,
+          "beerMarkers": ""
+        },
+        "n": {
+          "status": "absent",
+          "strikes": 5,
+          "beerMarkers": "🍻❌"
+        },
+        "john": {
+          "status": "present",
+          "strikes": 0,
+          "beerMarkers": ""
+        },
+        "j": {
+          "status": "present",
+          "strikes": 4,
+          "beerMarkers": ""
+        },
+        "s": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "i": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": "🍻❌"
+        }
+      }
+    },
+    {
+      "date": "2025-01-20",
+      "title": "No absences",
+      "activity": "Other",
+      "game": "",
+      "location": "",
+      "eventLabel": "No absences 1/20/25",
+      "sourceNote": "No absences 1/20/25.",
+      "dateConfidence": "explicit",
+      "sourcePostedAt": "2025-02-03 23:05",
+      "attendance": {
+        "a": {
+          "status": "present",
+          "strikes": 2,
+          "beerMarkers": ""
+        },
+        "n": {
+          "status": "present",
+          "strikes": 0,
+          "beerMarkers": "🍻❌"
+        },
+        "john": {
+          "status": "present",
+          "strikes": 0,
+          "beerMarkers": ""
+        },
+        "j": {
+          "status": "present",
+          "strikes": 4,
+          "beerMarkers": ""
+        },
+        "s": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "i": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": "🍻❌"
+        }
+      }
+    },
+    {
+      "date": "2025-01-27",
+      "title": "No absences",
+      "activity": "Other",
+      "game": "",
+      "location": "",
+      "eventLabel": "No absences 1/27/25",
+      "sourceNote": "No absences 1/27/25.",
+      "dateConfidence": "explicit",
+      "sourcePostedAt": "2025-02-03 23:05",
+      "attendance": {
+        "a": {
+          "status": "present",
+          "strikes": 2,
+          "beerMarkers": ""
+        },
+        "n": {
+          "status": "present",
+          "strikes": 0,
+          "beerMarkers": "🍻❌"
+        },
+        "john": {
+          "status": "present",
+          "strikes": 0,
+          "beerMarkers": ""
+        },
+        "j": {
+          "status": "present",
+          "strikes": 4,
+          "beerMarkers": ""
+        },
+        "s": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "i": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": "🍻❌"
+        }
+      }
+    },
+    {
+      "date": "2025-02-02",
+      "title": "Weekly Brotime",
+      "activity": "Other",
+      "game": "",
+      "location": "",
+      "eventLabel": "Caught up",
+      "sourceNote": "Caught up. Apologies for my lack of responsibility. Date inferred from the 2/3 update.",
+      "dateConfidence": "inferred-weekly",
+      "sourcePostedAt": "2025-02-03 23:05",
+      "attendance": {
+        "a": {
+          "status": "present",
+          "strikes": 2,
+          "beerMarkers": ""
+        },
+        "n": {
+          "status": "absent",
+          "strikes": 1,
+          "beerMarkers": "🍻❌"
+        },
+        "john": {
+          "status": "absent",
+          "strikes": 1,
+          "beerMarkers": ""
+        },
+        "j": {
+          "status": "present",
+          "strikes": 4,
+          "beerMarkers": ""
+        },
+        "s": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "i": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": ""
+        }
+      }
+    },
+    {
+      "date": "2025-02-09",
+      "title": "Weekly Brotime",
+      "activity": "Other",
+      "game": "",
+      "location": "",
+      "eventLabel": "",
+      "sourceNote": "Event date inferred as the Sunday before the Monday Discord update.",
+      "dateConfidence": "inferred-weekly",
+      "sourcePostedAt": "2025-02-10 22:37",
+      "attendance": {
+        "a": {
+          "status": "present",
+          "strikes": 2,
+          "beerMarkers": ""
+        },
+        "n": {
+          "status": "absent",
+          "strikes": 2,
+          "beerMarkers": "🍻❌"
+        },
+        "john": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": ""
+        },
+        "j": {
+          "status": "present",
+          "strikes": 4,
+          "beerMarkers": ""
+        },
+        "s": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "i": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": ""
+        }
+      }
+    },
+    {
+      "date": "2025-02-16",
+      "title": "Weekly Brotime",
+      "activity": "Other",
+      "game": "",
+      "location": "",
+      "eventLabel": "",
+      "sourceNote": "Event date inferred as the Sunday before the Monday Discord update.",
+      "dateConfidence": "inferred-weekly",
+      "sourcePostedAt": "2025-02-17 20:16",
+      "attendance": {
+        "a": {
+          "status": "present",
+          "strikes": 2,
+          "beerMarkers": ""
+        },
+        "n": {
+          "status": "absent",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "john": {
+          "status": "absent",
+          "strikes": 2,
+          "beerMarkers": ""
+        },
+        "j": {
+          "status": "present",
+          "strikes": 4,
+          "beerMarkers": ""
+        },
+        "s": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "i": {
+          "status": "absent",
+          "strikes": 2,
+          "beerMarkers": ""
+        }
+      }
+    },
+    {
+      "date": "2025-03-02",
+      "title": "No absences",
+      "activity": "Other",
+      "game": "",
+      "location": "",
+      "eventLabel": "No absences",
+      "sourceNote": "No absences. Date inferred from the 3/3 update.",
+      "dateConfidence": "inferred-weekly",
+      "sourcePostedAt": "2025-03-03 23:49",
+      "attendance": {
+        "a": {
+          "status": "present",
+          "strikes": 2,
+          "beerMarkers": ""
+        },
+        "n": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "john": {
+          "status": "present",
+          "strikes": 2,
+          "beerMarkers": ""
+        },
+        "j": {
+          "status": "present",
+          "strikes": 4,
+          "beerMarkers": ""
+        },
+        "s": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "i": {
+          "status": "present",
+          "strikes": 2,
+          "beerMarkers": ""
+        }
+      }
+    },
+    {
+      "date": "2025-03-09",
+      "title": "Weekly Brotime",
+      "activity": "Other",
+      "game": "",
+      "location": "",
+      "eventLabel": "",
+      "sourceNote": "",
+      "dateConfidence": "post-date",
+      "sourcePostedAt": "2025-03-09 23:13",
+      "attendance": {
+        "a": {
+          "status": "present",
+          "strikes": 2,
+          "beerMarkers": ""
+        },
+        "n": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "john": {
+          "status": "absent",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "j": {
+          "status": "present",
+          "strikes": 4,
+          "beerMarkers": ""
+        },
+        "s": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "i": {
+          "status": "present",
+          "strikes": 2,
+          "beerMarkers": ""
+        }
+      }
+    },
+    {
+      "date": "2025-03-17",
+      "title": "Movie",
+      "activity": "Movie night",
+      "game": "",
+      "location": "",
+      "eventLabel": "Movie",
+      "sourceNote": "Movie night.",
+      "dateConfidence": "explicit",
+      "sourcePostedAt": "2025-03-18 15:55",
+      "attendance": {
+        "a": {
+          "status": "present",
+          "strikes": 2,
+          "beerMarkers": ""
+        },
+        "n": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "john": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "j": {
+          "status": "present",
+          "strikes": 4,
+          "beerMarkers": ""
+        },
+        "s": {
+          "status": "absent",
+          "strikes": 4,
+          "beerMarkers": ""
+        },
+        "i": {
+          "status": "absent",
+          "strikes": 3,
+          "beerMarkers": ""
+        }
+      }
+    },
+    {
+      "date": "2025-03-23",
+      "title": "No absences",
+      "activity": "Other",
+      "game": "",
+      "location": "",
+      "eventLabel": "No absences",
+      "sourceNote": "No absences 3/23.",
+      "dateConfidence": "explicit",
+      "sourcePostedAt": "2025-03-26 15:39",
+      "attendance": {
+        "a": {
+          "status": "present",
+          "strikes": 2,
+          "beerMarkers": ""
+        },
+        "n": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "john": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "j": {
+          "status": "present",
+          "strikes": 4,
+          "beerMarkers": ""
+        },
+        "s": {
+          "status": "present",
+          "strikes": 4,
+          "beerMarkers": ""
+        },
+        "i": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": ""
+        }
+      }
+    },
+    {
+      "date": "2025-03-30",
+      "title": "No absences",
+      "activity": "Other",
+      "game": "",
+      "location": "",
+      "eventLabel": "",
+      "sourceNote": "No absences. Date inferred from the 3/31 update.",
+      "dateConfidence": "inferred-weekly",
+      "sourcePostedAt": "2025-03-31 22:42",
+      "attendance": {
+        "a": {
+          "status": "present",
+          "strikes": 2,
+          "beerMarkers": ""
+        },
+        "n": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "john": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "j": {
+          "status": "present",
+          "strikes": 4,
+          "beerMarkers": ""
+        },
+        "s": {
+          "status": "present",
+          "strikes": 4,
+          "beerMarkers": ""
+        },
+        "i": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": ""
+        }
+      }
+    },
+    {
+      "date": "2025-04-07",
+      "title": "Nathan's house",
+      "activity": "Other",
+      "game": "",
+      "location": "",
+      "eventLabel": "Nathan's House",
+      "sourceNote": "April 7, Nathan's house.",
+      "dateConfidence": "explicit",
+      "sourcePostedAt": "2025-04-14 16:50",
+      "attendance": {
+        "a": {
+          "status": "absent",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "n": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "john": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "j": {
+          "status": "present",
+          "strikes": 4,
+          "beerMarkers": ""
+        },
+        "s": {
+          "status": "present",
+          "strikes": 4,
+          "beerMarkers": ""
+        },
+        "i": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": ""
+        }
+      }
+    },
+    {
+      "date": "2025-04-14",
+      "title": "Poker",
+      "activity": "Poker",
+      "game": "",
+      "location": "",
+      "eventLabel": "Poker",
+      "sourceNote": "April 14, Poker.",
+      "dateConfidence": "explicit",
+      "sourcePostedAt": "2025-04-14 22:45",
+      "attendance": {
+        "a": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "n": {
+          "status": "absent",
+          "strikes": 4,
+          "beerMarkers": ""
+        },
+        "john": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "j": {
+          "status": "present",
+          "strikes": 4,
+          "beerMarkers": ""
+        },
+        "s": {
+          "status": "present",
+          "strikes": 4,
+          "beerMarkers": ""
+        },
+        "i": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": ""
+        }
+      }
+    },
+    {
+      "date": "2025-04-21",
+      "title": "Games (HLL)",
+      "activity": "Video Games",
+      "game": "Hell Let Loose",
+      "location": "",
+      "eventLabel": "April 21, Games (HLL)",
+      "sourceNote": "April 21, Games (HLL).",
+      "dateConfidence": "explicit",
+      "sourcePostedAt": "2025-04-27 15:46",
+      "attendance": {
+        "a": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "n": {
+          "status": "present",
+          "strikes": 4,
+          "beerMarkers": ""
+        },
+        "john": {
+          "status": "absent",
+          "strikes": 4,
+          "beerMarkers": ""
+        },
+        "j": {
+          "status": "present",
+          "strikes": 4,
+          "beerMarkers": ""
+        },
+        "s": {
+          "status": "present",
+          "strikes": 4,
+          "beerMarkers": ""
+        },
+        "i": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": ""
+        }
+      }
+    },
+    {
+      "date": "2025-04-26",
+      "title": "Board Game at Nathan's house",
+      "activity": "Board games",
+      "game": "",
+      "location": "Nathan's House",
+      "eventLabel": "April 26, Board Game Nathan's house",
+      "sourceNote": "April 26, Board Game Nathan's house.",
+      "dateConfidence": "explicit",
+      "sourcePostedAt": "2025-04-27 22:37",
+      "attendance": {
+        "a": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "n": {
+          "status": "present",
+          "strikes": 4,
+          "beerMarkers": ""
+        },
+        "john": {
+          "status": "absent",
+          "strikes": 5,
+          "beerMarkers": "❌"
+        },
+        "j": {
+          "status": "present",
+          "strikes": 4,
+          "beerMarkers": ""
+        },
+        "s": {
+          "status": "present",
+          "strikes": 4,
+          "beerMarkers": ""
+        },
+        "i": {
+          "status": "absent",
+          "strikes": 4,
+          "beerMarkers": ""
+        }
+      }
+    },
+    {
+      "date": "2025-05-04",
+      "title": "Weekly Brotime",
+      "activity": "Other",
+      "game": "",
+      "location": "",
+      "eventLabel": "May 4",
+      "sourceNote": "May 4.",
+      "dateConfidence": "explicit",
+      "sourcePostedAt": "2025-05-06 09:08",
+      "attendance": {
+        "a": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "n": {
+          "status": "absent",
+          "strikes": 5,
+          "beerMarkers": "❌"
+        },
+        "john": {
+          "status": "present",
+          "strikes": 0,
+          "beerMarkers": "❌"
+        },
+        "j": {
+          "status": "present",
+          "strikes": 4,
+          "beerMarkers": ""
+        },
+        "s": {
+          "status": "absent",
+          "strikes": 5,
+          "beerMarkers": "❌"
+        },
+        "i": {
+          "status": "absent",
+          "strikes": 5,
+          "beerMarkers": "❌"
+        }
+      }
+    },
+    {
+      "date": "2025-05-12",
+      "title": "Weekly Brotime",
+      "activity": "Other",
+      "game": "",
+      "location": "",
+      "eventLabel": "May 12",
+      "sourceNote": "May 12.",
+      "dateConfidence": "explicit",
+      "sourcePostedAt": "2025-05-13 20:59",
+      "attendance": {
+        "a": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "n": {
+          "status": "present",
+          "strikes": 0,
+          "beerMarkers": "❌"
+        },
+        "john": {
+          "status": "present",
+          "strikes": 0,
+          "beerMarkers": "❌"
+        },
+        "j": {
+          "status": "present",
+          "strikes": 4,
+          "beerMarkers": ""
+        },
+        "s": {
+          "status": "absent",
+          "strikes": 1,
+          "beerMarkers": "❌"
+        },
+        "i": {
+          "status": "present",
+          "strikes": 0,
+          "beerMarkers": "❌"
+        }
+      }
+    },
+    {
+      "date": "2025-05-26",
+      "title": "Nathan's birthday",
+      "activity": "Other",
+      "game": "",
+      "location": "",
+      "eventLabel": "Nathan BDay",
+      "sourceNote": "May 26, Nathan BDay.",
+      "dateConfidence": "explicit",
+      "sourcePostedAt": "2025-06-02 23:02",
+      "attendance": {
+        "a": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "n": {
+          "status": "present",
+          "strikes": 0,
+          "beerMarkers": "❌"
+        },
+        "john": {
+          "status": "present",
+          "strikes": 0,
+          "beerMarkers": ""
+        },
+        "j": {
+          "status": "present",
+          "strikes": 4,
+          "beerMarkers": ""
+        },
+        "s": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": "❌"
+        },
+        "i": {
+          "status": "present",
+          "strikes": 0,
+          "beerMarkers": ""
+        }
+      }
+    },
+    {
+      "date": "2025-06-02",
+      "title": "Time was missed",
+      "activity": "Other",
+      "game": "",
+      "location": "",
+      "eventLabel": "June 2",
+      "sourceNote": "Time was missed. Counters do not change in this snapshot, so attendance is unknown.",
+      "dateConfidence": "explicit",
+      "sourcePostedAt": "2025-06-02 23:02",
+      "attendance": {
+        "a": {
+          "status": "unknown",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "n": {
+          "status": "unknown",
+          "strikes": 0,
+          "beerMarkers": "❌"
+        },
+        "john": {
+          "status": "unknown",
+          "strikes": 0,
+          "beerMarkers": "✅"
+        },
+        "j": {
+          "status": "unknown",
+          "strikes": 4,
+          "beerMarkers": ""
+        },
+        "s": {
+          "status": "unknown",
+          "strikes": 1,
+          "beerMarkers": "❌"
+        },
+        "i": {
+          "status": "unknown",
+          "strikes": 0,
+          "beerMarkers": "✅"
+        }
+      }
+    },
+    {
+      "date": "2025-06-08",
+      "title": "Weekly Brotime",
+      "activity": "Other",
+      "game": "",
+      "location": "",
+      "eventLabel": "June 8",
+      "sourceNote": "June 8.",
+      "dateConfidence": "explicit",
+      "sourcePostedAt": "2025-06-09 10:34",
+      "attendance": {
+        "a": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "n": {
+          "status": "absent",
+          "strikes": 1,
+          "beerMarkers": "❌"
+        },
+        "john": {
+          "status": "absent",
+          "strikes": 1,
+          "beerMarkers": ""
+        },
+        "j": {
+          "status": "absent",
+          "strikes": 5,
+          "beerMarkers": "❌"
+        },
+        "s": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": "❌"
+        },
+        "i": {
+          "status": "absent",
+          "strikes": 1,
+          "beerMarkers": ""
+        }
+      }
+    },
+    {
+      "date": "2025-06-16",
+      "title": "Billiards",
+      "activity": "Billiards",
+      "game": "",
+      "location": "",
+      "eventLabel": "June 16, Billiards",
+      "sourceNote": "June 16, Billiards.",
+      "dateConfidence": "explicit",
+      "sourcePostedAt": "2025-06-22 15:52",
+      "attendance": {
+        "a": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "n": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": "❌"
+        },
+        "john": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": ""
+        },
+        "j": {
+          "status": "present",
+          "strikes": 0,
+          "beerMarkers": "❌"
+        },
+        "s": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": "❌"
+        },
+        "i": {
+          "status": "absent",
+          "strikes": 2,
+          "beerMarkers": ""
+        }
+      }
+    },
+    {
+      "date": "2025-06-23",
+      "title": "Games",
+      "activity": "Video Games",
+      "game": "",
+      "location": "",
+      "eventLabel": "June 23, games",
+      "sourceNote": "June 23, games; game title not specified.",
+      "dateConfidence": "explicit",
+      "sourcePostedAt": "2025-06-23 08:46",
+      "attendance": {
+        "a": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "n": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": "❌"
+        },
+        "john": {
+          "status": "absent",
+          "strikes": 2,
+          "beerMarkers": ""
+        },
+        "j": {
+          "status": "present",
+          "strikes": 0,
+          "beerMarkers": "❌"
+        },
+        "s": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": "❌"
+        },
+        "i": {
+          "status": "absent",
+          "strikes": 3,
+          "beerMarkers": ""
+        }
+      }
+    },
+    {
+      "date": "2025-06-29",
+      "title": "Disc golf",
+      "activity": "Disc golf",
+      "game": "",
+      "location": "",
+      "eventLabel": "June 29, disc golf",
+      "sourceNote": "June 29, disc golf.",
+      "dateConfidence": "explicit",
+      "sourcePostedAt": "2025-06-29 21:36",
+      "attendance": {
+        "a": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "n": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": ""
+        },
+        "john": {
+          "status": "present",
+          "strikes": 2,
+          "beerMarkers": ""
+        },
+        "j": {
+          "status": "present",
+          "strikes": 0,
+          "beerMarkers": "❌"
+        },
+        "s": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": "❌"
+        },
+        "i": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": ""
+        }
+      }
+    },
+    {
+      "date": "2025-07-06",
+      "title": "Games (Tarkov)",
+      "activity": "Video Games",
+      "game": "Escape from Tarkov",
+      "location": "",
+      "eventLabel": "July 6, games tarkov",
+      "sourceNote": "July 6, games tarkov.",
+      "dateConfidence": "explicit",
+      "sourcePostedAt": "2025-07-06 20:09",
+      "attendance": {
+        "a": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "n": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": ""
+        },
+        "john": {
+          "status": "present",
+          "strikes": 2,
+          "beerMarkers": ""
+        },
+        "j": {
+          "status": "present",
+          "strikes": 0,
+          "beerMarkers": "❌"
+        },
+        "s": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": "❌"
+        },
+        "i": {
+          "status": "absent",
+          "strikes": 4,
+          "beerMarkers": ""
+        }
+      }
+    },
+    {
+      "date": "2025-07-13",
+      "title": "Disc golf and Zombicide",
+      "activity": "Mixed activities",
+      "game": "",
+      "location": "Disc golf and Zombicide",
+      "eventLabel": "July 13, disc golf and zombiecide",
+      "sourceNote": "July 13, disc golf and zombiecide.",
+      "dateConfidence": "explicit",
+      "sourcePostedAt": "2025-07-16 17:13",
+      "attendance": {
+        "a": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "n": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": ""
+        },
+        "john": {
+          "status": "present",
+          "strikes": 2,
+          "beerMarkers": ""
+        },
+        "j": {
+          "status": "present",
+          "strikes": 0,
+          "beerMarkers": "❌"
+        },
+        "s": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": "❌"
+        },
+        "i": {
+          "status": "absent",
+          "strikes": 5,
+          "beerMarkers": "❌"
+        }
+      }
+    },
+    {
+      "date": "2025-07-20",
+      "title": "Games (HLL)",
+      "activity": "Video Games",
+      "game": "Hell Let Loose",
+      "location": "",
+      "eventLabel": "July 20, games, HLL",
+      "sourceNote": "July 20, games, HLL.",
+      "dateConfidence": "explicit",
+      "sourcePostedAt": "2025-07-21 09:53",
+      "attendance": {
+        "a": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "n": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": ""
+        },
+        "john": {
+          "status": "absent",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "j": {
+          "status": "present",
+          "strikes": 0,
+          "beerMarkers": "❌"
+        },
+        "s": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": "❌"
+        },
+        "i": {
+          "status": "present",
+          "strikes": 0,
+          "beerMarkers": "❌"
+        }
+      }
+    },
+    {
+      "date": "2025-07-27",
+      "title": "Discs at Aviary",
+      "activity": "Disc golf",
+      "game": "",
+      "location": "Aviary",
+      "eventLabel": "July 27, discs at Aviary",
+      "sourceNote": "July 27, discs at Aviary.",
+      "dateConfidence": "explicit",
+      "sourcePostedAt": "2025-08-01 09:16",
+      "attendance": {
+        "a": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "n": {
+          "status": "absent",
+          "strikes": 2,
+          "beerMarkers": ""
+        },
+        "john": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "j": {
+          "status": "present",
+          "strikes": 0,
+          "beerMarkers": "❌"
+        },
+        "s": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": "❌"
+        },
+        "i": {
+          "status": "present",
+          "strikes": 0,
+          "beerMarkers": "❌"
+        }
+      }
+    },
+    {
+      "date": "2025-08-03",
+      "title": "Games (Helldivers)",
+      "activity": "Video Games",
+      "game": "Helldivers",
+      "location": "",
+      "eventLabel": "Aug 3, Games Helldivers",
+      "sourceNote": "Aug 3, Games Helldivers.",
+      "dateConfidence": "explicit",
+      "sourcePostedAt": "2025-08-10 20:02",
+      "attendance": {
+        "a": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "n": {
+          "status": "present",
+          "strikes": 2,
+          "beerMarkers": ""
+        },
+        "john": {
+          "status": "absent",
+          "strikes": 4,
+          "beerMarkers": ""
+        },
+        "j": {
+          "status": "present",
+          "strikes": 0,
+          "beerMarkers": "❌"
+        },
+        "s": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": "❌"
+        },
+        "i": {
+          "status": "absent",
+          "strikes": 1,
+          "beerMarkers": "❌"
+        }
+      }
+    },
+    {
+      "date": "2025-08-10",
+      "title": "Discs at Cottonwood and games (BF6)",
+      "activity": "Mixed activities",
+      "game": "",
+      "location": "Cottonwood",
+      "eventLabel": "Aug 10, discs cottonwood, games BF6",
+      "sourceNote": "Aug 10, discs cottonwood, games BF6.",
+      "dateConfidence": "explicit",
+      "sourcePostedAt": "2025-08-10 20:02",
+      "attendance": {
+        "a": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "n": {
+          "status": "present",
+          "strikes": 2,
+          "beerMarkers": ""
+        },
+        "john": {
+          "status": "absent",
+          "strikes": 5,
+          "beerMarkers": "❌"
+        },
+        "j": {
+          "status": "present",
+          "strikes": 0,
+          "beerMarkers": "❌"
+        },
+        "s": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": "❌"
+        },
+        "i": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": "✅"
+        }
+      }
+    },
+    {
+      "date": "2025-08-17",
+      "title": "Discs at Falcon and Loveletter",
+      "activity": "Mixed activities",
+      "game": "",
+      "location": "Falcon",
+      "eventLabel": "Aug 17, discs falcon, loveletter",
+      "sourceNote": "Aug 17, discs falcon, loveletter.",
+      "dateConfidence": "explicit",
+      "sourcePostedAt": "2025-08-17 22:18",
+      "attendance": {
+        "a": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "n": {
+          "status": "present",
+          "strikes": 2,
+          "beerMarkers": ""
+        },
+        "john": {
+          "status": "absent",
+          "strikes": 1,
+          "beerMarkers": "❌"
+        },
+        "j": {
+          "status": "absent",
+          "strikes": 1,
+          "beerMarkers": "❌"
+        },
+        "s": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": "❌"
+        },
+        "i": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": ""
+        }
+      }
+    },
+    {
+      "date": "2025-08-15",
+      "title": "Minecraft",
+      "activity": "Video Games",
+      "game": "Minecraft",
+      "location": "",
+      "eventLabel": "Aug 15, Minecraft",
+      "sourceNote": "Aug 15, Minecraft. The source lists this after the Aug 17 entry. The counters cannot establish this event’s attendance because the record is out of chronological order.",
+      "dateConfidence": "source-order-conflict",
+      "sourcePostedAt": "2025-08-26 19:49",
+      "attendance": {
+        "a": {
+          "status": "unknown",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "n": {
+          "status": "unknown",
+          "strikes": 2,
+          "beerMarkers": ""
+        },
+        "john": {
+          "status": "unknown",
+          "strikes": 1,
+          "beerMarkers": "❌"
+        },
+        "j": {
+          "status": "unknown",
+          "strikes": 1,
+          "beerMarkers": "❌"
+        },
+        "s": {
+          "status": "unknown",
+          "strikes": 2,
+          "beerMarkers": "❌"
+        },
+        "i": {
+          "status": "unknown",
+          "strikes": 1,
+          "beerMarkers": ""
+        }
+      }
+    },
+    {
+      "date": "2025-09-01",
+      "title": "Rampart disc and Pummel game",
+      "activity": "Mixed activities",
+      "game": "",
+      "location": "Rampart",
+      "eventLabel": "Sep 1, rampart disc, pummel game",
+      "sourceNote": "Sep 1, rampart disc, pummel game.",
+      "dateConfidence": "explicit",
+      "sourcePostedAt": "2025-09-01 22:30",
+      "attendance": {
+        "a": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "n": {
+          "status": "present",
+          "strikes": 2,
+          "beerMarkers": ""
+        },
+        "john": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": "✅✅"
+        },
+        "j": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": "❌"
+        },
+        "s": {
+          "status": "present",
+          "strikes": 2,
+          "beerMarkers": "❌"
+        },
+        "i": {
+          "status": "absent",
+          "strikes": 2,
+          "beerMarkers": ""
+        }
+      }
+    },
+    {
+      "date": "2025-09-07",
+      "title": "Minecraft and smoothie",
+      "activity": "Video Games",
+      "game": "Minecraft",
+      "location": "",
+      "eventLabel": "Sep 7, Minecraft and smoothie",
+      "sourceNote": "Sep 7, Minecraft and smoothie.",
+      "dateConfidence": "explicit",
+      "sourcePostedAt": "2025-09-09 07:59",
+      "attendance": {
+        "a": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "n": {
+          "status": "absent",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "john": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": "✅✅"
+        },
+        "j": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": "❌"
+        },
+        "s": {
+          "status": "present",
+          "strikes": 2,
+          "beerMarkers": "❌"
+        },
+        "i": {
+          "status": "present",
+          "strikes": 2,
+          "beerMarkers": ""
+        }
+      }
+    },
+    {
+      "date": "2025-09-14",
+      "title": "Discs and Pummel Party",
+      "activity": "Mixed activities",
+      "game": "",
+      "location": "",
+      "eventLabel": "Pummel Party",
+      "sourceNote": "Sep 14, discs and pummel party.",
+      "dateConfidence": "explicit",
+      "sourcePostedAt": "2025-09-14 22:10",
+      "attendance": {
+        "a": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "n": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "john": {
+          "status": "absent",
+          "strikes": 2,
+          "beerMarkers": ""
+        },
+        "j": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": "❌"
+        },
+        "s": {
+          "status": "present",
+          "strikes": 2,
+          "beerMarkers": "❌"
+        },
+        "i": {
+          "status": "present",
+          "strikes": 2,
+          "beerMarkers": ""
+        }
+      }
+    },
+    {
+      "date": "2025-09-20",
+      "title": "Camping",
+      "activity": "Other",
+      "game": "",
+      "location": "",
+      "eventLabel": "Sep 20, camping",
+      "sourceNote": "Sep 20, camping.",
+      "dateConfidence": "explicit",
+      "sourcePostedAt": "2025-09-28 20:07",
+      "attendance": {
+        "a": {
+          "status": "absent",
+          "strikes": 4,
+          "beerMarkers": ""
+        },
+        "n": {
+          "status": "absent",
+          "strikes": 4,
+          "beerMarkers": ""
+        },
+        "john": {
+          "status": "absent",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "j": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": "❌"
+        },
+        "s": {
+          "status": "present",
+          "strikes": 2,
+          "beerMarkers": "❌"
+        },
+        "i": {
+          "status": "present",
+          "strikes": 2,
+          "beerMarkers": ""
+        }
+      }
+    },
+    {
+      "date": "2025-09-28",
+      "title": "Board games",
+      "activity": "Board games",
+      "game": "",
+      "location": "",
+      "eventLabel": "Sep 28, board games",
+      "sourceNote": "Sep 28, board games.",
+      "dateConfidence": "explicit",
+      "sourcePostedAt": "2025-09-28 20:07",
+      "attendance": {
+        "a": {
+          "status": "present",
+          "strikes": 4,
+          "beerMarkers": ""
+        },
+        "n": {
+          "status": "present",
+          "strikes": 4,
+          "beerMarkers": ""
+        },
+        "john": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "j": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": "❌"
+        },
+        "s": {
+          "status": "present",
+          "strikes": 2,
+          "beerMarkers": "❌"
+        },
+        "i": {
+          "status": "present",
+          "strikes": 2,
+          "beerMarkers": ""
+        }
+      }
+    },
+    {
+      "date": "2025-10-05",
+      "title": "Minecraft",
+      "activity": "Video Games",
+      "game": "Minecraft",
+      "location": "",
+      "eventLabel": "Oct 5, Minecraft",
+      "sourceNote": "Oct 5, Minecraft.",
+      "dateConfidence": "explicit",
+      "sourcePostedAt": "2025-10-07 15:25",
+      "attendance": {
+        "a": {
+          "status": "present",
+          "strikes": 4,
+          "beerMarkers": ""
+        },
+        "n": {
+          "status": "present",
+          "strikes": 4,
+          "beerMarkers": ""
+        },
+        "john": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "j": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": "❌"
+        },
+        "s": {
+          "status": "present",
+          "strikes": 2,
+          "beerMarkers": "❌"
+        },
+        "i": {
+          "status": "present",
+          "strikes": 2,
+          "beerMarkers": ""
+        }
+      }
+    },
+    {
+      "date": "2025-10-12",
+      "title": "No Brotime",
+      "activity": "Other",
+      "game": "",
+      "location": "",
+      "eventLabel": "No Brotime",
+      "sourceNote": "No Brotime; all six cumulative strike counts rise by one.",
+      "dateConfidence": "explicit",
+      "sourcePostedAt": "2025-10-19 22:55",
+      "attendance": {
+        "a": {
+          "status": "absent",
+          "strikes": 5,
+          "beerMarkers": "❌"
+        },
+        "n": {
+          "status": "absent",
+          "strikes": 5,
+          "beerMarkers": "❌"
+        },
+        "john": {
+          "status": "absent",
+          "strikes": 4,
+          "beerMarkers": ""
+        },
+        "j": {
+          "status": "absent",
+          "strikes": 2,
+          "beerMarkers": "❌"
+        },
+        "s": {
+          "status": "absent",
+          "strikes": 3,
+          "beerMarkers": "❌"
+        },
+        "i": {
+          "status": "absent",
+          "strikes": 3,
+          "beerMarkers": ""
+        }
+      }
+    },
+    {
+      "date": "2025-10-19",
+      "title": "Heavenly Bodies and Pummel",
+      "activity": "Video Games",
+      "game": "Heavenly Bodies, Pummel Party",
+      "location": "",
+      "eventLabel": "Oct 19, heavenly bodies and pummel",
+      "sourceNote": "Oct 19, heavenly bodies and pummel.",
+      "dateConfidence": "explicit",
+      "sourcePostedAt": "2025-10-19 22:55",
+      "attendance": {
+        "a": {
+          "status": "present",
+          "strikes": 0,
+          "beerMarkers": "❌"
+        },
+        "n": {
+          "status": "present",
+          "strikes": 0,
+          "beerMarkers": "❌"
+        },
+        "john": {
+          "status": "absent",
+          "strikes": 5,
+          "beerMarkers": "❌"
+        },
+        "j": {
+          "status": "present",
+          "strikes": 2,
+          "beerMarkers": "❌"
+        },
+        "s": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": "❌"
+        },
+        "i": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": "❌"
+        }
+      }
+    },
+    {
+      "date": "2025-10-26",
+      "title": "Dangerous Loving Time",
+      "activity": "Other",
+      "game": "",
+      "location": "",
+      "eventLabel": "Oct 26, dangerous loving time",
+      "sourceNote": "Oct 26, dangerous loving time.",
+      "dateConfidence": "explicit",
+      "sourcePostedAt": "2025-10-26 22:47",
+      "attendance": {
+        "a": {
+          "status": "absent",
+          "strikes": 1,
+          "beerMarkers": "❌"
+        },
+        "n": {
+          "status": "absent",
+          "strikes": 1,
+          "beerMarkers": "❌"
+        },
+        "john": {
+          "status": "absent",
+          "strikes": 1,
+          "beerMarkers": "❌"
+        },
+        "j": {
+          "status": "present",
+          "strikes": 2,
+          "beerMarkers": "❌"
+        },
+        "s": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": "❌"
+        },
+        "i": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": ""
+        }
+      }
+    },
+    {
+      "date": "2025-11-02",
+      "title": "Dangerous Loving Time",
+      "activity": "Other",
+      "game": "",
+      "location": "",
+      "eventLabel": "Nov 2, dangerous loving time",
+      "sourceNote": "Nov 2, dangerous loving time.",
+      "dateConfidence": "explicit",
+      "sourcePostedAt": "2025-11-03 08:32",
+      "attendance": {
+        "a": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": "❌"
+        },
+        "n": {
+          "status": "absent",
+          "strikes": 2,
+          "beerMarkers": "❌"
+        },
+        "john": {
+          "status": "absent",
+          "strikes": 2,
+          "beerMarkers": ""
+        },
+        "j": {
+          "status": "present",
+          "strikes": 2,
+          "beerMarkers": "❌"
+        },
+        "s": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": "❌"
+        },
+        "i": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": ""
+        }
+      }
+    },
+    {
+      "date": "2025-11-11",
+      "title": "Board games",
+      "activity": "Board games",
+      "game": "",
+      "location": "",
+      "eventLabel": "Nov 11, board games",
+      "sourceNote": "Nov 11, board games.",
+      "dateConfidence": "explicit",
+      "sourcePostedAt": "2025-11-10 20:22",
+      "attendance": {
+        "a": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": "❌"
+        },
+        "n": {
+          "status": "absent",
+          "strikes": 3,
+          "beerMarkers": "❌"
+        },
+        "john": {
+          "status": "present",
+          "strikes": 2,
+          "beerMarkers": ""
+        },
+        "j": {
+          "status": "present",
+          "strikes": 2,
+          "beerMarkers": "❌"
+        },
+        "s": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": "❌"
+        },
+        "i": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": ""
+        }
+      }
+    },
+    {
+      "date": "2025-11-17",
+      "title": "Star Realms",
+      "activity": "Board games",
+      "game": "Star Realms",
+      "location": "",
+      "eventLabel": "Nov 17, star realms",
+      "sourceNote": "Nov 17, star realms.",
+      "dateConfidence": "explicit",
+      "sourcePostedAt": "2025-11-24 18:21",
+      "attendance": {
+        "a": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": "❌"
+        },
+        "n": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": "❌"
+        },
+        "john": {
+          "status": "present",
+          "strikes": 2,
+          "beerMarkers": ""
+        },
+        "j": {
+          "status": "present",
+          "strikes": 2,
+          "beerMarkers": "❌"
+        },
+        "s": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": "❌"
+        },
+        "i": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": ""
+        }
+      }
+    },
+    {
+      "date": "2025-11-24",
+      "title": "Poker night",
+      "activity": "Poker",
+      "game": "",
+      "location": "",
+      "eventLabel": "Nov 24, poker night",
+      "sourceNote": "Nov 24, poker night.",
+      "dateConfidence": "explicit",
+      "sourcePostedAt": "2025-11-24 22:16",
+      "attendance": {
+        "a": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": "❌"
+        },
+        "n": {
+          "status": "absent",
+          "strikes": 4,
+          "beerMarkers": "❌"
+        },
+        "john": {
+          "status": "present",
+          "strikes": 2,
+          "beerMarkers": ""
+        },
+        "j": {
+          "status": "present",
+          "strikes": 2,
+          "beerMarkers": "❌"
+        },
+        "s": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": "❌"
+        },
+        "i": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": ""
+        }
+      }
+    },
+    {
+      "date": "2025-12-08",
+      "title": "All skipped",
+      "activity": "Other",
+      "game": "",
+      "location": "",
+      "eventLabel": "Dec 8, all skipped",
+      "sourceNote": "The source says all skipped, but the strike snapshot does not reflect that for every person; attendance is unknown.",
+      "dateConfidence": "explicit",
+      "sourcePostedAt": "2025-12-15 13:55",
+      "attendance": {
+        "a": {
+          "status": "unknown",
+          "strikes": 2,
+          "beerMarkers": "❌"
+        },
+        "n": {
+          "status": "unknown",
+          "strikes": 5,
+          "beerMarkers": "❌"
+        },
+        "john": {
+          "status": "unknown",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "j": {
+          "status": "unknown",
+          "strikes": 3,
+          "beerMarkers": "❌"
+        },
+        "s": {
+          "status": "unknown",
+          "strikes": 4,
+          "beerMarkers": "❌"
+        },
+        "i": {
+          "status": "unknown",
+          "strikes": 4,
+          "beerMarkers": ""
+        }
+      }
+    },
+    {
+      "date": "2025-12-15",
+      "title": "Minecraft",
+      "activity": "Video Games",
+      "game": "Minecraft",
+      "location": "",
+      "eventLabel": "Dec 15, Minecraft",
+      "sourceNote": "Dec 15, Minecraft.",
+      "dateConfidence": "explicit",
+      "sourcePostedAt": "2025-12-15 13:55",
+      "attendance": {
+        "a": {
+          "status": "present",
+          "strikes": 2,
+          "beerMarkers": "❌"
+        },
+        "n": {
+          "status": "present",
+          "strikes": 0,
+          "beerMarkers": "❌"
+        },
+        "john": {
+          "status": "absent",
+          "strikes": 4,
+          "beerMarkers": ""
+        },
+        "j": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": "❌"
+        },
+        "s": {
+          "status": "present",
+          "strikes": 4,
+          "beerMarkers": "❌"
+        },
+        "i": {
+          "status": "present",
+          "strikes": 4,
+          "beerMarkers": ""
+        }
+      }
+    },
+    {
+      "date": "2025-12-22",
+      "title": "Star Realms at Adam's",
+      "activity": "Board games",
+      "game": "Star Realms",
+      "location": "Adam's House",
+      "eventLabel": "Dec 22, star realms at Adam's",
+      "sourceNote": "Dec 22, star realms at Adam's; source timestamp appears earlier than this stated event date.",
+      "dateConfidence": "source-date-conflict",
+      "sourcePostedAt": "2025-12-15 13:55",
+      "attendance": {
+        "a": {
+          "status": "present",
+          "strikes": 2,
+          "beerMarkers": "❌"
+        },
+        "n": {
+          "status": "present",
+          "strikes": 0,
+          "beerMarkers": "❌"
+        },
+        "john": {
+          "status": "absent",
+          "strikes": 5,
+          "beerMarkers": "❌"
+        },
+        "j": {
+          "status": "present",
+          "strikes": 3,
+          "beerMarkers": "❌"
+        },
+        "s": {
+          "status": "present",
+          "strikes": 4,
+          "beerMarkers": "✅"
+        },
+        "i": {
+          "status": "absent",
+          "strikes": 5,
+          "beerMarkers": "❌"
+        }
+      }
+    },
+    {
+      "date": "2026-03-09",
+      "title": "GTFO at the Studio",
+      "activity": "Video Games",
+      "game": "GTFO",
+      "location": "Studio",
+      "eventLabel": "March 9, GTFO at the studio",
+      "sourceNote": "Reset! March 9, GTFO at the studio.",
+      "dateConfidence": "explicit",
+      "sourcePostedAt": "2026-03-09 23:12",
+      "attendance": {
+        "a": {
+          "status": "present",
+          "strikes": 0,
+          "beerMarkers": ""
+        },
+        "n": {
+          "status": "absent",
+          "strikes": 1,
+          "beerMarkers": ""
+        },
+        "john": {
+          "status": "absent",
+          "strikes": 1,
+          "beerMarkers": ""
+        },
+        "j": {
+          "status": "present",
+          "strikes": 0,
+          "beerMarkers": ""
+        },
+        "s": {
+          "status": "present",
+          "strikes": 0,
+          "beerMarkers": ""
+        },
+        "i": {
+          "status": "present",
+          "strikes": 0,
+          "beerMarkers": ""
+        }
+      }
+    },
+    {
+      "date": "2026-03-16",
+      "title": "Juice/wine night at Adam's",
+      "activity": "Other",
+      "game": "",
+      "location": "Adam's House",
+      "eventLabel": "Juice/wine night, Adam's",
+      "sourceNote": "Juice/wine night, Adam's.",
+      "dateConfidence": "explicit",
+      "sourcePostedAt": "2026-03-16 19:08",
+      "attendance": {
+        "a": {
+          "status": "present",
+          "strikes": 0,
+          "beerMarkers": ""
+        },
+        "n": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": ""
+        },
+        "john": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": ""
+        },
+        "j": {
+          "status": "present",
+          "strikes": 0,
+          "beerMarkers": ""
+        },
+        "s": {
+          "status": "present",
+          "strikes": 0,
+          "beerMarkers": ""
+        },
+        "i": {
+          "status": "present",
+          "strikes": 0,
+          "beerMarkers": ""
+        }
+      }
+    },
+    {
+      "date": "2026-03-22",
+      "title": "Game at Studio",
+      "activity": "Video Games",
+      "game": "",
+      "location": "Studio",
+      "eventLabel": "March 22, game at studio",
+      "sourceNote": "March 22, game at studio; game title not specified.",
+      "dateConfidence": "explicit",
+      "sourcePostedAt": "2026-03-29 23:23",
+      "attendance": {
+        "a": {
+          "status": "present",
+          "strikes": 0,
+          "beerMarkers": ""
+        },
+        "n": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": ""
+        },
+        "john": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": ""
+        },
+        "j": {
+          "status": "present",
+          "strikes": 0,
+          "beerMarkers": ""
+        },
+        "s": {
+          "status": "present",
+          "strikes": 0,
+          "beerMarkers": ""
+        },
+        "i": {
+          "status": "absent",
+          "strikes": 1,
+          "beerMarkers": ""
+        }
+      }
+    },
+    {
+      "date": "2026-03-29",
+      "title": "Zombie game at Nathan's",
+      "activity": "Other",
+      "game": "",
+      "location": "Nathan's House",
+      "eventLabel": "Zombie game, Nathan's",
+      "sourceNote": "Zombie game, Nathan's. Date inferred from the 3/29 update.",
+      "dateConfidence": "inferred-post-date",
+      "sourcePostedAt": "2026-03-29 23:23",
+      "attendance": {
+        "a": {
+          "status": "present",
+          "strikes": 0,
+          "beerMarkers": ""
+        },
+        "n": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": ""
+        },
+        "john": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": ""
+        },
+        "j": {
+          "status": "present",
+          "strikes": 0,
+          "beerMarkers": ""
+        },
+        "s": {
+          "status": "present",
+          "strikes": 0,
+          "beerMarkers": ""
+        },
+        "i": {
+          "status": "present",
+          "strikes": 1,
+          "beerMarkers": ""
+        }
+      }
+    },
+    {
+      "date": "2026-04-26",
+      "title": "Star Realms at Sterling's house",
+      "activity": "Board games",
+      "game": "Star Realms",
+      "location": "Sterling's House",
+      "eventLabel": "April 26, star realms at sterlings house",
+      "sourceNote": "April 26, star realms at sterlings house.",
+      "dateConfidence": "explicit",
+      "sourcePostedAt": "2026-04-26 21:27",
+      "attendance": {
+        "a": {
+          "status": "present",
+          "strikes": 0,
+          "beerMarkers": ""
+        },
+        "n": {
+          "status": "absent",
+          "strikes": 2,
+          "beerMarkers": ""
+        },
+        "john": {
+          "status": "absent",
+          "strikes": 3,
+          "beerMarkers": ""
+        },
+        "j": {
+          "status": "absent",
+          "strikes": 1,
+          "beerMarkers": ""
+        },
+        "s": {
+          "status": "present",
+          "strikes": 0,
+          "beerMarkers": ""
+        },
+        "i": {
+          "status": "absent",
+          "strikes": 2,
+          "beerMarkers": ""
+        }
+      }
+    }
+  ],
+  "notes": [
+    {
+      "date": "2024-09-15",
+      "type": "baseline",
+      "text": "Starting tally from the first snapshot in the pasted log.",
+      "sourcePostedAt": "2024-09-15 22:07",
+      "tallies": {
+        "a": {
+          "strikes": 0,
+          "beerMarkers": ""
+        },
+        "n": {
+          "strikes": 0,
+          "beerMarkers": ""
+        },
+        "john": {
+          "strikes": 0,
+          "beerMarkers": ""
+        },
+        "j": {
+          "strikes": 1,
+          "beerMarkers": ""
+        },
+        "s": {
+          "strikes": 0,
+          "beerMarkers": ""
+        },
+        "i": {
+          "strikes": 1,
+          "beerMarkers": ""
+        }
+      }
+    },
+    {
+      "date": "2024-10-28",
+      "type": "comment",
+      "text": "If you weren't there, how would you know?",
+      "sourcePostedAt": "2024-10-28 10:34"
+    },
+    {
+      "date": "2025-03-31",
+      "type": "comment",
+      "text": "No abscesses. Is what I read every time.",
+      "sourcePostedAt": "2025-03-31 23:09"
+    },
+    {
+      "date": "2025-06-03",
+      "type": "comment",
+      "text": "I brought my peace offering already.",
+      "sourcePostedAt": "2025-06-03 07:30"
+    },
+    {
+      "date": "2026-06-15",
+      "type": "status",
+      "text": "Isaiah MIA for 3 months.",
+      "sourcePostedAt": "2026-06-15 15:17"
+    }
+  ]
+}

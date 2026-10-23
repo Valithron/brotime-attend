@@ -428,7 +428,57 @@
           </div>
         </sc-if>
         <sc-if value="{{showDiscordHistory}}" hint-placeholder-val="{{ false }}">
-          <pre class="discord-archive" aria-label="Imported Discord attendance log">{{discordArchiveText}}</pre>
+          <div class="archive-intro"><b>{{discordCount}}</b> parsed gatherings. Attendance is reconstructed from consecutive strike snapshots where possible. Original strike and beer markers are kept with each record; unknown attendance and inferred dates are labeled.</div>
+          <div class="tl discord-tl" aria-label="Parsed Discord gathering records">
+            <sc-for list="{{discordHistory}}" as="r" hint-placeholder-count="8">
+              <sc-if value="{{r.isHead}}" hint-placeholder-val="{{ false }}"><h3 class="mhd">{{r.label}}</h3></sc-if>
+              <sc-if value="{{r.isRow}}" hint-placeholder-val="{{ true }}">
+                <div class="tl-item discord-item {{r.rowCls}}" data-discord-record="{{r.id}}">
+                  <span class="dot {{r.dotCls}}" aria-hidden="true"></span>
+                  <button class="row-head discord-row" sc-camel-on-click="{{r.toggle}}" aria-expanded="{{r.open}}" aria-label="{{r.aria}}" data-action="toggle-discord-record" data-record="{{r.id}}">
+                    <span class="date"><span class="d">{{r.day}}</span><span class="mo">{{r.month}}</span></span>
+                    <span class="row-main">
+                      <span class="act">{{r.title}}</span>
+                      <sc-if value="{{r.hasEventMeta}}" hint-placeholder-val="{{ false }}"><span class="act-meta">{{r.eventMeta}}</span></sc-if>
+                      <sc-if value="{{r.isNote}}" hint-placeholder-val="{{ false }}"><span class="act-meta">{{r.meta}}</span></sc-if>
+                      <sc-if value="{{r.isNote}}" hint-placeholder-val="{{ false }}"><span class="act-meta">{{r.sourcePostedAt}}</span></sc-if>
+                    </span>
+                    <sc-if value="{{r.isNote}}" hint-placeholder-val="{{ false }}">
+                      <span class="archive-note-tag">Note</span>
+                    </sc-if>
+                    <sc-if value="{{r.isEvent}}" hint-placeholder-val="{{ false }}">
+                      <span class="rcs" aria-hidden="true">
+                        <sc-for list="{{r.chips}}" as="c" hint-placeholder-count="6"><span class="rc {{c.cls}}" title="{{c.tip}}">{{c.initial}}</span></sc-for>
+                      </span>
+                    </sc-if>
+                    <sc-if value="{{r.isEvent}}" hint-placeholder-val="{{ false }}"><span class="archive-count">{{r.countText}}</span></sc-if>
+                  </button>
+                  <sc-if value="{{r.open}}" hint-placeholder-val="{{ false }}">
+                    <div class="detail discord-detail">
+                      <sc-if value="{{r.isEvent}}" hint-placeholder-val="{{ false }}">
+                        <div class="discord-meta">{{r.confidence}}<sc-if value="{{r.sourcePostedAt}}" hint-placeholder-val="{{ false }}"> · Discord post {{r.sourcePostedAt}}</sc-if></div>
+                      </sc-if>
+                      <sc-if value="{{r.isNote}}" hint-placeholder-val="{{ false }}">
+                        <div class="discord-meta">{{r.confidence}} · Discord post {{r.sourcePostedAt}}</div>
+                      </sc-if>
+                      <div class="discord-attendance">
+                        <sc-for list="{{r.members}}" as="m" hint-placeholder-count="6">
+                          <div class="discord-person {{m.cls}}" data-member="{{m.id}}">
+                            <span class="nm">{{m.name}}</span>
+                            <span class="discord-state">{{m.statusText}}</span>
+                            <span class="discord-strikes">{{m.strikesText}}</span>
+                            <span class="discord-beer">{{m.beerText}}</span>
+                          </div>
+                        </sc-for>
+                      </div>
+                      <sc-if value="{{r.hasSourceNote}}" hint-placeholder-val="{{ false }}"><div class="note">{{r.sourceNote}}</div></sc-if>
+                    </div>
+                  </sc-if>
+                </div>
+              </sc-if>
+            </sc-for>
+            <sc-if value="{{discordHistoryEmpty}}" hint-placeholder-val="{{ false }}"><div class="empty">No parsed Discord records are loaded yet.</div></sc-if>
+          </div>
         </sc-if>
       </section>
     </sc-if>

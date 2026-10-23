@@ -58,6 +58,9 @@ class Component extends DCLogic {
       this.setState({
         ...existing,
         seasons: data.seasons,
+        discordMembers: data.discordMembers || [],
+        discordEvents: data.discordEvents || [],
+        discordNotes: data.discordNotes || [],
         nextId: maxId
       });
     } catch (error) {

@@ -172,3 +172,73 @@ test("D1 state loading preserves the event's game and location", async () => {
   assert.equal(state.seasons[0].sessions[0].location, "Studio");
   assert.deepEqual(state.seasons[0].paid.a, ["2026-10-24"]);
 });
+
+test("Discord records keep the historical six-person data separate from active members", async () => {
+  const allMembers = [
+    { id: "s", name: "Sterling", is_active: 1 },
+    { id: "a", name: "Adam", is_active: 1 },
+    { id: "j", name: "Julian", is_active: 1 },
+    { id: "n", name: "Nathan", is_active: 1 },
+    { id: "i", name: "Isaiah", is_active: 1 },
+    { id: "john", name: "John", is_active: 0 }
+  ];
+  const archiveRows = [
+    {
+      id: 99, year: "2026", date: "2026-04-26", activity: "Board games", game: "Star Realms",
+      location: "Sterling's House", event_title: "Star Realms at Sterling's house", event_label: "April 26, star realms at sterling's house",
+      source_posted_at: "2026-04-26 21:27", date_confidence: "explicit", source_note: "Last tally in the pasted log.",
+      member_id: "john", status: "absent", source_strikes: 3, beer_markers: ""
+    },
+    {
+      id: 99, year: "2026", date: "2026-04-26", activity: "Board games", game: "Star Realms",
+      location: "Sterling's House", event_title: "Star Realms at Sterling's house", event_label: "April 26, star realms at sterling's house",
+      source_posted_at: "2026-04-26 21:27", date_confidence: "explicit", source_note: "Last tally in the pasted log.",
+      member_id: "a", status: "present", source_strikes: 0, beer_markers: ""
+    }
+  ];
+  const db = {
+    prepare(sql) {
+      return {
+        all: async () => {
+          if (sql.includes("discord_record_metadata")) return { results: archiveRows };
+          if (sql.includes("discord_archive_notes")) return { results: [] };
+          if (sql.includes("FROM seasons")) return { results: [
+            { id: 1, name: "2026", closed: 0, imported: 0, is_current: 1 },
+            { id: 2, name: "2026", closed: 1, imported: 1, is_current: 0 }
+          ] };
+          if (sql.includes("FROM members")) return { results: allMembers };
+          if (sql.includes("FROM gatherings")) return { results: [] };
+          return { results: [] };
+        }
+      };
+    }
+  };
+  const state = await loadAppState(db);
+  assert.deepEqual(state.members.map((member) => member.id), ["s", "a", "j", "n", "i"]);
+  assert.deepEqual(state.discordMembers.map((member) => member.id), ["a", "n", "john", "j", "s", "i"]);
+  assert.equal(state.discordEvents.length, 1);
+  assert.equal(state.discordEvents[0].attendance.john.status, "absent");
+  assert.equal(state.discordEvents[0].attendance.john.strikes, 3);
+  assert.equal(state.discordEvents[0].attendance.a.status, "present");
+  assert.equal(state.seasons[0].sessions.length, 0);
+});
+
+test("the live tracker still loads before the Discord import migration is run", async () => {
+  const db = {
+    prepare(sql) {
+      return {
+        all: async () => {
+          if (sql.includes("discord_record_metadata")) throw new Error("no such table: discord_record_metadata");
+          if (sql.includes("discord_archive_notes")) throw new Error("no such table: discord_archive_notes");
+          if (sql.includes("FROM seasons")) return { results: [{ id: 1, name: "2026", closed: 0, imported: 0, is_current: 1 }] };
+          if (sql.includes("FROM members")) return { results: members.map((member) => ({ ...member, is_active: 1 })) };
+          return { results: [] };
+        }
+      };
+    }
+  };
+  const state = await loadAppState(db);
+  assert.equal(state.currentSeasonId, 1);
+  assert.equal(state.discordEvents.length, 0);
+  assert.equal(state.members.length, 5);
+});

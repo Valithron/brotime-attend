@@ -42,6 +42,7 @@ function initialState(demo) {
   const today = isoToday();
   return {
     seasons: demo ? demoSeasons() : [emptySeason('cur', String(new Date().getFullYear()))],
+    discordMembers: [], discordEvents: [], discordNotes: [],
     viewId: null, view: 'board', memberId: 's',
     histFilter: 'all', historyMode: 'live', ledgerFilter: 'owed', openId: null, menu: null,
     confirmNew: false, confirmDel: false, toast: null,
