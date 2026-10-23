@@ -11,6 +11,10 @@ class Component extends DCLogic {
 
   /* Single entry point for every user intent. See ACTIONS above. */
   dispatch(name, payload) {
+    if (['saveGathering', 'deleteGathering', 'settleBeer', 'undoBeer', 'startSeason'].includes(name)) {
+      this.persistAction(name, payload || {});
+      return;
+    }
     const action = ACTIONS[name];
     if (!action) { console.warn('[tribunal] unknown action', name); return; }
     const result = action(this.state, payload || {}) || {};
@@ -36,6 +40,114 @@ class Component extends DCLogic {
       state: () => JSON.parse(JSON.stringify(this.state))
     };
     window.tribunal = this._api;
+    this.loadServerState();
+  }
+
+  async loadServerState() {
+    let signInConfigured = false;
+    try {
+      const sessionResponse = await fetch('/api/session', { credentials: 'same-origin', cache: 'no-store' });
+      const session = await sessionResponse.json();
+      if (!sessionResponse.ok) throw new Error(session.error || 'Could not check sign-in.');
+      signInConfigured = !!session.configured;
+      if (!session.authenticated) {
+        const authError = new URLSearchParams(window.location.search).get('auth_error');
+        const messages = {
+          state: 'Discord sign-in expired. Please try again.',
+          discord: 'Discord sign-in did not complete. Please try again.',
+          not_allowed: 'This Discord account has not been added to Brotime.'
+        };
+        this.setState({ auth: {
+          status: 'signedout', configured: !!session.configured,
+          message: messages[authError] || (session.configured ? 'Sign in with an authorized Discord account to view the live tracker.' : 'Discord sign-in is not configured yet.')
+        } });
+        return;
+      }
+      const stateResponse = await fetch('/api/state', { credentials: 'same-origin', cache: 'no-store' });
+      const data = await stateResponse.json();
+      if (!stateResponse.ok) throw new Error(data.error || 'Could not load the live tracker.');
+      const existing = this.state;
+      const maxId = Math.max(0, ...data.seasons.flatMap((s) => s.sessions.map((x) => Number(x.id) || 0)));
+      this.setState({
+        ...existing,
+        seasons: data.seasons,
+        nextId: maxId,
+        role: session.user.role,
+        memberId: session.user.memberId || existing.memberId,
+        auth: { status: 'ready', configured: true, message: '', user: session.user }
+      });
+    } catch (error) {
+        this.setState({ auth: {
+          status: 'error', configured: signInConfigured,
+          message: signInConfigured ? (error.message || 'Could not connect to the live tracker.') : 'Pages Functions and Discord sign-in are not configured for this preview.'
+        } });
+    }
+  }
+
+  async persistAction(name, payload) {
+    const S = this.state;
+    if (!S.auth || S.auth.status !== 'ready') return;
+    if (S.role !== 'admin') { this.showToast('Only the administrator can change the live tracker.', false); return; }
+    if (name === 'deleteGathering' && !S.confirmDel) {
+      const arm = ACTIONS.deleteGathering(S, payload || {});
+      if (arm.patch) this.setState(arm.patch);
+      return;
+    }
+    if (name === 'saveGathering') {
+      if (!isFormComplete(S.form)) return;
+      if (findDuplicate(currentSeason(S), S.form)) {
+        this.showToast('A gathering with that date and activity already exists.', false);
+        return;
+      }
+    }
+    let url = '';
+    let method = 'POST';
+    let body = null;
+    if (name === 'saveGathering') {
+      const f = S.form;
+      url = f.editId == null ? '/api/gatherings' : '/api/gatherings/' + encodeURIComponent(f.editId);
+      method = f.editId == null ? 'POST' : 'PUT';
+      body = { date: f.date, activity: f.activity, notes: f.notes, attendance: f.att };
+    } else if (name === 'deleteGathering') {
+      url = '/api/gatherings/' + encodeURIComponent(S.form.editId);
+      method = 'DELETE';
+    } else if (name === 'settleBeer') {
+      url = '/api/payments';
+      body = { memberId: payload.id };
+    } else if (name === 'undoBeer') {
+      url = '/api/payments/reverse';
+      body = { memberId: payload.id };
+    } else if (name === 'startSeason') {
+      url = '/api/seasons';
+    } else {
+      return;
+    }
+    if (this._mutationPending) return;
+    this._mutationPending = true;
+    try {
+      const response = await fetch(url, {
+        method,
+        credentials: 'same-origin',
+        headers: body ? { 'content-type': 'application/json' } : {},
+        body: body ? JSON.stringify(body) : undefined
+      });
+      const result = await response.json();
+      if (!response.ok) {
+        const error = new Error(result.error || 'The change could not be saved.');
+        error.status = response.status;
+        throw error;
+      }
+      await this.loadServerState();
+      if (name === 'saveGathering') this.setState({ view: 'history', openId: result.id, histFilter: 'all', confirmDel: false, form: blankForm(this.state.today) });
+      if (name === 'deleteGathering') this.setState({ view: 'history', openId: null, confirmDel: false, form: blankForm(this.state.today) });
+      if (name === 'startSeason') this.setState({ view: 'board', viewId: null, menu: null, confirmNew: false, form: blankForm(this.state.today) });
+      this.showToast(result.message || 'Saved.', false);
+    } catch (error) {
+      if (error.status === 401 || error.status === 403) await this.loadServerState();
+      this.showToast(error.message || 'The change could not be saved.', false);
+    } finally {
+      this._mutationPending = false;
+    }
   }
 
   componentWillUnmount() {

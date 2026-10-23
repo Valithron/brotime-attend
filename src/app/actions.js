@@ -10,7 +10,6 @@ const ACTIONS = {
     if (p.view === 'record' && S.view !== 'record') return { patch: { view: 'record', menu: null, confirmDel: false, form: blankForm(S.today) } };
     return { patch: { view: p.view, menu: null, confirmDel: false } };
   },
-  setRole: (S, p) => ({ patch: { role: p.role } }),
   toggleMenu: (S, p) => ({ patch: { menu: S.menu === p.menu ? null : p.menu, confirmNew: false } }),
   closeMenu: () => ({ patch: { menu: null, confirmNew: false } }),
   pickSeason: (S, p) => ({ patch: { viewId: p.id, menu: null, confirmNew: false, openId: null } }),
@@ -22,7 +21,6 @@ const ACTIONS = {
     seasons.push(emptySeason('s' + (S.nextId + 1), 'Season ' + n));
     return { patch: { seasons: seasons, nextId: S.nextId + 1, viewId: null, view: 'board', menu: null, confirmNew: false, form: blankForm(S.today) }, toast: { text: 'Season ' + n + ' started' } };
   },
-  loadData: (S, p) => ({ patch: initialState(p.demo) }),
   openMember: (S, p) => ({ patch: { view: 'member', memberId: p.id, menu: null } }),
   openGathering: (S, p) => ({ patch: { view: 'history', openId: p.id, histFilter: 'all' } }),
   toggleGathering: (S, p) => ({ patch: { openId: S.openId === p.id ? null : p.id } }),

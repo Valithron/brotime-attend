@@ -19,11 +19,11 @@
    DATA SHAPES
      Season   { id, name, closed, imported, sessions:[Session], paid:{memberId:[isoDate]} }
      Session  { id:number, date:'YYYY-MM-DD', activity, notes, att:{memberId:boolean} }
-     State    { seasons, viewId|null, view, role, memberId, histFilter,
+     State    { seasons, auth, viewId|null, view, role, memberId, histFilter,
                 ledgerFilter, openId, menu, confirmNew, confirmDel, toast,
                 form, nextId, today }
      view     'board' | 'member' | 'record' | 'ledger' | 'history'
-     role     'admin' | 'member'      (members are read-only)
+     role     'admin' | 'member'      (set by the signed-in server session)
 
    BUSINESS RULES (all enforced in section 2)
      - every absence = 1 strike, no excuses
@@ -54,9 +54,9 @@
                                        totals, per-member standing
              .state()               -> deep copy of raw state
      ACTIONS (payloads)
-       nav {view}              setRole {role}          toggleMenu {menu}
+       nav {view}              toggleMenu {menu}
        closeMenu               pickSeason {id|null}    askNewSeason
-       cancelNewSeason         startSeason             loadData {demo}
+       cancelNewSeason         startSeason
        openMember {id}         openGathering {id}      toggleGathering {id}
        filterHistory {id}      filterLedger {key}      setField {field,value}
        setAttendance {id,value:boolean}                setAllAttendance {value}

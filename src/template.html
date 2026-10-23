@@ -38,6 +38,7 @@
   </defs>
 </svg>
 
+<sc-if value="{{showApp}}" hint-placeholder-val="{{ false }}">
 <div class="shell" data-app="brotime-tribunal" data-view="{{viewKey}}" data-role="{{roleKey}}" data-season="{{seasonKey}}" data-can-edit="{{canEdit}}">
   <aside class="side">
     <div class="brand">
@@ -61,7 +62,7 @@
         <span class="sn">{{seasonName}}</span>
         <span class="cnt num">{{seasonCount}}</span>
       </button>
-      <button class="btn ico" sc-camel-on-click="{{toggleSettingsMenu}}" aria-label="Role and data" aria-haspopup="menu" aria-expanded="{{settingsMenuOpen}}" data-action="menu-settings">
+      <button class="btn ico" sc-camel-on-click="{{toggleSettingsMenu}}" aria-label="Account settings" aria-haspopup="menu" aria-expanded="{{settingsMenuOpen}}" data-action="menu-settings">
         <svg class="i" aria-hidden="true"><use href="#i-gear"></use></svg>
       </button>
 
@@ -94,14 +95,10 @@
       </sc-if>
 
       <sc-if value="{{settingsMenuOpen}}" hint-placeholder-val="{{ false }}">
-        <div class="menu" role="menu" aria-label="Role and data">
-          <div class="pair">
-            <button role="menuitemradio" aria-checked="{{isAdmin}}" class="{{roleAdminCls}}" sc-camel-on-click="{{setAdmin}}" data-action="set-role" data-role="admin">Admin</button>
-            <button role="menuitemradio" aria-checked="{{isMemberRole}}" class="{{roleMemberCls}}" sc-camel-on-click="{{setMember}}" data-action="set-role" data-role="member">Member</button>
-          </div>
+        <div class="menu" role="menu" aria-label="Account settings">
+          <div class="account-role">{{roleLabel}}</div>
           <hr>
-          <button role="menuitem" sc-camel-on-click="{{loadDemo}}" data-action="load-demo">Demo data</button>
-          <button role="menuitem" sc-camel-on-click="{{loadEmpty}}" data-action="load-empty">Empty season</button>
+          <a role="menuitem" class="account-signout" href="/auth/logout" data-action="sign-out">Sign out</a>
         </div>
       </sc-if>
     </div>
@@ -492,6 +489,21 @@
     </div>
   </sc-if>
 </div>
+</sc-if>
+
+<sc-if value="{{authLoading}}" hint-placeholder-val="{{ true }}">
+  <main class="auth-screen" role="status"><div class="auth-card"><div class="brand">Brotime <b>Tribunal</b></div><p>Loading the live attendance record…</p></div></main>
+</sc-if>
+
+<sc-if value="{{showSignIn}}" hint-placeholder-val="{{ false }}">
+  <main class="auth-screen"><div class="auth-card">
+    <div class="brand">Brotime <b>Tribunal</b></div>
+    <p>{{authMessage}}</p>
+    <sc-if value="{{showLogin}}" hint-placeholder-val="{{ false }}">
+      <a class="btn pri big" href="/auth/login" data-action="discord-sign-in">Sign in with Discord</a>
+    </sc-if>
+  </div></main>
+</sc-if>
 </x-dc>
 
 <!-- APP_SCRIPT -->

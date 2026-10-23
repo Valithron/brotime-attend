@@ -76,6 +76,7 @@ function snapshotOf(ctx) {
 const SELECTORS = {
   shell(ctx, bind) {
     const S = ctx.S;
+    const auth = S.auth || {};
     const keys = [
       { key: 'board', label: 'Board', icon: 'i-board' },
       { key: 'member', label: 'Members', icon: 'i-members' },
@@ -97,6 +98,12 @@ const SELECTORS = {
     }));
     return {
       viewKey: ctx.view, roleKey: S.role, seasonKey: ctx.season.id,
+      showApp: auth.status === 'ready',
+      authLoading: auth.status === 'loading',
+      showSignIn: auth.status === 'signedout' || auth.status === 'error',
+      showLogin: !!auth.configured,
+      authMessage: auth.message || '',
+      roleLabel: S.role === 'admin' ? 'Administrator' : 'Member',
       seasonName: ctx.season.name, viewingClosed: !!ctx.season.closed, seasonCount: ctx.C.count,
       seasonIcon: ctx.season.closed ? 'i-lock' : 'i-cal',
       seasonAria: 'Season: ' + ctx.season.name + ', ' + plural(ctx.C.count, 'gathering', 'gatherings') + (ctx.season.closed ? ', archived' : ''),
@@ -106,10 +113,6 @@ const SELECTORS = {
       seasonList: seasonList, canStartSeason: S.role === 'admin',
       confirmNew: S.confirmNew, confirmNewOff: !S.confirmNew,
       askNew: bind('askNewSeason'), cancelNew: bind('cancelNewSeason'), startSeason: bind('startSeason'),
-      isAdmin: S.role === 'admin', isMemberRole: S.role === 'member',
-      roleAdminCls: S.role === 'admin' ? 'on' : '', roleMemberCls: S.role === 'member' ? 'on' : '',
-      setAdmin: bind('setRole', { role: 'admin' }), setMember: bind('setRole', { role: 'member' }),
-      loadDemo: bind('loadData', { demo: true }), loadEmpty: bind('loadData', { demo: false }),
       tabs: tabs,
       isBoard: ctx.view === 'board', isRecord: ctx.view === 'record', isLedger: ctx.view === 'ledger',
       isHistory: ctx.view === 'history', isMember: ctx.view === 'member',

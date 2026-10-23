@@ -41,7 +41,8 @@ function initialState(demo) {
   const today = isoToday();
   return {
     seasons: demo ? demoSeasons() : [emptySeason('cur', 'Season 1')],
-    viewId: null, view: 'board', role: 'admin', memberId: 's',
+    viewId: null, view: 'board', role: 'member', memberId: 's',
+    auth: { status: 'loading', configured: false, message: '' },
     histFilter: 'all', ledgerFilter: 'owed', openId: null, menu: null,
     confirmNew: false, confirmDel: false, toast: null,
     form: blankForm(today), nextId: 5000, today: today
