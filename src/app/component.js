@@ -6,7 +6,11 @@ class Component extends DCLogic {
     this.dispatch = this.dispatch.bind(this);
     this.bind = (name, payload) => () => this.dispatch(name, payload);
     const field = (name) => (e) => this.dispatch('setField', { field: name, value: e.target.value });
-    this.fields = { setDate: field('date'), setActivity: field('activity'), setNotes: field('notes') };
+    this.fields = {
+      setDate: field('date'), setActivity: field('activity'), setNotes: field('notes'),
+      setGameChoice: field('gameChoice'), setGameOther: field('gameOther'),
+      setLocationChoice: field('locationChoice'), setLocationOther: field('locationOther')
+    };
   }
 
   /* Single entry point for every user intent. See ACTIONS above. */
@@ -44,25 +48,7 @@ class Component extends DCLogic {
   }
 
   async loadServerState() {
-    let signInConfigured = false;
     try {
-      const sessionResponse = await fetch('/api/session', { credentials: 'same-origin', cache: 'no-store' });
-      const session = await sessionResponse.json();
-      if (!sessionResponse.ok) throw new Error(session.error || 'Could not check sign-in.');
-      signInConfigured = !!session.configured;
-      if (!session.authenticated) {
-        const authError = new URLSearchParams(window.location.search).get('auth_error');
-        const messages = {
-          state: 'Discord sign-in expired. Please try again.',
-          discord: 'Discord sign-in did not complete. Please try again.',
-          not_allowed: 'This Discord account has not been added to Brotime.'
-        };
-        this.setState({ auth: {
-          status: 'signedout', configured: !!session.configured,
-          message: messages[authError] || (session.configured ? 'Sign in with an authorized Discord account to view the live tracker.' : 'Discord sign-in is not configured yet.')
-        } });
-        return;
-      }
       const stateResponse = await fetch('/api/state', { credentials: 'same-origin', cache: 'no-store' });
       const data = await stateResponse.json();
       if (!stateResponse.ok) throw new Error(data.error || 'Could not load the live tracker.');
@@ -71,23 +57,15 @@ class Component extends DCLogic {
       this.setState({
         ...existing,
         seasons: data.seasons,
-        nextId: maxId,
-        role: session.user.role,
-        memberId: session.user.memberId || existing.memberId,
-        auth: { status: 'ready', configured: true, message: '', user: session.user }
+        nextId: maxId
       });
     } catch (error) {
-        this.setState({ auth: {
-          status: 'error', configured: signInConfigured,
-          message: signInConfigured ? (error.message || 'Could not connect to the live tracker.') : 'Pages Functions and Discord sign-in are not configured for this preview.'
-        } });
+      this.showToast(error.message || 'Could not connect to the live tracker.', false);
     }
   }
 
   async persistAction(name, payload) {
     const S = this.state;
-    if (!S.auth || S.auth.status !== 'ready') return;
-    if (S.role !== 'admin') { this.showToast('Only the administrator can change the live tracker.', false); return; }
     if (name === 'deleteGathering' && !S.confirmDel) {
       const arm = ACTIONS.deleteGathering(S, payload || {});
       if (arm.patch) this.setState(arm.patch);
@@ -107,7 +85,14 @@ class Component extends DCLogic {
       const f = S.form;
       url = f.editId == null ? '/api/gatherings' : '/api/gatherings/' + encodeURIComponent(f.editId);
       method = f.editId == null ? 'POST' : 'PUT';
-      body = { date: f.date, activity: f.activity, notes: f.notes, attendance: f.att };
+      body = {
+        date: f.date,
+        activity: f.activity,
+        game: f.activity.trim().toLowerCase() === 'video games' ? selectedGame(f) : '',
+        location: selectedLocation(f),
+        notes: f.notes,
+        attendance: f.att
+      };
     } else if (name === 'deleteGathering') {
       url = '/api/gatherings/' + encodeURIComponent(S.form.editId);
       method = 'DELETE';
@@ -143,7 +128,6 @@ class Component extends DCLogic {
       if (name === 'startSeason') this.setState({ view: 'board', viewId: null, menu: null, confirmNew: false, form: blankForm(this.state.today) });
       this.showToast(result.message || 'Saved.', false);
     } catch (error) {
-      if (error.status === 401 || error.status === 403) await this.loadServerState();
       this.showToast(error.message || 'The change could not be saved.', false);
     } finally {
       this._mutationPending = false;

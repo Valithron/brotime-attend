@@ -1,7 +1,7 @@
 /* ───────────── 4. ACTIONS (the only state transitions) ───────────── */
 function currentSeason(S) { return S.seasons.find((s) => !s.closed) || S.seasons[S.seasons.length - 1]; }
 function viewedSeason(S) { return S.viewId != null ? (S.seasons.find((s) => s.id === S.viewId) || currentSeason(S)) : currentSeason(S); }
-function canEditNow(S) { return S.role === 'admin' && !viewedSeason(S).closed; }
+function canEditNow(S) { return !viewedSeason(S).closed; }
 function mapCurrent(S, fn) { const id = currentSeason(S).id; return S.seasons.map((s) => (s.id === id ? fn(s) : s)); }
 function memberName(id) { return MEMBERS.find((m) => m.id === id).name; }
 
@@ -17,9 +17,10 @@ const ACTIONS = {
   cancelNewSeason: () => ({ patch: { confirmNew: false } }),
   startSeason: (S) => {
     const seasons = S.seasons.map((s) => (s.closed ? s : { ...s, closed: true }));
-    const n = seasons.filter((s) => !s.imported).length + 1;
-    seasons.push(emptySeason('s' + (S.nextId + 1), 'Season ' + n));
-    return { patch: { seasons: seasons, nextId: S.nextId + 1, viewId: null, view: 'board', menu: null, confirmNew: false, form: blankForm(S.today) }, toast: { text: 'Season ' + n + ' started' } };
+    const activeYear = Number(currentSeason(S).name);
+    const year = String(Math.max(new Date().getFullYear(), Number.isInteger(activeYear) ? activeYear + 1 : new Date().getFullYear()));
+    seasons.push(emptySeason('s' + (S.nextId + 1), year));
+    return { patch: { seasons: seasons, nextId: S.nextId + 1, viewId: null, view: 'board', menu: null, confirmNew: false, form: blankForm(S.today) }, toast: { text: year + ' started' } };
   },
   openMember: (S, p) => ({ patch: { view: 'member', memberId: p.id, menu: null } }),
   openGathering: (S, p) => ({ patch: { view: 'history', openId: p.id, histFilter: 'all' } }),
@@ -27,7 +28,12 @@ const ACTIONS = {
   filterHistory: (S, p) => ({ patch: { histFilter: S.histFilter === p.id ? 'all' : p.id } }),
   filterLedger: (S, p) => ({ patch: { ledgerFilter: p.key } }),
 
-  setField: (S, p) => ({ patch: { form: { ...S.form, [p.field]: p.value } } }),
+  setField: (S, p) => {
+    if (p.field === 'activity' && /^war\s*dogs$/i.test(String(p.value).trim())) {
+      return { patch: { form: { ...S.form, activity: 'Video Games', gameChoice: 'War Dogs' } } };
+    }
+    return { patch: { form: { ...S.form, [p.field]: p.value } } };
+  },
   setAttendance: (S, p) => ({ patch: { form: { ...S.form, att: { ...S.form.att, [p.id]: p.value } } } }),
   setAllAttendance: (S, p) => {
     const att = {};
@@ -37,7 +43,14 @@ const ACTIONS = {
   startEdit: (S, p) => {
     const s = currentSeason(S).sessions.find((x) => x.id === p.id);
     if (!s) return {};
-    return { patch: { view: 'record', confirmDel: false, form: { editId: s.id, date: s.date, activity: s.activity, notes: s.notes || '', att: { ...s.att } } } };
+    const gameIsPreset = GAME_OPTIONS.includes(s.game) && s.game !== 'Other';
+    const locationIsPreset = LOCATION_OPTIONS.includes(s.location) && s.location !== 'Other';
+    return { patch: { view: 'record', confirmDel: false, form: {
+      editId: s.id, date: s.date, activity: s.activity,
+      gameChoice: s.game ? (gameIsPreset ? s.game : 'Other') : '', gameOther: s.game && !gameIsPreset ? s.game : '',
+      locationChoice: s.location ? (locationIsPreset ? s.location : 'Other') : '', locationOther: s.location && !locationIsPreset ? s.location : '',
+      notes: s.notes || '', att: { ...s.att }
+    } } };
   },
   cancelEdit: (S) => ({ patch: { view: 'history', confirmDel: false, form: blankForm(S.today) } }),
 
@@ -45,7 +58,8 @@ const ACTIONS = {
     const f = S.form;
     if (!isFormComplete(f) || findDuplicate(currentSeason(S), f)) return {};
     const id = f.editId || S.nextId + 1;
-    const session = { id: id, date: f.date, activity: f.activity.trim(), notes: f.notes.trim(), att: { ...f.att } };
+    const activity = f.activity.trim();
+    const session = { id: id, date: f.date, activity: activity, game: activity.toLowerCase() === 'video games' ? selectedGame(f) : '', location: selectedLocation(f), notes: f.notes.trim(), att: { ...f.att } };
     const seasons = mapCurrent(S, (s) => ({ ...s, sessions: f.editId ? s.sessions.map((x) => (x.id === id ? session : x)) : [...s.sessions, session] }));
     const C = computeSeason(seasons.find((s) => !s.closed));
     const row = C.rows.find((r) => r.s.id === id);

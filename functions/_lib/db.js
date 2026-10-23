@@ -1,10 +1,10 @@
-import { ApiError } from "./auth.js";
+import { ApiError } from "./http.js";
 
 export async function loadAppState(db) {
   const [seasonRows, memberRows, attendanceRows, paymentRows] = await Promise.all([
     db.prepare("SELECT id, name, closed, imported, is_current FROM seasons ORDER BY id").all(),
     db.prepare("SELECT id, name FROM members WHERE is_active = 1 ORDER BY sort_order").all(),
-    db.prepare("SELECT g.id, g.season_id, g.date, g.activity, g.notes, a.member_id, a.present FROM gatherings g LEFT JOIN attendance a ON a.gathering_id = g.id ORDER BY g.date, g.id, a.member_id").all(),
+    db.prepare("SELECT g.id, g.season_id, g.date, g.activity, g.notes, g.game, g.location, a.member_id, a.present FROM gatherings g LEFT JOIN attendance a ON a.gathering_id = g.id ORDER BY g.date, g.id, a.member_id").all(),
     db.prepare("SELECT season_id, member_id, paid_on FROM beer_payments WHERE reversed_at IS NULL ORDER BY paid_on, id").all()
   ]);
   const members = memberRows.results || [];
@@ -20,7 +20,7 @@ export async function loadAppState(db) {
   for (const row of attendanceRows.results || []) {
     let gathering = gatherings.get(row.id);
     if (!gathering) {
-      gathering = { id: row.id, seasonId: row.season_id, session: { id: row.id, date: row.date, activity: row.activity, notes: row.notes || "", att: Object.fromEntries(members.map((member) => [member.id, false])) } };
+      gathering = { id: row.id, seasonId: row.season_id, session: { id: row.id, date: row.date, activity: row.activity, game: row.game || "", location: row.location || "", notes: row.notes || "", att: Object.fromEntries(members.map((member) => [member.id, false])) } };
       gatherings.set(row.id, gathering);
       const season = seasons.get(row.season_id);
       if (season) season.sessions.push(gathering.session);
@@ -55,9 +55,15 @@ export function validateGathering(body, memberIds) {
   if (!body || typeof body !== "object" || Array.isArray(body)) throw new ApiError(400, "Gathering data is required.");
   const date = body.date;
   const activity = typeof body.activity === "string" ? body.activity.trim() : "";
+  const game = typeof body.game === "string" ? body.game.trim() : "";
+  const location = typeof body.location === "string" ? body.location.trim() : "";
   const notes = typeof body.notes === "string" ? body.notes.trim() : "";
   if (!validDate(date)) throw new ApiError(400, "Choose a valid gathering date.");
   if (!activity || activity.length > 120) throw new ApiError(400, "Activity must be between 1 and 120 characters.");
+  if (/^war\s*dogs$/i.test(activity)) throw new ApiError(400, "Choose Video Games as the category and War Dogs as the game.");
+  if (!location || location.length > 120) throw new ApiError(400, "Choose a location up to 120 characters long.");
+  if (activity.toLowerCase() === "video games" && !game) throw new ApiError(400, "Choose the video game for this gathering.");
+  if (game.length > 120) throw new ApiError(400, "Game must be 120 characters or fewer.");
   if (notes.length > 500) throw new ApiError(400, "Notes must be 500 characters or fewer.");
   if (!body.attendance || typeof body.attendance !== "object" || Array.isArray(body.attendance)) throw new ApiError(400, "Attendance for every active member is required.");
   const attendance = {};
@@ -66,5 +72,5 @@ export function validateGathering(body, memberIds) {
     attendance[id] = body.attendance[id];
   }
   if (Object.keys(body.attendance).length !== memberIds.length) throw new ApiError(400, "Attendance data contains an unknown member.");
-  return { date, activity, notes, attendance };
+  return { date, activity, game: activity.toLowerCase() === "video games" ? game : "", location, notes, attendance };
 }

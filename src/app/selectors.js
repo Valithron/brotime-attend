@@ -46,11 +46,13 @@ function sessionRow(ctx, bind, r) {
   const anyBeer = r.outcomes.some((o) => o.beer);
   const allHere = r.present === MEMBERS.length;
   const away = r.outcomes.filter((o) => !o.here).map((o) => o.name + (o.beer ? ' (beer earned)' : ''));
+  const eventMeta = [r.s.activity.toLowerCase() === 'video games' ? r.s.game : '', r.s.location].filter(Boolean).join(' · ');
   return {
     isRow: true, isHead: false, label: '', id: r.s.id, wd: d.wd, d: d.d, mo: d.mo, when: d.when,
-    activity: r.s.activity, notes: r.s.notes, hasNotes: !!r.s.notes, allHere: allHere,
+    activity: r.s.activity, eventMeta: eventMeta, hasEventMeta: !!eventMeta, location: r.s.location || '',
+    notes: r.s.notes, hasNotes: !!r.s.notes, allHere: allHere,
     open: open, canEdit: ctx.canEdit, rowCls: open ? 'open' : '', dotCls: anyBeer ? 'beer' : (allHere ? 'full' : ''),
-    aria: r.s.activity + ', ' + d.wd + ' ' + d.when + ', ' + (allHere ? 'everyone present' : 'absent: ' + away.join(', ')),
+    aria: r.s.activity + (eventMeta ? ', ' + eventMeta : '') + ', ' + d.wd + ' ' + d.when + ', ' + (allHere ? 'everyone present' : 'absent: ' + away.join(', ')),
     chips: r.outcomes.map((o) => ({ initial: o.initial, cls: cellCls(o), tip: o.name + ' ' + outcomeText(o) })),
     effects: r.outcomes.filter((o) => !o.here).map((o) => ({
       id: o.id, name: o.name, beer: o.beer, pips: pipsFor(o.strikes, o.beer),
@@ -63,7 +65,7 @@ function sessionRow(ctx, bind, r) {
 /* Plain-JSON summary of what the screen means. Used by window.tribunal for agents. */
 function snapshotOf(ctx) {
   return {
-    view: ctx.view, role: ctx.S.role, canEdit: ctx.canEdit,
+    view: ctx.view, role: 'public', canEdit: ctx.canEdit,
     season: { id: ctx.season.id, name: ctx.season.name, closed: !!ctx.season.closed, gatherings: ctx.C.count },
     totals: { ...ctx.totals },
     members: ctx.mem.map((m) => ({
@@ -76,7 +78,6 @@ function snapshotOf(ctx) {
 const SELECTORS = {
   shell(ctx, bind) {
     const S = ctx.S;
-    const auth = S.auth || {};
     const keys = [
       { key: 'board', label: 'Board', icon: 'i-board' },
       { key: 'member', label: 'Members', icon: 'i-members' },
@@ -97,20 +98,14 @@ const SELECTORS = {
       pick: bind('pickSeason', { id: s.closed ? s.id : null })
     }));
     return {
-      viewKey: ctx.view, roleKey: S.role, seasonKey: ctx.season.id,
-      showApp: auth.status === 'ready',
-      authLoading: auth.status === 'loading',
-      showSignIn: auth.status === 'signedout' || auth.status === 'error',
-      showLogin: !!auth.configured,
-      authMessage: auth.message || '',
-      roleLabel: S.role === 'admin' ? 'Administrator' : 'Member',
+      viewKey: ctx.view, roleKey: 'public', seasonKey: ctx.season.id,
       seasonName: ctx.season.name, viewingClosed: !!ctx.season.closed, seasonCount: ctx.C.count,
       seasonIcon: ctx.season.closed ? 'i-lock' : 'i-cal',
-      seasonAria: 'Season: ' + ctx.season.name + ', ' + plural(ctx.C.count, 'gathering', 'gatherings') + (ctx.season.closed ? ', archived' : ''),
-      menuOpen: S.menu !== null, seasonMenuOpen: S.menu === 'season', settingsMenuOpen: S.menu === 'settings',
+      seasonAria: 'Year: ' + ctx.season.name + ', ' + plural(ctx.C.count, 'gathering', 'gatherings') + (ctx.season.closed ? ', archived' : ''),
+      menuOpen: S.menu !== null, seasonMenuOpen: S.menu === 'season',
       closeMenu: bind('closeMenu'),
-      toggleSeasonMenu: bind('toggleMenu', { menu: 'season' }), toggleSettingsMenu: bind('toggleMenu', { menu: 'settings' }),
-      seasonList: seasonList, canStartSeason: S.role === 'admin',
+      toggleSeasonMenu: bind('toggleMenu', { menu: 'season' }),
+      seasonList: seasonList, canStartSeason: true,
       confirmNew: S.confirmNew, confirmNewOff: !S.confirmNew,
       askNew: bind('askNewSeason'), cancelNew: bind('cancelNewSeason'), startSeason: bind('startSeason'),
       tabs: tabs,
@@ -189,8 +184,10 @@ const SELECTORS = {
     MEMBERS.forEach((m) => { const v = f.att[m.id]; if (v === true) tally.p++; else if (v === false) tally.a++; else tally.u++; });
     const isEditing = !!f.editId;
     const activityKey = f.activity.trim().toLowerCase();
+    const isVideoGames = activityKey === 'video games';
     return {
       form: f, isEditing: isEditing, recTitle: isEditing ? 'Edit gathering' : 'New gathering',
+      isVideoGames: isVideoGames, isGameOther: isVideoGames && f.gameChoice === 'Other', isLocationOther: f.locationChoice === 'Other',
       cancelEdit: bind('cancelEdit'),
       actChips: names.map((a) => {
         const on = activityKey === a.toLowerCase();

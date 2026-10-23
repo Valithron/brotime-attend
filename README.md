@@ -1,23 +1,23 @@
 # Brotime Attendance Tribunal
 
-A private attendance and beer-obligation tracker for five active members: Sterling, Adam, Julian, Nathan, and Isaiah.
+A public attendance and beer-obligation tracker for five members: Sterling, Adam, Julian, Nathan, and Isaiah.
 
 ## Rules
 
 - Every missed gathering adds one strike, regardless of reason.
 - Each fifth accumulated strike creates one beer obligation and resets that member's active strike count to zero.
 - Fulfilling a beer obligation does not change strikes.
-- Season 1 starts empty. Historical Discord records must remain separate and must never affect live totals.
+- Each year starts empty. Historical records must remain separate and must never affect live totals.
 
 ## Local preview
 
-The production app uses Pages Functions for sign-in and data access. A plain static server cannot provide those API routes; it only serves the source files and displays a note that Pages Functions are unavailable:
+The production app uses Pages Functions to read and write data. A plain static server cannot provide those API routes; it only serves the source files:
 
 ```sh
 python3 -m http.server 8000
 ```
 
-Open `http://localhost:8000`. The source runner fetches its files over HTTP, so opening `index.html` directly as a `file://` URL will not work.
+Open `http://localhost:8000`. The source runner fetches its files over HTTP, so opening `index.html` directly as a `file://` URL will not work. The local server cannot provide live D1 reads or writes.
 
 ## Source layout
 
@@ -28,20 +28,13 @@ Open `http://localhost:8000`. The source runner fetches its files over HTTP, so 
 - `scripts/prototype-runtime.js` loads the split files and assembles the page.
 - `prototype/Brotime_Tribunal.html` is the portable, bundled copy of the prototype.
 
-The live app reads Season 1 and its attendance from Cloudflare D1. Gathering edits, removals, season starts, and beer payments are written to D1 and reload from the server.
+The live app reads the current year and its attendance from Cloudflare D1. Gatherings record a category, game when the category is Video Games, and a location. Gathering edits, removals, year starts, and beer payments are written to D1 and reload from the server.
+
+Anyone with the public Pages URL can view and edit the tracker. It has no sign-in gate.
 
 ## Cloudflare Pages setup
 
-The project is a static site with Pages Functions. It has no framework build step or dependencies, so the Pages build command is blank and the output directory is the repository root. Bind the D1 database to the Pages Function using the binding name `DB`.
-
-Set these production variables in the Pages project:
-
-- `DISCORD_CLIENT_ID`: the Discord OAuth application client ID.
-- `DISCORD_CLIENT_SECRET`: the Discord OAuth application secret.
-- `SESSION_SECRET`: a random secret of at least 32 characters.
-- `ADMIN_DISCORD_ID`: the designated administrator's Discord user ID.
-
-Register `https://brotime-attend.pages.dev/auth/callback` as an OAuth2 redirect URL in the Discord application. The administrator account is created in `app_users` on its first successful sign-in. Add each member's Discord user ID to `app_users` with their member ID (`s`, `a`, `j`, `n`, or `i`) to grant read-only access. Until the bindings and variables are configured, the app keeps the live tracker behind the sign-in screen.
+The project is a static site with Pages Functions. It has no framework build step or dependencies, so the Pages build command is blank and the output directory is the repository root. Bind the D1 database to the Pages Function using the binding name `DB`. Apply `migrations/0002_event_details_and_years.sql` once to add game and location fields and rename the current season to its year.
 
 ## Checks
 

@@ -3,7 +3,7 @@
 
    The script is layered so each layer can be read, tested and changed alone:
 
-   1 CONFIG      constants: members, strike limit, default activities
+   1 CONFIG      constants: members, strike limit, categories, games, locations
    2 RULES       pure functions, no UI and no state. All strike / beer maths
                  lives here: computeSeason(), ledgerFor(), strikesBefore(),
                  findDuplicate(). Nothing is stored that can be derived.
@@ -18,12 +18,11 @@
 
    DATA SHAPES
      Season   { id, name, closed, imported, sessions:[Session], paid:{memberId:[isoDate]} }
-     Session  { id:number, date:'YYYY-MM-DD', activity, notes, att:{memberId:boolean} }
-     State    { seasons, auth, viewId|null, view, role, memberId, histFilter,
+     Session  { id:number, date:'YYYY-MM-DD', activity, game, location, notes, att:{memberId:boolean} }
+     State    { seasons, viewId|null, view, memberId, histFilter,
                 ledgerFilter, openId, menu, confirmNew, confirmDel, toast,
                 form, nextId, today }
      view     'board' | 'member' | 'record' | 'ledger' | 'history'
-     role     'admin' | 'member'      (set by the signed-in server session)
 
    BUSINESS RULES (all enforced in section 2)
      - every absence = 1 strike, no excuses
@@ -74,5 +73,7 @@ const MEMBERS = [
   { id: 'n', name: 'Nathan' },
   { id: 'i', name: 'Isaiah' }
 ];
-const DEFAULT_ACTIVITIES = ['War Dogs', 'Poker', 'Disc golf', 'Board games', 'Movie night'];
+const DEFAULT_ACTIVITIES = ['Video Games', 'Poker', 'Disc golf', 'Board games', 'Movie night'];
+const GAME_OPTIONS = ['War Dogs', 'Counter-Strike 2', 'Minecraft', 'Other'];
+const LOCATION_OPTIONS = ['Studio', "Sterling's House", "Adam's House", "Julian's House", "Nathan's House", "Isaiah's House", 'Restaurant', 'Other'];
 const GLASS_INNER = 116; // liquid column height in the glass svg (user units)

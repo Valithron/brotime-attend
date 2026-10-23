@@ -74,6 +74,15 @@ function findDuplicate(season, form) {
   return season.sessions.find((x) => x.id !== form.editId && x.date === form.date && x.activity.trim().toLowerCase() === a) || null;
 }
 
+function selectedGame(form) {
+  return form.gameChoice === 'Other' ? String(form.gameOther || '').trim() : String(form.gameChoice || '').trim();
+}
+
+function selectedLocation(form) {
+  return form.locationChoice === 'Other' ? String(form.locationOther || '').trim() : String(form.locationChoice || '').trim();
+}
+
 function isFormComplete(form) {
-  return MEMBERS.every((m) => form.att[m.id] !== undefined) && !!form.date && !!form.activity.trim();
+  const isVideoGames = form.activity.trim().toLowerCase() === 'video games';
+  return MEMBERS.every((m) => form.att[m.id] !== undefined) && !!form.date && !!form.activity.trim() && !!selectedLocation(form) && (!isVideoGames || !!selectedGame(form));
 }

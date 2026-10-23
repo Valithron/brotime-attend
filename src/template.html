@@ -38,7 +38,6 @@
   </defs>
 </svg>
 
-<sc-if value="{{showApp}}" hint-placeholder-val="{{ false }}">
 <div class="shell" data-app="brotime-tribunal" data-view="{{viewKey}}" data-role="{{roleKey}}" data-season="{{seasonKey}}" data-can-edit="{{canEdit}}">
   <aside class="side">
     <div class="brand">
@@ -62,16 +61,12 @@
         <span class="sn">{{seasonName}}</span>
         <span class="cnt num">{{seasonCount}}</span>
       </button>
-      <button class="btn ico" sc-camel-on-click="{{toggleSettingsMenu}}" aria-label="Account settings" aria-haspopup="menu" aria-expanded="{{settingsMenuOpen}}" data-action="menu-settings">
-        <svg class="i" aria-hidden="true"><use href="#i-gear"></use></svg>
-      </button>
-
       <sc-if value="{{menuOpen}}" hint-placeholder-val="{{ false }}">
         <button class="scrim" aria-label="Close menu" sc-camel-on-click="{{closeMenu}}" data-action="close-menu"></button>
       </sc-if>
 
       <sc-if value="{{seasonMenuOpen}}" hint-placeholder-val="{{ false }}">
-        <div class="menu" role="menu" aria-label="Seasons">
+        <div class="menu" role="menu" aria-label="Years">
           <sc-for list="{{seasonList}}" as="s" hint-placeholder-count="2">
             <button role="menuitem" class="{{s.cls}}" sc-camel-on-click="{{s.pick}}" aria-label="{{s.aria}}" data-action="pick-season" data-season="{{s.key}}">
               <span>{{s.name}}</span>
@@ -82,25 +77,18 @@
             <hr>
             <sc-if value="{{confirmNewOff}}" hint-placeholder-val="{{ true }}">
               <button role="menuitem" sc-camel-on-click="{{askNew}}" data-action="new-season">
-                <span>New season</span>
+                <span>New year</span>
                 <svg class="i b" aria-hidden="true"><use href="#i-plus"></use></svg>
               </button>
             </sc-if>
             <sc-if value="{{confirmNew}}" hint-placeholder-val="{{ false }}">
-              <button role="menuitem" class="btn pri" sc-camel-on-click="{{startSeason}}" data-action="confirm-new-season">Archive {{seasonName}} and start fresh</button>
+              <button role="menuitem" class="btn pri" sc-camel-on-click="{{startSeason}}" data-action="confirm-new-season">Archive {{seasonName}} and start next year</button>
               <button role="menuitem" sc-camel-on-click="{{cancelNew}}" data-action="cancel-new-season">Cancel</button>
             </sc-if>
           </sc-if>
         </div>
       </sc-if>
 
-      <sc-if value="{{settingsMenuOpen}}" hint-placeholder-val="{{ false }}">
-        <div class="menu" role="menu" aria-label="Account settings">
-          <div class="account-role">{{roleLabel}}</div>
-          <hr>
-          <a role="menuitem" class="account-signout" href="/auth/logout" data-action="sign-out">Sign out</a>
-        </div>
-      </sc-if>
     </div>
   </aside>
 
@@ -167,7 +155,10 @@
             <sc-for list="{{recent}}" as="r" hint-placeholder-count="5">
               <button class="row-head" sc-camel-on-click="{{r.openBoard}}" aria-label="{{r.aria}}" data-action="open-gathering" data-gathering="{{r.id}}">
                 <span class="date"><span class="d">{{r.d}}</span><span class="mo">{{r.mo}}</span></span>
-                <span class="act">{{r.activity}}</span>
+                <span class="row-main">
+                  <span class="act">{{r.activity}}</span>
+                  <sc-if value="{{r.hasEventMeta}}" hint-placeholder-val="{{ false }}"><span class="act-meta">{{r.eventMeta}}</span></sc-if>
+                </span>
                 <span class="rcs" aria-hidden="true">
                   <sc-for list="{{r.chips}}" as="c" hint-placeholder-count="5"><span class="rc {{c.cls}}" title="{{c.tip}}">{{c.initial}}</span></sc-for>
                 </span>
@@ -192,7 +183,7 @@
       <section class="page rec" data-view-root="record" aria-label="{{recTitle}}" data-editing="{{isEditing}}" data-gathering="{{form.editId}}">
         <div class="docket">
           <input class="date-in" type="date" value="{{form.date}}" sc-camel-on-change="{{setDate}}" aria-label="Date" data-field="date">
-          <input class="act-in" type="text" value="{{form.activity}}" placeholder="Activity" autocomplete="off" sc-camel-on-change="{{setActivity}}" aria-label="Activity" data-field="activity">
+          <input class="act-in" type="text" value="{{form.activity}}" placeholder="Category" autocomplete="off" sc-camel-on-change="{{setActivity}}" aria-label="Category" data-field="activity">
           <sc-if value="{{isEditing}}" hint-placeholder-val="{{ false }}">
             <button class="btn" sc-camel-on-click="{{cancelEdit}}" data-action="cancel-edit">Cancel</button>
           </sc-if>
@@ -202,6 +193,38 @@
             <button class="chip {{a.cls}}" sc-camel-on-click="{{a.pick}}" aria-pressed="{{a.on}}" data-action="pick-activity" data-value="{{a.name}}">{{a.name}}</button>
           </sc-for>
         </div>
+        <div class="event-details">
+          <label class="event-field">Location
+            <select class="detail-select" value="{{form.locationChoice}}" sc-camel-on-change="{{setLocationChoice}}" aria-label="Location" data-field="location">
+              <option value="">Choose location</option>
+              <option value="Studio">Studio</option>
+              <option value="Sterling's House">Sterling's House</option>
+              <option value="Adam's House">Adam's House</option>
+              <option value="Julian's House">Julian's House</option>
+              <option value="Nathan's House">Nathan's House</option>
+              <option value="Isaiah's House">Isaiah's House</option>
+              <option value="Restaurant">Restaurant</option>
+              <option value="Other">Other…</option>
+            </select>
+          </label>
+          <sc-if value="{{isVideoGames}}" hint-placeholder-val="{{ false }}">
+            <label class="event-field">Video game
+              <select class="detail-select" value="{{form.gameChoice}}" sc-camel-on-change="{{setGameChoice}}" aria-label="Video game" data-field="game">
+                <option value="">Choose game</option>
+                <option value="War Dogs">War Dogs</option>
+                <option value="Counter-Strike 2">Counter-Strike 2</option>
+                <option value="Minecraft">Minecraft</option>
+                <option value="Other">Other…</option>
+              </select>
+            </label>
+          </sc-if>
+        </div>
+        <sc-if value="{{isLocationOther}}" hint-placeholder-val="{{ false }}">
+          <input class="detail-custom" type="text" value="{{form.locationOther}}" placeholder="Enter location" autocomplete="off" sc-camel-on-change="{{setLocationOther}}" aria-label="Custom location" data-field="location-other">
+        </sc-if>
+        <sc-if value="{{isGameOther}}" hint-placeholder-val="{{ false }}">
+          <input class="detail-custom" type="text" value="{{form.gameOther}}" placeholder="Enter game" autocomplete="off" sc-camel-on-change="{{setGameOther}}" aria-label="Custom game" data-field="game-other">
+        </sc-if>
         <sc-if value="{{dup}}" hint-placeholder-val="{{ false }}">
           <div class="dup" role="alert">
             <svg class="i" aria-hidden="true"><use href="#i-warn"></use></svg>
@@ -346,7 +369,10 @@
                 <span class="dot {{r.dotCls}}" aria-hidden="true"></span>
                 <button class="row-head" sc-camel-on-click="{{r.toggle}}" aria-expanded="{{r.open}}" aria-label="{{r.aria}}" data-action="toggle-gathering" data-gathering="{{r.id}}">
                   <span class="date"><span class="d">{{r.d}}</span><span class="mo">{{r.mo}}</span></span>
-                  <span class="act">{{r.activity}}</span>
+                  <span class="row-main">
+                    <span class="act">{{r.activity}}</span>
+                    <sc-if value="{{r.hasEventMeta}}" hint-placeholder-val="{{ false }}"><span class="act-meta">{{r.eventMeta}}</span></sc-if>
+                  </span>
                   <span class="rcs" aria-hidden="true">
                     <sc-for list="{{r.chips}}" as="c" hint-placeholder-count="5"><span class="rc {{c.cls}}" title="{{c.tip}}">{{c.initial}}</span></sc-for>
                   </span>
@@ -489,21 +515,6 @@
     </div>
   </sc-if>
 </div>
-</sc-if>
-
-<sc-if value="{{authLoading}}" hint-placeholder-val="{{ true }}">
-  <main class="auth-screen" role="status"><div class="auth-card"><div class="brand">Brotime <b>Tribunal</b></div><p>Loading the live attendance record…</p></div></main>
-</sc-if>
-
-<sc-if value="{{showSignIn}}" hint-placeholder-val="{{ false }}">
-  <main class="auth-screen"><div class="auth-card">
-    <div class="brand">Brotime <b>Tribunal</b></div>
-    <p>{{authMessage}}</p>
-    <sc-if value="{{showLogin}}" hint-placeholder-val="{{ false }}">
-      <a class="btn pri big" href="/auth/login" data-action="discord-sign-in">Sign in with Discord</a>
-    </sc-if>
-  </div></main>
-</sc-if>
 </x-dc>
 
 <!-- APP_SCRIPT -->
