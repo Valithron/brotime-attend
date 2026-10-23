@@ -9,7 +9,8 @@ class Component extends DCLogic {
     this.fields = {
       setDate: field('date'), setActivity: field('activity'), setNotes: field('notes'),
       setGameChoice: field('gameChoice'), setGameOther: field('gameOther'),
-      setLocationChoice: field('locationChoice'), setLocationOther: field('locationOther')
+      setLocationChoice: field('locationChoice'), setLocationOther: field('locationOther'),
+      refreshData: () => { this.dispatch('closeMenu'); this.loadServerState(); }
     };
   }
 

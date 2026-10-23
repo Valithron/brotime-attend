@@ -61,6 +61,9 @@
         <span class="sn">{{seasonName}}</span>
         <span class="cnt num">{{seasonCount}}</span>
       </button>
+      <button class="btn ico" sc-camel-on-click="{{toggleOptionsMenu}}" aria-label="Options" aria-haspopup="menu" aria-expanded="{{optionsMenuOpen}}" data-action="menu-options">
+        <svg class="i s" aria-hidden="true"><use href="#i-gear"></use></svg>
+      </button>
       <sc-if value="{{menuOpen}}" hint-placeholder-val="{{ false }}">
         <button class="scrim" aria-label="Close menu" sc-camel-on-click="{{closeMenu}}" data-action="close-menu"></button>
       </sc-if>
@@ -86,6 +89,14 @@
               <button role="menuitem" sc-camel-on-click="{{cancelNew}}" data-action="cancel-new-season">Cancel</button>
             </sc-if>
           </sc-if>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{optionsMenuOpen}}" hint-placeholder-val="{{ false }}">
+        <div class="menu options-menu" role="menu" aria-label="Options">
+          <button role="menuitem" sc-camel-on-click="{{refreshData}}" data-action="refresh-data">
+            <span>Refresh tracker</span>
+          </button>
         </div>
       </sc-if>
 

@@ -237,6 +237,7 @@ button{cursor:pointer;background:none;border:0;padding:0;text-align:left}
 .btn.grow{flex:1;min-width:0}
 .scrim{position:fixed;inset:0;z-index:40;background:transparent;cursor:default}
 .menu{position:absolute;left:0;bottom:100%;margin-bottom:8px;z-index:50;min-width:260px;background:var(--s2);border:1px solid var(--line);border-radius:var(--r);padding:6px;display:flex;flex-direction:column;gap:2px;box-shadow:var(--shadow)}
+.menu.options-menu{left:auto;right:0}
 .menu button{min-height:44px;padding:0 12px;border-radius:var(--r-sm);display:flex;justify-content:space-between;align-items:center;gap:12px;width:100%}
 .menu button:hover{background:var(--s3)}
 .menu button.on{background:var(--tx);color:var(--ink)}
