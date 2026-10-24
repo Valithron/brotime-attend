@@ -417,6 +417,12 @@
                       <sc-for list="{{r.chips}}" as="c" hint-placeholder-count="5"><span class="rc {{c.cls}}" title="{{c.tip}}">{{c.initial}}</span></sc-for>
                     </span>
                   </button>
+
+                    <div class="event-share">
+                      <button class="btn" sc-camel-on-click="{{r.copyRecap}}" disabled="{{r.recapDisabled}}" data-action="copy-event-recap" data-gathering="{{r.id}}">{{r.recapLabel}}</button>
+                      <sc-if value="{{r.recapBlocked}}"><span class="share-blocked">Complete attendance before sharing.</span></sc-if>
+                      <sc-if value="{{r.recapFallback}}"><textarea class="share-fallback" data-share-fallback readonly value="{{r.recapText}}" sc-camel-on-focus="{{r.selectRecap}}" aria-label="Event recap for manual copying"></textarea></sc-if>
+                    </div>
                   <sc-if value="{{r.open}}" hint-placeholder-val="{{ false }}">
                     <div class="detail">
                       <sc-for list="{{r.effects}}" as="e" hint-placeholder-count="0">
@@ -476,6 +482,13 @@
                     </sc-if>
                     <sc-if value="{{r.isEvent}}" hint-placeholder-val="{{ false }}"><span class="archive-count">{{r.countText}}</span></sc-if>
                   </button>
+                  <sc-if value="{{r.isEvent}}">
+                    <div class="event-share">
+                      <button class="btn" sc-camel-on-click="{{r.copyRecap}}" disabled="{{r.recapDisabled}}" data-action="copy-event-recap" data-gathering="{{r.id}}">{{r.recapLabel}}</button>
+                      <sc-if value="{{r.recapBlocked}}"><span class="share-blocked">Complete attendance before sharing.</span></sc-if>
+                      <sc-if value="{{r.recapFallback}}"><textarea class="share-fallback" data-share-fallback readonly value="{{r.recapText}}" sc-camel-on-focus="{{r.selectRecap}}" aria-label="Event recap for manual copying"></textarea></sc-if>
+                    </div>
+                  </sc-if>
                   <sc-if value="{{r.open}}" hint-placeholder-val="{{ false }}">
                     <div class="detail discord-detail">
                       <sc-if value="{{r.isEvent}}" hint-placeholder-val="{{ false }}">

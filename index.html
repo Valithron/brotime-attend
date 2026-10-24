@@ -1,18 +1,1708 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="color-scheme" content="dark">
-  <link rel="icon" href="/favicon.ico?v=2">
-  <link rel="icon" href="/favicon-16x16.png?v=2" type="image/png" sizes="16x16">
-  <link rel="icon" href="/favicon-32x32.png?v=2" type="image/png" sizes="32x32">
-  <link rel="icon" href="/favicon.svg?v=2" type="image/svg+xml" sizes="any">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2" sizes="180x180">
-  <title>BroTime Attendance</title>
-</head>
-<body>
-  <div id="__bundler_loading" role="status">Loading</div>
-  <script src="./scripts/prototype-runtime.js" defer></script>
-</body>
-</html>
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<link rel="icon" href="/favicon.ico?v=2">
+<link rel="icon" href="/favicon-16x16.png?v=2" type="image/png" sizes="16x16">
+<link rel="icon" href="/favicon-32x32.png?v=2" type="image/png" sizes="32x32">
+<link rel="icon" href="/favicon.svg?v=2" type="image/svg+xml" sizes="any">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2" sizes="180x180">
+<title>BroTime Attendance</title>
+<link rel="stylesheet" href="/assets/app.6bef07b87156.css">
+<script>window.__brotimeStatePromise=fetch('/api/state',{credentials:'same-origin',cache:'no-store'}).then(async r=>{const d=await r.json();if(!r.ok)throw new Error(d.error||'Could not load tracker.');return d;});window.__brotimeStatePromise.catch(()=>{});</script>
+<script defer src="/assets/c2a83737-9a18-4fef-a756-3185ed2ae073.d949f1c3687a.js"></script>
+<script defer src="/assets/3bbeece5-af32-45a2-beeb-ff672c2dc649.35f4f974f4b2.js"></script>
+<script defer src="/assets/125557a3-318f-4bc6-a6d9-2df5344dc562.654b7f6201e7.js"></script>
+<meta name="hz:slide-selector" content="[data-canvas-width]"><meta name="hz:canvas-width" content="1280"><meta name="hz:canvas-height" content="1040"></head>
+<body data-canvas-width="1280" data-canvas-height="1040" data-document-role="page" data-label="BroTime Attendance">
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+
+
+</helmet>
+
+<!-- Icon sprite + glass clip. Every icon in the template is <svg class="i"><use href="#i-…"></use></svg>. -->
+<svg class="sprite" width="0" height="0" aria-hidden="true" focusable="false">
+  <defs>
+    <clipPath id="glassClip"><path d="M8 6H72L63 112Q62.6 116 58.5 116H21.5Q17.4 116 17 112Z"></path></clipPath>
+    <symbol id="i-pint" sc-camel-view-box="0 0 24 24"><path d="M6 4h12l-1.6 15.2a2 2 0 0 1-2 1.8H9.6a2 2 0 0 1-2-1.8L6 4z"></path></symbol>
+    <symbol id="i-board" sc-camel-view-box="0 0 24 24"><path d="M6 3h12l-1.6 16.2a2 2 0 0 1-2 1.8H9.6a2 2 0 0 1-2-1.8L6 3z"></path><path d="M6.4 9h11.2"></path></symbol>
+    <symbol id="i-members" sc-camel-view-box="0 0 24 24"><circle cx="9" cy="8" r="3.5"></circle><path d="M2.5 20c.6-3.6 3.2-5.5 6.5-5.5s5.9 1.9 6.5 5.5"></path><path d="M16 4.8a3.5 3.5 0 0 1 0 6.4M18 14.8c2 .7 3.2 2.4 3.5 5.2"></path></symbol>
+    <symbol id="i-plus" sc-camel-view-box="0 0 24 24"><path d="M12 5v14M5 12h14"></path></symbol>
+    <symbol id="i-ledger" sc-camel-view-box="0 0 24 24"><path d="M5 3h14v18l-3-2-2 2-2-2-2 2-2-2-3 2z"></path><path d="M9 8h6M9 12h6"></path></symbol>
+    <symbol id="i-history" sc-camel-view-box="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></symbol>
+    <symbol id="i-cal" sc-camel-view-box="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></symbol>
+    <symbol id="i-cal-add" sc-camel-view-box="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4M12 13v5M9.5 15.5h5"></path></symbol>
+    <symbol id="i-lock" sc-camel-view-box="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></symbol>
+    <symbol id="i-gear" sc-camel-view-box="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"></path></symbol>
+    <symbol id="i-check" sc-camel-view-box="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"></path></symbol>
+    <symbol id="i-x" sc-camel-view-box="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"></path></symbol>
+    <symbol id="i-trash" sc-camel-view-box="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"></path></symbol>
+    <symbol id="i-undo" sc-camel-view-box="0 0 24 24"><path d="M9 14L4 9l5-5"></path><path d="M4 9h10a6 6 0 0 1 0 12h-3"></path></symbol>
+    <symbol id="i-edit" sc-camel-view-box="0 0 24 24"><path d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16v4z"></path></symbol>
+    <symbol id="i-warn" sc-camel-view-box="0 0 24 24"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0zM12 9v4M12 17h.01"></path></symbol>
+  </defs>
+</svg>
+
+<div class="shell" data-app="brotime-tribunal" data-view="{{viewKey}}" data-role="{{roleKey}}" data-season="{{seasonKey}}" data-can-edit="{{canEdit}}">
+  <aside class="side">
+    <div class="brand">
+      <svg sc-camel-view-box="0 0 24 24" aria-hidden="true"><path d="M6 3h12l-1.6 16.2a2 2 0 0 1-2 1.8H9.6a2 2 0 0 1-2-1.8L6 3z" fill="currentColor"></path><path class="cut" d="M6.3 7h11.4"></path></svg>
+      <span>BroTime <b>Attendance</b></span>
+    </div>
+
+    <nav class="nav" aria-label="Sections">
+      <sc-for list="{{tabs}}" as="t" hint-placeholder-count="5">
+        <button class="navi {{t.cls}}" sc-camel-on-click="{{t.go}}" aria-label="{{t.aria}}" aria-current="{{t.current}}" data-action="nav" data-target="{{t.key}}">
+          <svg class="i" aria-hidden="true"><use href="#{{t.icon}}"></use></svg>
+          <span class="lbl">{{t.label}}</span>
+          <sc-if value="{{t.hasBadge}}" hint-placeholder-val="{{ false }}"><span class="badge">{{t.badge}}</span></sc-if>
+        </button>
+      </sc-for>
+    </nav>
+
+    <div class="tools">
+      <button class="btn grow seasonbtn" sc-camel-on-click="{{toggleSeasonMenu}}" aria-label="{{seasonAria}}" aria-haspopup="menu" aria-expanded="{{seasonMenuOpen}}" data-action="menu-season">
+        <svg class="i s" aria-hidden="true"><use href="#{{seasonIcon}}"></use></svg>
+        <span class="sn">{{seasonName}}</span>
+        <span class="cnt num">{{seasonCount}}</span>
+      </button>
+      <button class="btn ico" sc-camel-on-click="{{toggleOptionsMenu}}" aria-label="Options" aria-haspopup="menu" aria-expanded="{{optionsMenuOpen}}" data-action="menu-options">
+        <svg class="i s" aria-hidden="true"><use href="#i-gear"></use></svg>
+      </button>
+      <sc-if value="{{menuOpen}}" hint-placeholder-val="{{ false }}">
+        <button class="scrim" aria-label="Close menu" sc-camel-on-click="{{closeMenu}}" data-action="close-menu"></button>
+      </sc-if>
+
+      <sc-if value="{{seasonMenuOpen}}" hint-placeholder-val="{{ false }}">
+        <div class="menu" role="menu" aria-label="Years">
+          <sc-for list="{{seasonList}}" as="s" hint-placeholder-count="2">
+            <button role="menuitem" class="{{s.cls}}" sc-camel-on-click="{{s.pick}}" aria-label="{{s.aria}}" data-action="pick-season" data-season="{{s.key}}">
+              <span>{{s.name}}</span>
+              <span class="sub num">{{s.count}}</span>
+            </button>
+          </sc-for>
+          <sc-if value="{{canStartSeason}}" hint-placeholder-val="{{ true }}">
+            <hr>
+            <sc-if value="{{confirmNewOff}}" hint-placeholder-val="{{ true }}">
+              <button role="menuitem" sc-camel-on-click="{{askNew}}" data-action="new-season">
+                <span>New year</span>
+                <svg class="i b" aria-hidden="true"><use href="#i-plus"></use></svg>
+              </button>
+            </sc-if>
+            <sc-if value="{{confirmNew}}" hint-placeholder-val="{{ false }}">
+              <button role="menuitem" class="btn pri" sc-camel-on-click="{{startSeason}}" data-action="confirm-new-season">Archive {{seasonName}} and start next year</button>
+              <button role="menuitem" sc-camel-on-click="{{cancelNew}}" data-action="cancel-new-season">Cancel</button>
+            </sc-if>
+          </sc-if>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{optionsMenuOpen}}" hint-placeholder-val="{{ false }}">
+        <div class="menu options-menu" role="menu" aria-label="Options">
+          <button role="menuitem" sc-camel-on-click="{{refreshData}}" data-action="refresh-data">
+            <span>Refresh tracker</span>
+          </button>
+        </div>
+      </sc-if>
+
+    </div>
+  </aside>
+
+  <main class="content">
+
+    <!-- ============ BOARD ============ -->
+    <sc-if value="{{isBoard}}" hint-placeholder-val="{{ true }}">
+      <section class="page" data-view-root="board" aria-label="Board">
+        <div class="bench">
+          <sc-for list="{{seats}}" as="m" hint-placeholder-count="5">
+            <button class="seat {{m.cls}}" style="--i: {{$index}}" sc-camel-on-click="{{m.open}}" aria-label="{{m.aria}}" data-action="open-member" data-member="{{m.id}}" data-rank="{{m.rank}}" data-strikes="{{m.strikes}}" data-owed="{{m.owed}}">
+              <span class="stand">
+                <svg class="glass" sc-camel-view-box="0 0 80 124" aria-hidden="true">
+                  <g clip-path="url(#glassClip)">
+                    <g class="liqg" style="transform: translateY({{m.shift}}px)">
+                      <rect class="liq {{m.liqCls}}" x="0" y="8" width="80" height="116"></rect>
+                      <circle class="bub" cx="28" cy="112" r="1.8"></circle>
+                      <circle class="bub" cx="47" cy="112" r="1.4"></circle>
+                      <circle class="bub" cx="57" cy="112" r="1.6"></circle>
+                      <path class="foam" d="M0 9V5.5Q5 2.5 10 5.5T20 5.5T30 5.5T40 5.5T50 5.5T60 5.5T70 5.5T80 5.5V9Z"></path>
+                    </g>
+                    <path class="tick" d="M0 29.6H80M0 51.2H80M0 72.8H80M0 94.4H80"></path>
+                  </g>
+                  <path class="rim" d="M8 6H72L63 112Q62.6 116 58.5 116H21.5Q17.4 116 17 112Z"></path>
+                </svg>
+              </span>
+              <span class="seat-name">{{m.name}}</span>
+              <span class="seat-pct">{{m.pctText}}</span>
+              <span class="pints">
+                <sc-for list="{{m.pints}}" as="p" hint-placeholder-count="0"><span class="pint {{p.cls}}"><svg aria-hidden="true"><use href="#i-pint"></use></svg></span></sc-for>
+              </span>
+            </button>
+          </sc-for>
+        </div>
+
+        <sc-if value="{{hasSessions}}" hint-placeholder-val="{{ true }}">
+          <div class="panel mx-scroll">
+            <div class="mx">
+              <div class="mx-row">
+                <span class="mx-label" aria-hidden="true"></span>
+                <sc-for list="{{matrix.cols}}" as="c" hint-placeholder-count="12">
+                  <button class="mx-col" title="{{c.tip}}" aria-label="{{c.tip}}" sc-camel-on-click="{{c.go}}" data-action="open-gathering" data-gathering="{{c.id}}"><span class="mo">{{c.mo}}</span>{{c.d}}</button>
+                </sc-for>
+              </div>
+              <sc-for list="{{matrix.rows}}" as="r" hint-placeholder-count="5">
+                <div class="mx-row">
+                  <button class="mx-label" sc-camel-on-click="{{r.open}}" data-action="open-member" data-member="{{r.id}}"><span class="avatar">{{r.initial}}</span>{{r.name}}</button>
+                  <sc-for list="{{r.cells}}" as="c" hint-placeholder-count="12">
+                    <button class="mx-cell {{c.cls}}" title="{{c.tip}}" aria-label="{{c.tip}}" sc-camel-on-click="{{c.go}}" data-action="open-gathering" data-gathering="{{c.sid}}">
+                      <sc-if value="{{c.isGone}}" hint-placeholder-val="{{ false }}"><svg class="i" aria-hidden="true"><use href="#i-x"></use></svg></sc-if>
+                      <sc-if value="{{c.isBeer}}" hint-placeholder-val="{{ false }}"><span class="pint"><svg aria-hidden="true"><use href="#i-pint"></use></svg></span></sc-if>
+                    </button>
+                  </sc-for>
+                </div>
+              </sc-for>
+              <div class="mx-row" aria-hidden="true">
+                <span class="mx-label"></span>
+                <sc-for list="{{matrix.cols}}" as="c" hint-placeholder-count="12"><span class="mx-n {{c.fullCls}}">{{c.n}}</span></sc-for>
+              </div>
+            </div>
+          </div>
+
+          <sc-if value="{{hasShareGathering}}" hint-placeholder-val="{{ false }}">
+            <section class="share-panel" aria-label="Weekly recap">
+              <div class="share-top">
+                <div class="share-copy">
+                  <span class="share-kicker">Latest gathering</span>
+                  <span class="share-date">{{shareDate}}</span>
+                </div>
+                <button class="btn pri" disabled="{{shareDisabled}}" sc-camel-on-click="{{copyWeeklyRecap}}" aria-label="{{shareAria}}" data-action="copy-weekly-recap">{{shareButtonLabel}}</button>
+              </div>
+              <sc-if value="{{shareBlocked}}" hint-placeholder-val="{{ false }}"><div class="share-blocked" role="status">{{shareBlockedText}}</div></sc-if>
+              <sc-if value="{{shareFallbackVisible}}" hint-placeholder-val="{{ false }}">
+                <div class="share-error" role="alert">{{shareFallbackError}}</div>
+                <textarea class="share-fallback" data-share-fallback readonly spellcheck="false" aria-label="Weekly recap to copy" value="{{shareFallbackText}}"></textarea>
+                <button class="btn" sc-camel-on-click="{{selectShareFallback}}" data-action="select-share-fallback">Select message</button>
+              </sc-if>
+            </section>
+          </sc-if>
+
+          <div class="list">
+            <sc-for list="{{recent}}" as="r" hint-placeholder-count="5">
+              <button class="row-head" sc-camel-on-click="{{r.openBoard}}" aria-label="{{r.aria}}" data-action="open-gathering" data-gathering="{{r.id}}">
+                <span class="date"><span class="d">{{r.d}}</span><span class="mo">{{r.mo}}</span></span>
+                <span class="row-main">
+                  <span class="act">{{r.activity}}</span>
+                  <sc-if value="{{r.hasEventMeta}}" hint-placeholder-val="{{ false }}"><span class="act-meta">{{r.eventMeta}}</span></sc-if>
+                </span>
+                <span class="rcs" aria-hidden="true">
+                  <sc-for list="{{r.chips}}" as="c" hint-placeholder-count="5"><span class="rc {{c.cls}}" title="{{c.tip}}">{{c.initial}}</span></sc-for>
+                </span>
+              </button>
+            </sc-for>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{noSessions}}" hint-placeholder-val="{{ false }}">
+          <div class="empty">
+            <svg class="i" aria-hidden="true"><use href="#i-cal-add"></use></svg>
+            <sc-if value="{{canEdit}}" hint-placeholder-val="{{ true }}">
+              <button class="btn pri big" sc-camel-on-click="{{goRecord}}" data-action="nav" data-target="record">Record gathering</button>
+            </sc-if>
+          </div>
+        </sc-if>
+      </section>
+    </sc-if>
+
+    <!-- ============ RECORD ============ -->
+    <sc-if value="{{isRecord}}" hint-placeholder-val="{{ false }}">
+      <section class="page rec" data-view-root="record" aria-label="{{recTitle}}" data-editing="{{isEditing}}" data-gathering="{{form.editId}}">
+        <div class="docket">
+          <input class="date-in" type="date" value="{{form.date}}" sc-camel-on-change="{{setDate}}" aria-label="Date" data-field="date">
+          <input class="act-in" type="text" value="{{form.activity}}" placeholder="Category" autocomplete="off" sc-camel-on-change="{{setActivity}}" aria-label="Category" data-field="activity">
+          <sc-if value="{{isEditing}}" hint-placeholder-val="{{ false }}">
+            <button class="btn" sc-camel-on-click="{{cancelEdit}}" data-action="cancel-edit">Cancel</button>
+          </sc-if>
+        </div>
+        <div class="chips">
+          <sc-for list="{{actChips}}" as="a" hint-placeholder-count="5">
+            <button class="chip {{a.cls}}" sc-camel-on-click="{{a.pick}}" aria-pressed="{{a.on}}" data-action="pick-activity" data-value="{{a.name}}">{{a.name}}</button>
+          </sc-for>
+        </div>
+        <div class="event-details">
+          <label class="event-field">Location
+            <select class="detail-select" value="{{form.locationChoice}}" sc-camel-on-change="{{setLocationChoice}}" aria-label="Location" data-field="location">
+              <option value="">Choose location</option>
+              <option value="Studio">Studio</option>
+              <option value="Sterling's House">Sterling's House</option>
+              <option value="Adam's House">Adam's House</option>
+              <option value="Julian's House">Julian's House</option>
+              <option value="Nathan's House">Nathan's House</option>
+              <option value="Isaiah's House">Isaiah's House</option>
+              <option value="Restaurant">Restaurant</option>
+              <option value="Other">Other…</option>
+            </select>
+          </label>
+          <sc-if value="{{isVideoGames}}" hint-placeholder-val="{{ false }}">
+            <label class="event-field">Video game
+              <select class="detail-select" value="{{form.gameChoice}}" sc-camel-on-change="{{setGameChoice}}" aria-label="Video game" data-field="game">
+                <option value="">Choose game</option>
+                <option value="War Dogs">War Dogs</option>
+                <option value="Counter-Strike 2">Counter-Strike 2</option>
+                <option value="Minecraft">Minecraft</option>
+                <option value="Other">Other…</option>
+              </select>
+            </label>
+          </sc-if>
+        </div>
+        <sc-if value="{{isLocationOther}}" hint-placeholder-val="{{ false }}">
+          <input class="detail-custom" type="text" value="{{form.locationOther}}" placeholder="Enter location" autocomplete="off" sc-camel-on-change="{{setLocationOther}}" aria-label="Custom location" data-field="location-other">
+        </sc-if>
+        <sc-if value="{{isGameOther}}" hint-placeholder-val="{{ false }}">
+          <input class="detail-custom" type="text" value="{{form.gameOther}}" placeholder="Enter game" autocomplete="off" sc-camel-on-change="{{setGameOther}}" aria-label="Custom game" data-field="game-other">
+        </sc-if>
+        <sc-if value="{{dup}}" hint-placeholder-val="{{ false }}">
+          <div class="dup" role="alert">
+            <svg class="i" aria-hidden="true"><use href="#i-warn"></use></svg>
+            <span>{{dupText}}</span>
+            <button class="btn" sc-camel-on-click="{{openDup}}" data-action="open-duplicate">Open</button>
+          </div>
+        </sc-if>
+
+        <div class="roll-bar">
+          <button class="btn" sc-camel-on-click="{{allPresent}}" data-action="all-present">All present</button>
+          <button class="btn" sc-camel-on-click="{{allAbsent}}" data-action="all-absent">All absent</button>
+        </div>
+
+        <div class="roll">
+          <sc-for list="{{roll}}" as="r" hint-placeholder-count="5">
+            <div class="lane {{r.cls}}" style="--i: {{$index}}" data-member="{{r.id}}" data-state="{{r.state}}" data-strikes="{{r.from}}">
+              <svg class="glass sm {{r.glassCls}}" sc-camel-view-box="0 0 80 124" role="img" aria-label="{{r.glassLabel}}">
+                <g clip-path="url(#glassClip)">
+                  <g class="liqg" style="transform: translateY({{r.nextShift}}px)">
+                    <rect class="liq next" x="0" y="8" width="80" height="116"></rect>
+                  </g>
+                  <g class="liqg" style="transform: translateY({{r.shift}}px)">
+                    <rect class="liq {{r.liqCls}}" x="0" y="8" width="80" height="116"></rect>
+                    <path class="foam" d="M0 9V5.5Q5 2.5 10 5.5T20 5.5T30 5.5T40 5.5T50 5.5T60 5.5T70 5.5T80 5.5V9Z"></path>
+                  </g>
+                  <path class="tick" d="M0 29.6H80M0 51.2H80M0 72.8H80M0 94.4H80"></path>
+                </g>
+                <path class="rim" d="M8 6H72L63 112Q62.6 116 58.5 116H21.5Q17.4 116 17 112Z"></path>
+                <g class="spill">
+                  <path class="cap" d="M4 9C3 2 12-1 19 2.5C24-2.5 33-2 39 1C45-3 55-2.5 60 1.5C66-1.5 76 .5 76 9Z"></path>
+                  <path class="drip" d="M8.4 8C7.6 15 9.6 21 9.8 27.5a2.6 2.6 0 0 1-5.2.2C4.4 21 6 15 5.4 8Z"></path>
+                  <path class="drip" d="M71.6 8C71.8 12.5 70.8 16.5 70.6 20.5a2.4 2.4 0 0 0 4.8.1C75.4 16.5 74.8 12.5 74.6 8Z"></path>
+                </g>
+              </svg>
+              <span class="lane-name">{{r.name}}</span>
+              <div class="seg" role="group" aria-label="{{r.name}} attendance">
+                <button class="{{r.presentCls}}" aria-pressed="{{r.isP}}" sc-camel-on-click="{{r.setP}}" data-action="set-attendance" data-member="{{r.id}}" data-value="present"><svg class="i b" aria-hidden="true"><use href="#i-check"></use></svg>Here</button>
+                <button class="{{r.absentCls}}" aria-pressed="{{r.isA}}" sc-camel-on-click="{{r.setA}}" data-action="set-attendance" data-member="{{r.id}}" data-value="absent"><svg class="i b" aria-hidden="true"><use href="#i-x"></use></svg>Out</button>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+
+        <input class="notes-in" type="text" value="{{form.notes}}" placeholder="Notes" sc-camel-on-change="{{setNotes}}" aria-label="Notes" data-field="notes">
+
+        <div class="savebar">
+          <span class="marks" role="img" aria-label="{{tallyLabel}}">
+            <sc-for list="{{marks}}" as="k" hint-placeholder-count="5"><span class="mk {{k.cls}}" title="{{k.tip}}">{{k.initial}}</span></sc-for>
+          </span>
+          <span class="sp"></span>
+          <sc-if value="{{isEditing}}" hint-placeholder-val="{{ false }}">
+            <button class="btn dng {{delCls}}" sc-camel-on-click="{{delClick}}" data-action="delete-gathering" data-armed="{{confirmDel}}">
+              <svg class="i" aria-hidden="true"><use href="#i-trash"></use></svg>
+              {{delLabel}}
+            </button>
+          </sc-if>
+          <button class="btn pri big" disabled="{{cantSave}}" sc-camel-on-click="{{save}}" data-action="save-gathering">
+            <svg class="i b" aria-hidden="true"><use href="#i-check"></use></svg>
+            {{saveLabel}}
+          </button>
+        </div>
+      </section>
+    </sc-if>
+
+    <!-- ============ LEDGER ============ -->
+    <sc-if value="{{isLedger}}" hint-placeholder-val="{{ false }}">
+      <section class="page" data-view-root="ledger" aria-label="Ledger">
+        <div class="tabrail" role="img" aria-label="{{tabRailLabel}}">
+          <sc-for list="{{tabRail}}" as="p" hint-placeholder-count="3"><span class="pint {{p.cls}}"><svg aria-hidden="true"><use href="#i-pint"></use></svg></span></sc-for>
+        </div>
+
+        <div class="tabs">
+          <sc-for list="{{tabCards}}" as="m" hint-placeholder-count="5">
+            <div class="tab {{m.cls}}" data-member="{{m.id}}" data-owed="{{m.owed}}" data-settled="{{m.fulfilled}}" data-credit="{{m.credit}}">
+              <div class="tab-top">
+                <span class="avatar" aria-hidden="true">{{m.initial}}</span>
+                <span class="nm">{{m.name}}</span>
+                <span class="tab-owed {{m.owedCls}}" aria-label="{{m.owedLabel}}">{{m.owed}}</span>
+              </div>
+              <div class="tab-pints">
+                <sc-for list="{{m.pints}}" as="p" hint-placeholder-count="0"><span class="pint {{p.cls}}"><svg aria-hidden="true"><use href="#i-pint"></use></svg></span></sc-for>
+                <sc-if value="{{m.hasCredit}}" hint-placeholder-val="{{ false }}"><span class="credit" aria-label="{{m.creditLabel}}">+{{m.credit}}</span></sc-if>
+              </div>
+              <sc-if value="{{canEdit}}" hint-placeholder-val="{{ true }}">
+                <div class="actions">
+                  <button class="btn pri grow" disabled="{{m.noOwed}}" sc-camel-on-click="{{m.settle}}" data-action="settle-beer" data-member="{{m.id}}">Settle</button>
+                  <button class="btn ico" disabled="{{m.noPaid}}" sc-camel-on-click="{{m.undo}}" aria-label="Undo last payment for {{m.name}}" data-action="undo-beer" data-member="{{m.id}}">
+                    <svg class="i" aria-hidden="true"><use href="#i-undo"></use></svg>
+                  </button>
+                </div>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+
+        <div class="chips">
+          <sc-for list="{{ledgerFilters}}" as="f" hint-placeholder-count="3">
+            <button class="chip {{f.cls}}" sc-camel-on-click="{{f.pick}}" aria-pressed="{{f.on}}" data-action="filter-ledger" data-filter="{{f.key}}">{{f.label}}</button>
+          </sc-for>
+        </div>
+
+        <sc-if value="{{logAny}}" hint-placeholder-val="{{ true }}">
+          <div class="list">
+            <sc-for list="{{log}}" as="o" hint-placeholder-count="3">
+              <div class="lrow" data-member="{{o.id}}" data-status="{{o.cls}}" aria-label="{{o.aria}}">
+                <span class="pint {{o.cls}}"><svg aria-hidden="true"><use href="#i-pint"></use></svg></span>
+                <span class="who">
+                  <span class="nm">{{o.name}}</span>
+                  <span class="meta"><span>{{o.activity}}</span><span>{{o.when}}</span></span>
+                </span>
+                <sc-if value="{{o.paidOn}}" hint-placeholder-val="{{ false }}"><span class="paid-on">{{o.paidDate}}</span></sc-if>
+                <sc-if value="{{o.canSettle}}" hint-placeholder-val="{{ false }}"><button class="btn pri" sc-camel-on-click="{{o.settle}}" data-action="settle-beer" data-member="{{o.id}}">Settle</button></sc-if>
+                <sc-if value="{{o.canUndo}}" hint-placeholder-val="{{ false }}"><button class="btn ico" sc-camel-on-click="{{o.undo}}" aria-label="Undo payment" data-action="undo-beer" data-member="{{o.id}}"><svg class="i" aria-hidden="true"><use href="#i-undo"></use></svg></button></sc-if>
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
+        <sc-if value="{{logEmpty}}" hint-placeholder-val="{{ false }}">
+          <div class="empty">
+            <span class="pint paid xl"><svg aria-hidden="true"><use href="#i-pint"></use></svg></span>
+          </div>
+        </sc-if>
+      </section>
+    </sc-if>
+
+    <!-- ============ HISTORY ============ -->
+    <sc-if value="{{isHistory}}" hint-placeholder-val="{{ false }}">
+      <section class="page narrow" data-view-root="history" aria-label="History">
+        <div class="chips" role="group" aria-label="History source">
+          <sc-for list="{{historyModes}}" as="m" hint-placeholder-count="2">
+            <button class="chip {{m.cls}}" sc-camel-on-click="{{m.pick}}" aria-pressed="{{m.on}}" data-action="history-mode" data-mode="{{m.key}}">{{m.label}}</button>
+          </sc-for>
+        </div>
+        <sc-if value="{{showLiveHistory}}" hint-placeholder-val="{{ true }}">
+          <div class="chips">
+            <sc-for list="{{histFilters}}" as="f" hint-placeholder-count="6">
+              <button class="chip {{f.cls}}" sc-camel-on-click="{{f.pick}}" aria-label="{{f.aria}}" aria-pressed="{{f.on}}" data-action="filter-history" data-filter="{{f.key}}">
+                <sc-if value="{{f.hasAvatar}}" hint-placeholder-val="{{ false }}"><span class="avatar gone">{{f.initial}}</span></sc-if>
+                {{f.label}}
+              </button>
+            </sc-for>
+          </div>
+          <div class="tl">
+            <sc-for list="{{history}}" as="r" hint-placeholder-count="5">
+              <sc-if value="{{r.isHead}}" hint-placeholder-val="{{ false }}"><h3 class="mhd">{{r.label}}</h3></sc-if>
+              <sc-if value="{{r.isRow}}" hint-placeholder-val="{{ true }}">
+                <div class="tl-item {{r.rowCls}}" data-gathering="{{r.id}}" data-open="{{r.open}}">
+                  <span class="dot {{r.dotCls}}" aria-hidden="true"></span>
+                  <button class="row-head" sc-camel-on-click="{{r.toggle}}" aria-expanded="{{r.open}}" aria-label="{{r.aria}}" data-action="toggle-gathering" data-gathering="{{r.id}}">
+                    <span class="date"><span class="d">{{r.d}}</span><span class="mo">{{r.mo}}</span></span>
+                    <span class="row-main">
+                      <span class="act">{{r.activity}}</span>
+                      <sc-if value="{{r.hasEventMeta}}" hint-placeholder-val="{{ false }}"><span class="act-meta">{{r.eventMeta}}</span></sc-if>
+                    </span>
+                    <span class="rcs" aria-hidden="true">
+                      <sc-for list="{{r.chips}}" as="c" hint-placeholder-count="5"><span class="rc {{c.cls}}" title="{{c.tip}}">{{c.initial}}</span></sc-for>
+                    </span>
+                  </button>
+
+                    <div class="event-share">
+                      <button class="btn" sc-camel-on-click="{{r.copyRecap}}" disabled="{{r.recapDisabled}}" data-action="copy-event-recap" data-gathering="{{r.id}}">{{r.recapLabel}}</button>
+                      <sc-if value="{{r.recapBlocked}}"><span class="share-blocked">Complete attendance before sharing.</span></sc-if>
+                      <sc-if value="{{r.recapFallback}}"><textarea class="share-fallback" data-share-fallback readonly value="{{r.recapText}}" sc-camel-on-focus="{{r.selectRecap}}" aria-label="Event recap for manual copying"></textarea></sc-if>
+                    </div>
+                  <sc-if value="{{r.open}}" hint-placeholder-val="{{ false }}">
+                    <div class="detail">
+                      <sc-for list="{{r.effects}}" as="e" hint-placeholder-count="0">
+                        <div class="eff" data-member="{{e.id}}" aria-label="{{e.aria}}">
+                          <span class="nm">{{e.name}}</span>
+                          <span class="pips" aria-hidden="true">
+                            <sc-for list="{{e.pips}}" as="p" hint-placeholder-count="5"><span class="pip {{p.cls}}"></span></sc-for>
+                          </span>
+                          <sc-if value="{{e.beer}}" hint-placeholder-val="{{ false }}"><span class="pint" aria-hidden="true"><svg><use href="#i-pint"></use></svg></span></sc-if>
+                        </div>
+                      </sc-for>
+                      <sc-if value="{{r.hasNotes}}" hint-placeholder-val="{{ false }}"><div class="note">{{r.notes}}</div></sc-if>
+                      <sc-if value="{{r.canEdit}}" hint-placeholder-val="{{ false }}">
+                        <div class="actions">
+                          <button class="btn" sc-camel-on-click="{{r.edit}}" data-action="edit-gathering" data-gathering="{{r.id}}">
+                            <svg class="i" aria-hidden="true"><use href="#i-edit"></use></svg>
+                            Edit
+                          </button>
+                        </div>
+                      </sc-if>
+                    </div>
+                  </sc-if>
+                </div>
+              </sc-if>
+            </sc-for>
+            <sc-if value="{{historyEmpty}}" hint-placeholder-val="{{ false }}">
+              <div class="empty">
+                <svg class="i" aria-hidden="true"><use href="#i-cal"></use></svg>
+                <sc-if value="{{canEdit}}" hint-placeholder-val="{{ true }}"><button class="btn pri big" sc-camel-on-click="{{goRecord}}" data-action="nav" data-target="record">Record gathering</button></sc-if>
+              </div>
+            </sc-if>
+          </div>
+        </sc-if>
+        <sc-if value="{{showDiscordHistory}}" hint-placeholder-val="{{ false }}">
+          <div class="archive-intro"><b>{{discordCount}}</b> parsed gatherings. Attendance is reconstructed from consecutive strike snapshots where possible. Original strike and beer markers are kept with each record; unknown attendance and inferred dates are labeled.</div>
+          <div class="tl discord-tl" aria-label="Parsed Discord gathering records">
+            <sc-for list="{{discordHistory}}" as="r" hint-placeholder-count="8">
+              <sc-if value="{{r.isHead}}" hint-placeholder-val="{{ false }}"><h3 class="mhd">{{r.label}}</h3></sc-if>
+              <sc-if value="{{r.isRow}}" hint-placeholder-val="{{ true }}">
+                <div class="tl-item discord-item {{r.rowCls}}" data-discord-record="{{r.id}}">
+                  <span class="dot {{r.dotCls}}" aria-hidden="true"></span>
+                  <button class="row-head discord-row" sc-camel-on-click="{{r.toggle}}" aria-expanded="{{r.open}}" aria-label="{{r.aria}}" data-action="toggle-discord-record" data-record="{{r.id}}">
+                    <span class="date"><span class="d">{{r.day}}</span><span class="mo">{{r.month}}</span></span>
+                    <span class="row-main">
+                      <span class="act">{{r.title}}</span>
+                      <sc-if value="{{r.hasEventMeta}}" hint-placeholder-val="{{ false }}"><span class="act-meta">{{r.eventMeta}}</span></sc-if>
+                      <sc-if value="{{r.isNote}}" hint-placeholder-val="{{ false }}"><span class="act-meta">{{r.meta}}</span></sc-if>
+                      <sc-if value="{{r.isNote}}" hint-placeholder-val="{{ false }}"><span class="act-meta">{{r.sourcePostedAt}}</span></sc-if>
+                    </span>
+                    <sc-if value="{{r.isNote}}" hint-placeholder-val="{{ false }}">
+                      <span class="archive-note-tag">Note</span>
+                    </sc-if>
+                    <sc-if value="{{r.isEvent}}" hint-placeholder-val="{{ false }}">
+                      <span class="rcs" aria-hidden="true">
+                        <sc-for list="{{r.chips}}" as="c" hint-placeholder-count="6"><span class="rc {{c.cls}}" title="{{c.tip}}">{{c.initial}}</span></sc-for>
+                      </span>
+                    </sc-if>
+                    <sc-if value="{{r.isEvent}}" hint-placeholder-val="{{ false }}"><span class="archive-count">{{r.countText}}</span></sc-if>
+                  </button>
+                  <sc-if value="{{r.isEvent}}">
+                    <div class="event-share">
+                      <button class="btn" sc-camel-on-click="{{r.copyRecap}}" disabled="{{r.recapDisabled}}" data-action="copy-event-recap" data-gathering="{{r.id}}">{{r.recapLabel}}</button>
+                      <sc-if value="{{r.recapBlocked}}"><span class="share-blocked">Complete attendance before sharing.</span></sc-if>
+                      <sc-if value="{{r.recapFallback}}"><textarea class="share-fallback" data-share-fallback readonly value="{{r.recapText}}" sc-camel-on-focus="{{r.selectRecap}}" aria-label="Event recap for manual copying"></textarea></sc-if>
+                    </div>
+                  </sc-if>
+                  <sc-if value="{{r.open}}" hint-placeholder-val="{{ false }}">
+                    <div class="detail discord-detail">
+                      <sc-if value="{{r.isEvent}}" hint-placeholder-val="{{ false }}">
+                        <div class="discord-meta">{{r.confidence}}<sc-if value="{{r.sourcePostedAt}}" hint-placeholder-val="{{ false }}"> · Discord post {{r.sourcePostedAt}}</sc-if></div>
+                      </sc-if>
+                      <sc-if value="{{r.isNote}}" hint-placeholder-val="{{ false }}">
+                        <div class="discord-meta">{{r.confidence}} · Discord post {{r.sourcePostedAt}}</div>
+                      </sc-if>
+                      <div class="discord-attendance">
+                        <sc-for list="{{r.members}}" as="m" hint-placeholder-count="6">
+                          <div class="discord-person {{m.cls}}" data-member="{{m.id}}">
+                            <span class="nm">{{m.name}}</span>
+                            <span class="discord-state">{{m.statusText}}</span>
+                            <span class="discord-strikes">{{m.strikesText}}</span>
+                            <span class="discord-beer">{{m.beerText}}</span>
+                          </div>
+                        </sc-for>
+                      </div>
+                      <sc-if value="{{r.hasSourceNote}}" hint-placeholder-val="{{ false }}"><div class="note">{{r.sourceNote}}</div></sc-if>
+                    </div>
+                  </sc-if>
+                </div>
+              </sc-if>
+            </sc-for>
+            <sc-if value="{{discordHistoryEmpty}}" hint-placeholder-val="{{ false }}"><div class="empty">No parsed Discord records are loaded yet.</div></sc-if>
+          </div>
+        </sc-if>
+      </section>
+    </sc-if>
+
+    <!-- ============ MEMBER ============ -->
+    <sc-if value="{{isMember}}" hint-placeholder-val="{{ false }}">
+      <section class="page" data-view-root="member" data-member="{{mv.id}}" aria-label="{{mv.name}}">
+        <div class="chips">
+          <sc-for list="{{switcher}}" as="s" hint-placeholder-count="5">
+            <button class="chip {{s.cls}}" sc-camel-on-click="{{s.pick}}" aria-pressed="{{s.on}}" data-action="open-member" data-member="{{s.id}}"><span class="avatar">{{s.initial}}</span>{{s.name}}</button>
+          </sc-for>
+        </div>
+
+        <div class="hero" data-strikes="{{mv.strikes}}" data-owed="{{mv.owed}}">
+          <svg class="glass lg" sc-camel-view-box="0 0 80 124" role="img" aria-label="{{mv.strikeLabel}}">
+            <g clip-path="url(#glassClip)">
+              <g class="liqg" style="transform: translateY({{mv.shift}}px)">
+                <rect class="liq {{mv.liqCls}}" x="0" y="8" width="80" height="116"></rect>
+                <path class="foam" d="M0 9V5.5Q5 2.5 10 5.5T20 5.5T30 5.5T40 5.5T50 5.5T60 5.5T70 5.5T80 5.5V9Z"></path>
+              </g>
+              <path class="tick" d="M0 29.6H80M0 51.2H80M0 72.8H80M0 94.4H80"></path>
+            </g>
+            <path class="rim" d="M8 6H72L63 112Q62.6 116 58.5 116H21.5Q17.4 116 17 112Z"></path>
+          </svg>
+          <div class="hero-id">
+            <span class="hero-nm">{{mv.name}}</span>
+            <span class="pints" role="img" aria-label="{{mv.pintLabel}}">
+              <sc-for list="{{mv.pints}}" as="p" hint-placeholder-count="0"><span class="pint {{p.cls}}"><svg aria-hidden="true"><use href="#i-pint"></use></svg></span></sc-for>
+            </span>
+          </div>
+          <div class="ring" role="img" aria-label="{{mv.pctLabel}}">
+            <svg sc-camel-view-box="0 0 100 100" aria-hidden="true">
+              <circle class="track" cx="50" cy="50" r="42"></circle>
+              <circle class="arc" cx="50" cy="50" r="42" stroke-dasharray="{{mv.dash}}" transform="rotate(-90 50 50)"></circle>
+            </svg>
+            <span class="ring-in" aria-hidden="true">
+              <span class="ring-pct">{{mv.pctText}}</span>
+              <span class="ring-frac num">{{mv.fraction}}</span>
+            </span>
+          </div>
+        </div>
+
+        <sc-if value="{{mv.hasData}}" hint-placeholder-val="{{ true }}">
+          <div class="panel">
+            <div class="strip" role="group" aria-label="{{mv.stripLabel}}">
+              <sc-for list="{{mv.cells}}" as="c" hint-placeholder-count="12">
+                <button class="cell {{c.cls}}" title="{{c.tip}}" aria-label="{{c.tip}}" sc-camel-on-click="{{c.go}}" data-action="open-gathering" data-gathering="{{c.sid}}">
+                  <sc-if value="{{c.isGone}}" hint-placeholder-val="{{ false }}"><svg class="i" aria-hidden="true"><use href="#i-x"></use></svg></sc-if>
+                  <sc-if value="{{c.isBeer}}" hint-placeholder-val="{{ false }}"><span class="pint"><svg aria-hidden="true"><use href="#i-pint"></use></svg></span></sc-if>
+                  <sc-if value="{{c.hasNum}}" hint-placeholder-val="{{ false }}"><span aria-hidden="true">{{c.num}}</span></sc-if>
+                </button>
+              </sc-for>
+            </div>
+          </div>
+          <div class="cols">
+            <div class="col-main">
+              <sc-if value="{{mv.hasLine}}" hint-placeholder-val="{{ true }}">
+                <div class="trend" role="img" aria-label="{{mv.trendLabel}}">
+                  <svg class="line" sc-camel-view-box="0 0 300 100" sc-camel-preserve-aspect-ratio="none" aria-hidden="true">
+                    <line class="mid" x1="0" y1="50" x2="300" y2="50" stroke-width="1" vector-effect="non-scaling-stroke"></line>
+                    <polyline class="avg" points="{{mv.avg}}" vector-effect="non-scaling-stroke"></polyline>
+                    <polyline class="me" points="{{mv.line}}" vector-effect="non-scaling-stroke"></polyline>
+                  </svg>
+                  <div class="ends" aria-hidden="true">
+                    <span class="endpt all" style="top: {{mv.endAll.top}}%">{{mv.endAll.text}}</span>
+                    <span class="endpt me" style="top: {{mv.endMe.top}}%">{{mv.endMe.text}}</span>
+                  </div>
+                </div>
+              </sc-if>
+              <div class="panel bars">
+                <sc-for list="{{mv.acts}}" as="a" hint-placeholder-count="4">
+                  <div class="abar" aria-label="{{a.aria}}"><span class="l">{{a.name}}</span><span class="t"><span style="width: {{a.w}}"></span></span><span class="v">{{a.pct}}</span></div>
+                </sc-for>
+              </div>
+            </div>
+            <div class="col-side">
+              <div class="hlist">
+                <sc-for list="{{mv.hist}}" as="h" hint-placeholder-count="6">
+                  <button class="hline" sc-camel-on-click="{{h.go}}" aria-label="{{h.tip}}" data-action="open-gathering" data-gathering="{{h.sid}}">
+                    <span class="cell {{h.cls}}" aria-hidden="true">
+                      <sc-if value="{{h.isGone}}" hint-placeholder-val="{{ false }}"><svg class="i"><use href="#i-x"></use></svg></sc-if>
+                      <sc-if value="{{h.isBeer}}" hint-placeholder-val="{{ false }}"><span class="pint"><svg><use href="#i-pint"></use></svg></span></sc-if>
+                    </span>
+                    <span class="a">{{h.activity}}</span>
+                    <span class="w">{{h.when}}</span>
+                  </button>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+        </sc-if>
+        <sc-if value="{{mv.noData}}" hint-placeholder-val="{{ false }}">
+          <div class="empty">
+            <svg class="i" aria-hidden="true"><use href="#i-cal"></use></svg>
+          </div>
+        </sc-if>
+      </section>
+    </sc-if>
+  </main>
+
+  <sc-if value="{{hasToast}}" hint-placeholder-val="{{ false }}">
+    <div class="toast" role="status">
+      <sc-if value="{{toastPint}}" hint-placeholder-val="{{ false }}"><span class="pint"><svg aria-hidden="true"><use href="#i-pint"></use></svg></span></sc-if>
+      {{toastText}}
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+
+<script type="text/x-dc" data-dc-script>/* =====================================================================
+   BROTIME TRIBUNAL — how this file is organised (read this first)
+
+   The script is layered so each layer can be read, tested and changed alone:
+
+   1 CONFIG      constants: members, strike limit, categories, games, locations
+   2 RULES       pure functions, no UI and no state. All strike / beer maths
+                 lives here: computeSeason(), ledgerFor(), strikesBefore(),
+                 findDuplicate(). Nothing is stored that can be derived.
+   3 DATA        seed data + empty-season factory (swap for Cloudflare D1
+                 queries in production; the shapes below are the table rows).
+   4 ACTIONS     the ONLY place state changes. Each action is a pure reducer:
+                 ACTIONS.name(state, payload) -> { patch, toast? }.
+                 The UI never calls setState directly; it calls dispatch().
+   5 SELECTORS   pure view-models: state -> exactly what each screen shows.
+                 One selector per view; only the active view's selector runs.
+   6 COMPONENT   thin glue: dispatch(), renderVals(), the agent API.
+
+   DATA SHAPES
+     Season   { id, name, closed, imported, sessions:[Session], paid:{memberId:[isoDate]} }
+     Session  { id:number, date:'YYYY-MM-DD', activity, game, location, notes, att:{memberId:boolean}, attendanceComplete:boolean }
+     Discord  { date, activity, game, location, attendance:{memberId:{status,strikes,beerMarkers}} }
+   State    { seasons, viewId|null, view, memberId, histFilter, historyMode,
+                ledgerFilter, discordMembers, discordEvents, discordNotes,
+                openId, menu, confirmNew, confirmDel, toast,
+                form, nextId, today }
+     view     'board' | 'member' | 'record' | 'ledger' | 'history'
+
+   BUSINESS RULES (all enforced in section 2)
+     - every absence = 1 strike, no excuses
+     - 5 strikes -> counter resets to 0, one beer obligation is earned
+     - paying a beer never changes strikes
+     - obligations and strikes are re-derived from sessions every render,
+       so editing / deleting a gathering can never leave totals inconsistent
+     - paid beers are stored as a list of dates per member; the oldest
+       obligations are settled first; overpayment shows as credit
+
+   VISUAL LANGUAGE (no captions; meaning is carried by form and colour)
+     glass level = strikes (5 graduations)   foam cell   = present
+     dashed cell = absent (an empty seat)    coral pint  = beer owed
+     hollow blue pint = beer settled         amber run   = current streak
+     amber underline  = best streak          order on the shelf = rank
+     Every visual-only cue has an aria-label / title carrying it as text.
+
+   AGENT HOOKS (AX)
+     DOM   root [data-app="brotime-tribunal"] carries data-view, data-role,
+           data-season, data-can-edit. Every control carries data-action plus
+           data-member / data-gathering / data-target / data-filter /
+           data-value where relevant. State-bearing nodes expose
+           data-strikes, data-owed, data-settled, data-state, data-open.
+     API   window.tribunal (set on mount):
+             .actions               -> names of every ACTIONS reducer
+             .dispatch(name, p)     -> runs an action, returns snapshot()
+             .snapshot()            -> plain JSON: view, role, season,
+                                       totals, per-member standing
+             .state()               -> deep copy of raw state
+     ACTIONS (payloads)
+       nav {view}              toggleMenu {menu}
+       closeMenu               pickSeason {id|null}    askNewSeason
+       cancelNewSeason         startSeason
+       openMember {id}         openGathering {id}      toggleGathering {id}
+       filterHistory {id}      setHistoryMode {mode}   filterLedger {key}
+       setField {field,value}
+       setAttendance {id,value:boolean}                setAllAttendance {value}
+       startEdit {id}          cancelEdit              saveGathering
+       deleteGathering (call twice: arm, then confirm) settleBeer {id}
+       undoBeer {id}           copyWeeklyRecap          selectShareFallback
+   ===================================================================== */
+
+/* ───────────── 1. CONFIG ───────────── */
+const STRIKE_LIMIT = 5;
+const MEMBERS = [
+  { id: 's', name: 'Sterling' },
+  { id: 'a', name: 'Adam' },
+  { id: 'j', name: 'Julian' },
+  { id: 'n', name: 'Nathan' },
+  { id: 'i', name: 'Isaiah' }
+];
+/* Keep the canonical data order above for imported masks and calculations.
+   Every people-facing list uses this alphabetical display order instead. */
+const DISPLAY_MEMBERS = [...MEMBERS].sort((a, b) => a.name.localeCompare(b.name));
+const DEFAULT_ACTIVITIES = ['Video Games', 'Poker', 'Disc golf', 'Board games', 'Movie night'];
+const GAME_OPTIONS = ['War Dogs', 'Counter-Strike 2', 'Minecraft', 'Other'];
+const LOCATION_OPTIONS = ['Studio', "Sterling's House", "Adam's House", "Julian's House", "Nathan's House", "Isaiah's House", 'Restaurant', 'Other'];
+const GLASS_INNER = 116; // liquid column height in the glass svg (user units)
+
+
+/* ───────────── 2. RULES (pure) ───────────── */
+function sortSessions(list) {
+  return [...list].sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : a.id - b.id));
+}
+
+/* Replays a season chronologically. Returns per-member stats, per-gathering rows
+   (with each member's outcome) and the running group attendance series. */
+function computeSeason(season) {
+  const sessions = sortSessions(season.sessions);
+  const members = {};
+  MEMBERS.forEach((m) => {
+    members[m.id] = { id: m.id, name: m.name, initial: m.name[0], attended: 0, missed: 0, strikes: 0, earned: [], cells: [], series: [], streak: 0, best: 0, byActivity: {} };
+  });
+  const rows = [];
+  const groupSeries = [];
+  let presentTotal = 0;
+  sessions.forEach((s, k) => {
+    const outcomes = [];
+    let present = 0;
+    MEMBERS.forEach((m) => {
+      const x = members[m.id];
+      const here = !!s.att[m.id];
+      let beer = false;
+      if (here) {
+        x.attended++; present++; x.streak++;
+        if (x.streak > x.best) x.best = x.streak;
+      } else {
+        x.missed++; x.streak = 0; x.strikes++;
+        if (x.strikes >= STRIKE_LIMIT) {
+          x.strikes = 0; beer = true;
+          x.earned.push({ sid: s.id, date: s.date, activity: s.activity });
+        }
+      }
+      if (!x.byActivity[s.activity]) x.byActivity[s.activity] = { p: 0, t: 0 };
+      x.byActivity[s.activity].t++;
+      if (here) x.byActivity[s.activity].p++;
+      x.cells.push({ sid: s.id, here: here, beer: beer, date: s.date, activity: s.activity });
+      x.series.push(x.attended / (k + 1));
+      outcomes.push({ id: m.id, name: m.name, initial: m.name[0], here: here, beer: beer, strikes: x.strikes });
+    });
+    presentTotal += present;
+    groupSeries.push(presentTotal / (MEMBERS.length * (k + 1)));
+    rows.push({ s: s, present: present, outcomes: outcomes });
+  });
+  return { members: members, rows: rows, count: sessions.length, groupSeries: groupSeries };
+}
+
+/* Beer ledger derived from a computed season + the season's payment list. */
+function ledgerFor(season, C) {
+  const out = {};
+  MEMBERS.forEach((m) => {
+    const earned = C.members[m.id].earned;
+    const paidDates = season.paid[m.id] || [];
+    const fulfilled = Math.min(paidDates.length, earned.length);
+    out[m.id] = {
+      earnedCount: earned.length, fulfilled: fulfilled, owed: earned.length - fulfilled,
+      paidCount: paidDates.length, credit: paidDates.length - fulfilled, paidDates: paidDates
+    };
+  });
+  return out;
+}
+
+function strikesBefore(season, date, excludeId) {
+  const sessions = season.sessions.filter((x) => x.id !== excludeId && x.date <= date);
+  const C = computeSeason({ sessions: sessions, paid: {} });
+  const out = {};
+  MEMBERS.forEach((m) => { out[m.id] = C.members[m.id].strikes; });
+  return out;
+}
+
+function findDuplicate(season, form) {
+  const a = form.activity.trim().toLowerCase();
+  if (!a) return null;
+  return season.sessions.find((x) => x.id !== form.editId && x.date === form.date && x.activity.trim().toLowerCase() === a) || null;
+}
+
+function selectedGame(form) {
+  return form.gameChoice === 'Other' ? String(form.gameOther || '').trim() : String(form.gameChoice || '').trim();
+}
+
+function selectedLocation(form) {
+  return form.locationChoice === 'Other' ? String(form.locationOther || '').trim() : String(form.locationChoice || '').trim();
+}
+
+function isFormComplete(form) {
+  const isVideoGames = form.activity.trim().toLowerCase() === 'video games';
+  return MEMBERS.every((m) => form.att[m.id] !== undefined) && !!form.date && !!form.activity.trim() && !!selectedLocation(form) && (!isVideoGames || !!selectedGame(form));
+}
+
+
+/* ───────────── 3. DATA (seed + factories) ───────────── */
+function emptyPaid() { const p = {}; MEMBERS.forEach((m) => { p[m.id] = []; }); return p; }
+function emptySeason(id, name) { return { id: id, name: name, closed: false, imported: false, sessions: [], paid: emptyPaid() }; }
+function isoToday() {
+  const d = new Date();
+  const p = (x) => (x < 10 ? '0' + x : '' + x);
+  return d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate());
+}
+function blankForm(today) { return { editId: null, date: today, activity: '', gameChoice: '', gameOther: '', locationChoice: '', locationOther: '', notes: '', att: {} }; }
+
+function makeSessions(start, masks, activities, firstId, notes) {
+  return masks.map((mask, k) => {
+    const att = {};
+    MEMBERS.forEach((m, x) => { att[m.id] = mask[x] === '1'; });
+    const activity = activities[k % activities.length];
+    return {
+      id: firstId + k,
+      date: new Date(Date.UTC(start[0], start[1], start[2] + 7 * k)).toISOString().slice(0, 10),
+      activity: activity, game: activity === 'Video Games' ? 'War Dogs' : '', location: 'Studio', notes: notes[k] || '', att: att,
+      attendanceComplete: true
+    };
+  });
+}
+
+/* mask digit order = MEMBERS order: Sterling, Adam, Julian, Nathan, Isaiah. 1 = present */
+function demoSeasons() {
+  const archive = emptySeason('arc', '2024');
+  archive.closed = true; archive.imported = true;
+  archive.sessions = makeSessions([2024, 8, 8],
+    ['11111', '10111', '11011', '11101', '01111', '11110', '10110', '11111', '11011', '01101'],
+    ['Video Games', 'Poker', 'Board games', 'Disc golf'], 1001, {});
+  const current = emptySeason('cur', String(new Date().getFullYear()));
+  current.sessions = makeSessions([2026, 5, 21],
+    ['11111', '11011', '10110', '11101', '01111', '11111', '10011', '11110', '01101', '11011',
+     '00111', '10111', '10111', '11001', '01110', '11011', '11110', '01111'],
+    ['Video Games', 'Poker', 'Disc golf', 'Board games', 'Movie night', 'Video Games'], 1,
+    { 2: 'Rain delay, played inside', 10: 'Tournament night', 17: 'First snow' });
+  current.paid.j = ['2026-10-04'];
+  return [archive, current];
+}
+
+function initialState(demo) {
+  const today = isoToday();
+  return {
+    seasons: demo ? demoSeasons() : [emptySeason('cur', String(new Date().getFullYear()))],
+    discordMembers: [], discordEvents: [], discordNotes: [],
+    viewId: null, view: 'board', memberId: 's',
+    histFilter: 'all', historyMode: 'live', ledgerFilter: 'owed', openId: null, menu: null,
+    confirmNew: false, confirmDel: false, toast: null,
+    share: { status: 'idle', text: '', error: '', id: null },
+    form: blankForm(today), nextId: 5000, today: today
+  };
+}
+
+
+/* ───────────── 4. ACTIONS (the only state transitions) ───────────── */
+function currentSeason(S) { return S.seasons.find((s) => !s.closed) || S.seasons[S.seasons.length - 1]; }
+function viewedSeason(S) { return S.viewId != null ? (S.seasons.find((s) => s.id === S.viewId) || currentSeason(S)) : currentSeason(S); }
+function canEditNow(S) { return !viewedSeason(S).closed; }
+function mapCurrent(S, fn) { const id = currentSeason(S).id; return S.seasons.map((s) => (s.id === id ? fn(s) : s)); }
+function memberName(id) { return MEMBERS.find((m) => m.id === id).name; }
+
+const ACTIONS = {
+  nav: (S, p) => {
+    if (p.view === 'record' && S.view !== 'record') return { patch: { view: 'record', menu: null, confirmDel: false, form: blankForm(S.today) } };
+    return { patch: { view: p.view, menu: null, confirmDel: false } };
+  },
+  toggleMenu: (S, p) => ({ patch: { menu: S.menu === p.menu ? null : p.menu, confirmNew: false } }),
+  closeMenu: () => ({ patch: { menu: null, confirmNew: false } }),
+  pickSeason: (S, p) => ({ patch: { viewId: p.id, menu: null, confirmNew: false, openId: null } }),
+  askNewSeason: () => ({ patch: { confirmNew: true } }),
+  cancelNewSeason: () => ({ patch: { confirmNew: false } }),
+  startSeason: (S) => {
+    const seasons = S.seasons.map((s) => (s.closed ? s : { ...s, closed: true }));
+    const activeYear = Number(currentSeason(S).name);
+    const year = String(Math.max(new Date().getFullYear(), Number.isInteger(activeYear) ? activeYear + 1 : new Date().getFullYear()));
+    seasons.push(emptySeason('s' + (S.nextId + 1), year));
+    return { patch: { seasons: seasons, nextId: S.nextId + 1, viewId: null, view: 'board', menu: null, confirmNew: false, form: blankForm(S.today) }, toast: { text: year + ' started' } };
+  },
+  openMember: (S, p) => ({ patch: { view: 'member', memberId: p.id, menu: null } }),
+  openGathering: (S, p) => ({ patch: { view: 'history', openId: p.id, histFilter: 'all' } }),
+  toggleGathering: (S, p) => ({ patch: { openId: S.openId === p.id ? null : p.id } }),
+  toggleDiscordRecord: (S, p) => ({ patch: { openId: S.openId === p.id ? null : p.id } }),
+  filterHistory: (S, p) => ({ patch: { histFilter: S.histFilter === p.id ? 'all' : p.id } }),
+  setHistoryMode: (S, p) => ({ patch: { historyMode: p.mode, histFilter: 'all', openId: null } }),
+  filterLedger: (S, p) => ({ patch: { ledgerFilter: p.key } }),
+
+  setField: (S, p) => {
+    if (p.field === 'activity' && /^war\s*dogs$/i.test(String(p.value).trim())) {
+      return { patch: { form: { ...S.form, activity: 'Video Games', gameChoice: 'War Dogs' } } };
+    }
+    return { patch: { form: { ...S.form, [p.field]: p.value } } };
+  },
+  setAttendance: (S, p) => ({ patch: { form: { ...S.form, att: { ...S.form.att, [p.id]: p.value } } } }),
+  setAllAttendance: (S, p) => {
+    const att = {};
+    MEMBERS.forEach((m) => { att[m.id] = p.value; });
+    return { patch: { form: { ...S.form, att: att } } };
+  },
+  startEdit: (S, p) => {
+    const s = currentSeason(S).sessions.find((x) => x.id === p.id);
+    if (!s) return {};
+    const gameIsPreset = GAME_OPTIONS.includes(s.game) && s.game !== 'Other';
+    const locationIsPreset = LOCATION_OPTIONS.includes(s.location) && s.location !== 'Other';
+    return { patch: { view: 'record', confirmDel: false, form: {
+      editId: s.id, date: s.date, activity: s.activity,
+      gameChoice: s.game ? (gameIsPreset ? s.game : 'Other') : '', gameOther: s.game && !gameIsPreset ? s.game : '',
+      locationChoice: s.location ? (locationIsPreset ? s.location : 'Other') : '', locationOther: s.location && !locationIsPreset ? s.location : '',
+      notes: s.notes || '', att: { ...s.att }
+    } } };
+  },
+  cancelEdit: (S) => ({ patch: { view: 'history', confirmDel: false, form: blankForm(S.today) } }),
+
+  saveGathering: (S) => {
+    const f = S.form;
+    if (!isFormComplete(f) || findDuplicate(currentSeason(S), f)) return {};
+    const id = f.editId || S.nextId + 1;
+    const activity = f.activity.trim();
+    const session = { id: id, date: f.date, activity: activity, game: activity.toLowerCase() === 'video games' ? selectedGame(f) : '', location: selectedLocation(f), notes: f.notes.trim(), att: { ...f.att }, attendanceComplete: true };
+    const seasons = mapCurrent(S, (s) => ({ ...s, sessions: f.editId ? s.sessions.map((x) => (x.id === id ? session : x)) : [...s.sessions, session] }));
+    const C = computeSeason(seasons.find((s) => !s.closed));
+    const row = C.rows.find((r) => r.s.id === id);
+    const beers = row ? row.outcomes.filter((o) => o.beer).map((o) => o.name) : [];
+    const text = beers.length ? beers.join(', ') + (beers.length > 1 ? ' each earned a beer' : ' earned a beer') : (f.editId ? 'Changes saved' : 'Gathering saved');
+    return {
+      patch: { seasons: seasons, nextId: f.editId ? S.nextId : S.nextId + 1, view: 'history', openId: id, histFilter: 'all', confirmDel: false, form: blankForm(S.today) },
+      toast: { text: text, pint: beers.length > 0 }
+    };
+  },
+  deleteGathering: (S) => {
+    if (!S.confirmDel) return { patch: { confirmDel: true } };
+    const id = S.form.editId;
+    const seasons = mapCurrent(S, (s) => ({ ...s, sessions: s.sessions.filter((x) => x.id !== id) }));
+    return { patch: { seasons: seasons, view: 'history', openId: null, confirmDel: false, form: blankForm(S.today) }, toast: { text: 'Gathering deleted' } };
+  },
+
+  settleBeer: (S, p) => ({
+    patch: { seasons: mapCurrent(S, (s) => ({ ...s, paid: { ...s.paid, [p.id]: [...(s.paid[p.id] || []), S.today] } })) },
+    toast: { text: memberName(p.id) + ' settled a beer' }
+  }),
+  undoBeer: (S, p) => ({
+    patch: { seasons: mapCurrent(S, (s) => ({ ...s, paid: { ...s.paid, [p.id]: (s.paid[p.id] || []).slice(0, -1) } })) },
+    toast: { text: 'Payment reversed for ' + memberName(p.id) }
+  })
+};
+
+
+/* ───────────── 5. SELECTORS (pure view-models) ───────────── */
+function fmtDate(iso) {
+  const d = new Date(iso + 'T12:00:00');
+  return {
+    wd: d.toLocaleDateString('en-US', { weekday: 'long' }), d: d.getDate(),
+    mo: d.toLocaleDateString('en-US', { month: 'short' }),
+    month: d.toLocaleDateString('en-US', { month: 'long', year: 'numeric' }),
+    when: d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+  };
+}
+function pipsFor(strikes, hit) { return [0, 1, 2, 3, 4].map((i) => ({ cls: hit ? 'hit' : (i < strikes ? 'on' : '') })); }
+/* vertical offset of the liquid for n strikes (0 = empty, hidden below the glass) */
+function liquidShift(n) { return n <= 0 ? GLASS_INNER + 12 : Math.round((1 - Math.min(n, STRIKE_LIMIT) / STRIKE_LIMIT) * (GLASS_INNER - 8)); }
+function liquidClass(strikes) { return strikes === STRIKE_LIMIT - 1 ? 'hot' : ''; }
+/* one cell vocabulary everywhere: here | gone (empty seat) | beer */
+function cellCls(c) { return c.here ? 'here' : (c.beer ? 'beer' : 'gone'); }
+function outcomeText(c) { return c.here ? 'present' : (c.beer ? 'absent, beer earned' : 'absent'); }
+function plural(n, one, many) { return n + ' ' + (n === 1 ? one : many); }
+
+const SHARE_URL = 'https://brotime719.com/';
+const SHARE_MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+/* Share dates are date-only values. Format the stored parts directly so the
+   recap never crosses a day boundary because of a timezone conversion. */
+function shareDate(iso) {
+  const parts = String(iso || '').split('-');
+  const month = Number(parts[1]);
+  const day = Number(parts[2]);
+  if (parts.length !== 3 || !parts[0] || !Number.isInteger(month) || !Number.isInteger(day) || month < 1 || month > 12 || day < 1 || day > 31) return '';
+  return SHARE_MONTHS[month - 1] + ' ' + day + ', ' + parts[0];
+}
+
+function eventForShare(S, id, archive) {
+  if (!archive) return S.seasons.flatMap(season => season.sessions).find(event => event.id === id);
+  const event = (S.discordEvents || []).find(event => event.id === id);
+  if (!event) return null;
+  const att = Object.fromEntries(MEMBERS.map(member => {
+    const status = event.attendance && event.attendance[member.id] && event.attendance[member.id].status;
+    return [member.id, status === 'present' ? true : status === 'absent' ? false : undefined];
+  }));
+  return { ...event, att };
+}
+
+function eventShareView(S, id, archive, bind) {
+  const session = eventForShare(S, id, archive);
+  const saved = S.share || {};
+  const same = saved.id === id;
+  return {
+    copyRecap: bind('copyWeeklyRecap', { id, archive }),
+    recapLabel: same && saved.status === 'copied' ? 'Copied' : 'Copy event recap',
+    recapDisabled: !shareAttendanceComplete(session),
+    recapBlocked: !shareAttendanceComplete(session),
+    recapFallback: same && saved.status === 'fallback',
+    recapText: same ? saved.text || '' : '',
+    selectRecap: bind('selectShareFallback')
+  };
+}
+
+function shareMembers() { return DISPLAY_MEMBERS; }
+
+function shareAttendanceComplete(session) {
+  if (!session || session.attendanceComplete === false) return false;
+  return MEMBERS.every((member) => session.att && typeof session.att[member.id] === 'boolean');
+}
+
+function shareNames(session, present) {
+  const attendance = session && session.att ? session.att : {};
+  return shareMembers().filter((member) => typeof attendance[member.id] === 'boolean' && attendance[member.id] === present).map((member) => member.name);
+}
+
+function shareMug(session) {
+  const present = shareNames(session, true);
+  const blankRows = MEMBERS.length - present.length;
+  const edges = ['├─╮', '│ │', '├─╯', '│', '│'];
+  const rows = edges.map((edge, index) => {
+    const name = index < blankRows ? '' : present[index - blankRows];
+    const interior = name ? (' ' + name).slice(0, 10).padEnd(10, ' ') : '          ';
+    return '│' + interior + edge;
+  });
+  return ['╭──────────╮', ...rows, '╰──────────╯ ' + present.length + '/' + MEMBERS.length].join('\n');
+}
+
+function shareMessage(session) {
+  const activity = String(session.activity || '').trim();
+  const game = String(session.game || '').trim();
+  const location = String(session.location || '').trim();
+  const metadata = [activity, game, location].filter(Boolean).join(' · ');
+  const absent = shareNames(session, false);
+  const lines = ['BroTime · ' + shareDate(session.date)];
+  if (metadata) lines.push(metadata);
+  lines.push('', '```', shareMug(session), '```', '');
+  if (absent.length) lines.push('Out: ' + absent.join(', '), '');
+  lines.push(SHARE_URL);
+  return lines.join('\n');
+}
+
+function buildShareContext(S, season) {
+  /* A future row is a scheduled gathering until all five active attendance
+     values are recorded. Ignore that unrecorded row, but keep a future row
+     that already has complete results eligible as the latest saved record. */
+  const sessions = sortSessions(season.sessions).filter((session) => !S.today || session.date <= S.today || shareAttendanceComplete(session));
+  const session = sessions.length ? sessions[sessions.length - 1] : null;
+  const complete = shareAttendanceComplete(session);
+  const saved = S.share || {};
+  const sameGathering = !!session && saved.id === session.id;
+  const status = sameGathering ? (saved.status || 'idle') : 'idle';
+  return {
+    session: session,
+    id: session ? session.id : null,
+    hasGathering: !!session,
+    complete: complete,
+    blocked: !!session && !complete,
+    date: session ? shareDate(session.date) : '',
+    message: complete ? shareMessage(session) : '',
+    status: status,
+    text: sameGathering ? (saved.text || '') : '',
+    error: sameGathering ? (saved.error || '') : '',
+    buttonLabel: status === 'copied' ? 'Copied' : 'Copy weekly recap',
+    disabled: !complete,
+    fallbackVisible: status === 'fallback' && !!saved.text,
+    blockedText: session ? 'Complete attendance for ' + shareDate(session.date) + ' before sharing.' : '',
+    aria: complete ? 'Copy weekly recap for ' + shareDate(session.date) : (session ? 'Complete attendance for ' + shareDate(session.date) + ' before sharing' : 'No completed gathering to share')
+  };
+}
+
+function buildContext(S) {
+  const season = viewedSeason(S);
+  const C = computeSeason(season);
+  const L = ledgerFor(season, C);
+  const canEdit = canEditNow(S);
+  const view = (S.view === 'record' && !canEdit) ? 'board' : S.view;
+  const share = buildShareContext(S, season);
+  const mem = DISPLAY_MEMBERS.map((m) => {
+    const x = C.members[m.id];
+    const l = L[m.id];
+    const pct = C.count ? Math.round(x.attended * 100 / C.count) : null;
+    const pints = [];
+    for (let i = 0; i < l.owed; i++) pints.push({ cls: 'owed' });
+    for (let i = 0; i < l.fulfilled; i++) pints.push({ cls: 'paid' });
+    return { ...x, ...l, pct: pct, pctText: pct == null ? '–' : pct + '%', pints: pints, strikeLabel: x.strikes + ' of ' + STRIKE_LIMIT + ' strikes' };
+  });
+  const totals = {
+    earned: mem.reduce((a, m) => a + m.earned.length, 0),
+    fulfilled: mem.reduce((a, m) => a + m.fulfilled, 0)
+  };
+  totals.owed = totals.earned - totals.fulfilled;
+  return { S: S, season: season, C: C, L: L, canEdit: canEdit, view: view, mem: mem, totals: totals, share: share };
+}
+
+function sessionRow(ctx, bind, r) {
+  const d = fmtDate(r.s.date);
+  const open = ctx.S.openId === r.s.id;
+  const anyBeer = r.outcomes.some((o) => o.beer);
+  const allHere = r.present === MEMBERS.length;
+  const orderedOutcomes = [...r.outcomes].sort((a, b) => a.name.localeCompare(b.name));
+  const away = orderedOutcomes.filter((o) => !o.here).map((o) => o.name + (o.beer ? ' (beer earned)' : ''));
+  const eventMeta = [r.s.activity.toLowerCase() === 'video games' ? r.s.game : '', r.s.location].filter(Boolean).join(' · ');
+  return {
+    ...eventShareView(ctx.S, r.s.id, false, bind),
+    isRow: true, isHead: false, label: '', id: r.s.id, wd: d.wd, d: d.d, mo: d.mo, when: d.when,
+    activity: r.s.activity, eventMeta: eventMeta, hasEventMeta: !!eventMeta, location: r.s.location || '',
+    notes: r.s.notes, hasNotes: !!r.s.notes, allHere: allHere,
+    open: open, canEdit: ctx.canEdit, rowCls: open ? 'open' : '', dotCls: anyBeer ? 'beer' : (allHere ? 'full' : ''),
+    aria: r.s.activity + (eventMeta ? ', ' + eventMeta : '') + ', ' + d.wd + ' ' + d.when + ', ' + (allHere ? 'everyone present' : 'absent: ' + away.join(', ')),
+    chips: orderedOutcomes.map((o) => ({ initial: o.initial, cls: cellCls(o), tip: o.name + ' ' + outcomeText(o) })),
+    effects: orderedOutcomes.filter((o) => !o.here).map((o) => ({
+      id: o.id, name: o.name, beer: o.beer, pips: pipsFor(o.strikes, o.beer),
+      aria: o.name + (o.beer ? ' reached ' + STRIKE_LIMIT + ' strikes and earned a beer' : ' now at ' + o.strikes + ' of ' + STRIKE_LIMIT + ' strikes')
+    })),
+    toggle: bind('toggleGathering', { id: r.s.id }), edit: bind('startEdit', { id: r.s.id }), openBoard: bind('openGathering', { id: r.s.id })
+  };
+}
+
+/* Plain-JSON summary of what the screen means. Used by window.tribunal for agents. */
+function snapshotOf(ctx) {
+  return {
+    view: ctx.view, role: 'public', canEdit: ctx.canEdit,
+    season: { id: ctx.season.id, name: ctx.season.name, closed: !!ctx.season.closed, gatherings: ctx.C.count },
+    totals: { ...ctx.totals },
+    members: ctx.mem.map((m) => ({
+      id: m.id, name: m.name, strikes: m.strikes, strikeLimit: STRIKE_LIMIT, attended: m.attended, missed: m.missed,
+      pct: m.pct, owed: m.owed, settled: m.fulfilled, credit: m.credit, streak: m.streak, best: m.best
+    }))
+  };
+}
+
+const SELECTORS = {
+  shell(ctx, bind) {
+    const S = ctx.S;
+    const keys = [
+      { key: 'board', label: 'Board', icon: 'i-board' },
+      { key: 'member', label: 'Members', icon: 'i-members' },
+      ...(ctx.canEdit ? [{ key: 'record', label: 'Record', icon: 'i-plus', cta: true }] : []),
+      { key: 'ledger', label: 'Ledger', icon: 'i-ledger', badge: ctx.totals.owed },
+      { key: 'history', label: 'History', icon: 'i-history' }
+    ];
+    const tabs = keys.map((t) => ({
+      key: t.key, label: t.label, icon: t.icon,
+      aria: t.badge ? t.label + ', ' + plural(t.badge, 'beer', 'beers') + ' owed' : t.label,
+      cls: (ctx.view === t.key ? 'on ' : '') + (t.cta ? 'cta' : ''), current: ctx.view === t.key ? 'page' : 'false',
+      hasBadge: !!t.badge, badge: t.badge || 0, go: bind('nav', { view: t.key })
+    }));
+    const seasonList = [...S.seasons].filter((s) => !s.imported).reverse().map((s) => ({
+      key: s.id, name: s.name, count: s.sessions.length,
+      aria: s.name + ', ' + plural(s.sessions.length, 'gathering', 'gatherings') + (s.closed ? ', archived' : ''),
+      cls: ctx.season.id === s.id ? 'on' : '',
+      pick: bind('pickSeason', { id: s.closed ? s.id : null })
+    }));
+    return {
+      viewKey: ctx.view, roleKey: 'public', seasonKey: ctx.season.id,
+      seasonName: ctx.season.name, viewingClosed: !!ctx.season.closed, seasonCount: ctx.C.count,
+      seasonIcon: ctx.season.closed ? 'i-lock' : 'i-cal',
+      seasonAria: 'Year: ' + ctx.season.name + ', ' + plural(ctx.C.count, 'gathering', 'gatherings') + (ctx.season.closed ? ', archived' : ''),
+      menuOpen: S.menu !== null, seasonMenuOpen: S.menu === 'season', optionsMenuOpen: S.menu === 'options',
+      closeMenu: bind('closeMenu'),
+      toggleSeasonMenu: bind('toggleMenu', { menu: 'season' }),
+      toggleOptionsMenu: bind('toggleMenu', { menu: 'options' }),
+      seasonList: seasonList, canStartSeason: true,
+      confirmNew: S.confirmNew, confirmNewOff: !S.confirmNew,
+      askNew: bind('askNewSeason'), cancelNew: bind('cancelNewSeason'), startSeason: bind('startSeason'),
+      tabs: tabs,
+      isBoard: ctx.view === 'board', isRecord: ctx.view === 'record', isLedger: ctx.view === 'ledger',
+      isHistory: ctx.view === 'history', isMember: ctx.view === 'member',
+      canEdit: ctx.canEdit, goRecord: bind('nav', { view: 'record' }),
+      hasToast: !!S.toast, toastText: S.toast ? S.toast.text : '', toastPint: !!(S.toast && S.toast.pint)
+    };
+  },
+
+  board(ctx, bind) {
+    const C = ctx.C;
+    const ranked = [...ctx.mem].sort((a, b) => ((b.pct == null ? -1 : b.pct) - (a.pct == null ? -1 : a.pct)) || (a.strikes - b.strikes) || a.name.localeCompare(b.name));
+    let rank = 0; let last = -2;
+    const seats = ranked.map((m, i) => {
+      const p = m.pct == null ? -1 : m.pct;
+      if (p !== last) { rank = i + 1; last = p; }
+      const owedText = m.owed ? ', ' + plural(m.owed, 'beer', 'beers') + ' owed' : '';
+      const paidText = m.fulfilled ? ', ' + m.fulfilled + ' settled' : '';
+      return {
+        id: m.id, name: m.name, pctText: m.pctText, strikes: m.strikes, owed: m.owed, pints: m.pints, strikeLabel: m.strikeLabel,
+        rank: C.count ? rank : '', cls: m.strikes === STRIKE_LIMIT - 1 ? 'hot' : '',
+        shift: liquidShift(m.strikes), liqCls: liquidClass(m.strikes),
+        aria: (C.count ? 'Rank ' + rank + ', ' : '') + m.name + ', ' + m.pctText + ' attendance, ' + m.strikeLabel + owedText + paidText,
+        open: bind('openMember', { id: m.id })
+      };
+    });
+    const visible = C.rows.slice(-24);
+    let prevMonth = '';
+    const cols = visible.map((r) => {
+      const d = fmtDate(r.s.date);
+      const mo = d.mo !== prevMonth ? d.mo : '';
+      prevMonth = d.mo;
+      return { id: r.s.id, d: d.d, mo: mo, n: r.present, fullCls: r.present === MEMBERS.length ? 'full' : '', tip: d.when + ' · ' + r.s.activity + ' · ' + r.present + ' of ' + MEMBERS.length + ' present', go: bind('openGathering', { id: r.s.id }) };
+    });
+    const rows = ctx.mem.map((m) => ({
+      id: m.id, name: m.name, initial: m.initial, open: bind('openMember', { id: m.id }),
+      cells: m.cells.slice(-24).map((c) => ({
+        sid: c.sid, cls: cellCls(c), isGone: !c.here && !c.beer, isBeer: c.beer,
+        tip: m.name + ' · ' + fmtDate(c.date).when + ' · ' + c.activity + ' · ' + outcomeText(c),
+        go: bind('openGathering', { id: c.sid })
+      }))
+    }));
+    return {
+      seats: seats, matrix: { cols: cols, rows: rows },
+      recent: [...C.rows].reverse().slice(0, 5).map((r) => sessionRow(ctx, bind, r)),
+      hasSessions: C.count > 0, noSessions: C.count === 0,
+      hasShareGathering: ctx.share.hasGathering,
+      shareDate: ctx.share.date,
+      shareDisabled: ctx.share.disabled,
+      shareBlocked: ctx.share.blocked,
+      shareBlockedText: ctx.share.blockedText,
+      shareButtonLabel: ctx.share.buttonLabel,
+      shareFallbackVisible: ctx.share.fallbackVisible,
+      shareFallbackText: ctx.share.text,
+      shareFallbackError: ctx.share.error,
+      shareAria: ctx.share.aria,
+      copyWeeklyRecap: bind('copyWeeklyRecap'),
+      selectShareFallback: bind('selectShareFallback')
+    };
+  },
+
+  record(ctx, bind) {
+    const S = ctx.S;
+    const f = S.form;
+    const base = strikesBefore(ctx.season, f.date, f.editId);
+    const roll = DISPLAY_MEMBERS.map((m) => {
+      const v = f.att[m.id];
+      const from = base[m.id];
+      const absent = v === false;
+      const hit = absent && from === STRIKE_LIMIT - 1;
+      const state = v === undefined ? 'unset' : (v ? 'present' : 'absent');
+      return {
+        id: m.id, name: m.name, absent: absent, hit: hit, from: from, to: hit ? 0 : from + 1, state: state,
+        cls: v === undefined ? '' : (v ? 'p' : (hit ? 'a x' : 'a')),
+        isP: v === true, isA: v === false,
+        presentCls: v === true ? 'on-p' : '', absentCls: v === false ? 'on-a' : '',
+        shift: liquidShift(from), nextShift: liquidShift(absent ? (hit ? STRIKE_LIMIT : from + 1) : from),
+        liqCls: hit ? 'hit' : liquidClass(from), glassCls: hit ? 'over' : '',
+        glassLabel: m.name + ' at ' + from + ' of ' + STRIKE_LIMIT + ' strikes' + (absent ? (hit ? '; this absence earns a beer' : '; this absence makes ' + (from + 1)) : ''),
+        setP: bind('setAttendance', { id: m.id, value: true }), setA: bind('setAttendance', { id: m.id, value: false })
+      };
+    });
+    const names = DEFAULT_ACTIVITIES.slice();
+    S.seasons.forEach((s) => s.sessions.forEach((x) => { if (names.indexOf(x.activity) < 0) names.push(x.activity); }));
+    const dupS = findDuplicate(ctx.season, f);
+    const tally = { p: 0, a: 0, u: 0 };
+    MEMBERS.forEach((m) => { const v = f.att[m.id]; if (v === true) tally.p++; else if (v === false) tally.a++; else tally.u++; });
+    const isEditing = !!f.editId;
+    const activityKey = f.activity.trim().toLowerCase();
+    const isVideoGames = activityKey === 'video games';
+    return {
+      form: f, isEditing: isEditing, recTitle: isEditing ? 'Edit gathering' : 'New gathering',
+      isVideoGames: isVideoGames, isGameOther: isVideoGames && f.gameChoice === 'Other', isLocationOther: f.locationChoice === 'Other',
+      cancelEdit: bind('cancelEdit'),
+      actChips: names.map((a) => {
+        const on = activityKey === a.toLowerCase();
+        return { name: a, on: on, cls: on ? 'on' : '', pick: bind('setField', { field: 'activity', value: a }) };
+      }),
+      dup: !!dupS, dupText: dupS ? 'Already recorded for ' + fmtDate(dupS.date).when : '',
+      openDup: dupS ? bind('startEdit', { id: dupS.id }) : bind('closeMenu'),
+      allPresent: bind('setAllAttendance', { value: true }), allAbsent: bind('setAllAttendance', { value: false }),
+      roll: roll, tally: tally, tallyLabel: tally.p + ' present, ' + tally.a + ' absent, ' + tally.u + ' not set',
+      marks: roll.map((r) => ({
+        initial: r.name[0], cls: r.state === 'present' ? 'here' : (r.hit ? 'beer' : (r.absent ? 'gone' : '')),
+        tip: r.name + ': ' + (r.state === 'unset' ? 'not set' : (r.hit ? 'absent, beer earned' : r.state))
+      })),
+      cantSave: !(isFormComplete(f) && !dupS),
+      saveLabel: isEditing ? 'Save changes' : 'Save',
+      confirmDel: !!S.confirmDel, delCls: S.confirmDel ? 'arm' : '', delLabel: S.confirmDel ? 'Confirm delete' : 'Delete',
+      delClick: bind('deleteGathering'), save: bind('saveGathering')
+    };
+  },
+
+  ledger(ctx, bind) {
+    const S = ctx.S;
+    const lf = S.ledgerFilter;
+    const t = ctx.totals;
+    const log = [];
+    ctx.mem.forEach((m) => {
+      m.earned.forEach((o, i) => {
+        const isPaid = i < m.fulfilled;
+        const when = fmtDate(o.date).when;
+        const paidDate = isPaid ? fmtDate(m.paidDates[i]).when : '';
+        log.push({
+          id: m.id, initial: m.initial, name: m.name, date: o.date, when: when, activity: o.activity,
+          isPaid: isPaid, status: isPaid ? 'Paid' : 'Owed', cls: isPaid ? 'paid' : 'owed',
+          aria: m.name + ', beer earned ' + when + ' at ' + o.activity + (isPaid ? ', settled ' + paidDate : ', owed'),
+          paidOn: isPaid, paidDate: paidDate,
+          canSettle: ctx.canEdit && i === m.fulfilled,
+          canUndo: ctx.canEdit && isPaid && i === m.fulfilled - 1 && m.paidCount === m.fulfilled,
+          settle: bind('settleBeer', { id: m.id }), undo: bind('undoBeer', { id: m.id })
+        });
+      });
+    });
+    log.sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
+    const shown = log.filter((o) => lf === 'all' || (lf === 'owed' ? !o.isPaid : o.isPaid));
+    const rail = [];
+    for (let i = 0; i < t.owed; i++) rail.push({ cls: 'owed' });
+    for (let i = 0; i < t.fulfilled; i++) rail.push({ cls: 'paid' });
+    if (!rail.length) rail.push({ cls: 'none' });
+    return {
+      tabRail: rail,
+      tabRailLabel: t.earned ? plural(t.earned, 'beer', 'beers') + ' earned: ' + t.owed + ' owed, ' + t.fulfilled + ' settled' : 'No beers earned yet',
+      tabCards: ctx.mem.map((m) => ({
+        id: m.id, initial: m.initial, name: m.name, pints: m.pints, owed: m.owed, fulfilled: m.fulfilled, credit: m.credit, hasCredit: m.credit > 0,
+        owedLabel: m.name + ' owes ' + plural(m.owed, 'beer', 'beers'),
+        creditLabel: plural(m.credit, 'beer', 'beers') + ' of credit',
+        cls: m.owed ? 'has' : '', owedCls: m.owed ? 'co' : '', noOwed: m.owed < 1, noPaid: m.paidCount < 1,
+        settle: bind('settleBeer', { id: m.id }), undo: bind('undoBeer', { id: m.id })
+      })),
+      ledgerFilters: [['owed', 'Owed'], ['paid', 'Fulfilled'], ['all', 'All']].map((x) => ({ key: x[0], label: x[1], on: lf === x[0], cls: lf === x[0] ? 'on' : '', pick: bind('filterLedger', { key: x[0] }) })),
+      log: shown, logAny: shown.length > 0, logEmpty: shown.length === 0
+    };
+  },
+
+  history(ctx, bind) {
+    const hf = ctx.S.histFilter;
+    const rows = [...ctx.C.rows].reverse().filter((r) => hf === 'all' || !r.s.att[hf]);
+    const historyMode = ctx.S.historyMode || 'live';
+    const history = [];
+    let month = '';
+    rows.forEach((r) => {
+      const label = fmtDate(r.s.date).month;
+      if (label !== month) {
+        month = label;
+        history.push({ isHead: true, isRow: false, label: label, chips: [], effects: [], id: 0 });
+      }
+      history.push(sessionRow(ctx, bind, r));
+    });
+    const histFilters = [{ key: 'all', label: 'All', aria: 'All gatherings', on: hf === 'all', hasAvatar: false, initial: '', cls: hf === 'all' ? 'on' : '', pick: bind('filterHistory', { id: 'all' }) }]
+      .concat(DISPLAY_MEMBERS.map((m) => ({ key: m.id, label: m.name, aria: 'Gatherings missed by ' + m.name, on: hf === m.id, hasAvatar: true, initial: m.name[0], cls: hf === m.id ? 'on' : '', pick: bind('filterHistory', { id: m.id }) })));
+    const archiveMembers = [...(ctx.S.discordMembers || [])].sort((a, b) => a.name.localeCompare(b.name));
+    const archiveRows = [];
+    const entries = [
+      ...(ctx.S.discordEvents || []).map((event) => ({ kind: 'event', date: event.date, id: event.id, event: event })),
+      ...(ctx.S.discordNotes || []).map((note) => ({ kind: 'note', date: note.date, id: 'note-' + note.id, note: note }))
+    ].sort((a, b) => b.date.localeCompare(a.date) || String(b.id).localeCompare(String(a.id)));
+    let archiveYear = '';
+    const confidenceLabel = (value) => ({
+      explicit: 'Date stated in Discord',
+      'post-date': 'Date taken from Discord post',
+      'inferred-weekly': 'Date inferred from weekly update',
+      'inferred-post-date': 'Date inferred from update',
+      'source-order-conflict': 'Source order conflicts with event date',
+      'source-date-conflict': 'Event date conflicts with post timestamp'
+    }[value] || 'Date source unclear');
+    entries.forEach((entry) => {
+      const year = entry.date.slice(0, 4);
+      if (year !== archiveYear) {
+        archiveYear = year;
+        archiveRows.push({ isHead: true, isRow: false, label: year, id: 0 });
+      }
+      if (entry.kind === 'note') {
+        const note = entry.note;
+        const noteDate = fmtDate(note.date);
+        const noteMembers = archiveMembers.map((m) => {
+          const tally = note.tallies && note.tallies[m.id];
+          return {
+            id: m.id, name: m.name, statusText: 'Starting balance', strikesText: tally ? tally.strikes + ' strikes' : 'No tally',
+            beerText: tally && tally.beerMarkers ? tally.beerMarkers : 'No beer marker in source'
+          };
+        }).filter((m) => note.tallies && note.tallies[m.id]);
+        archiveRows.push({
+          isHead: false, isRow: true, isNote: true, isEvent: false, id: entry.id, open: ctx.S.openId === entry.id,
+          rowCls: ctx.S.openId === entry.id ? 'open' : '', dotCls: 'archive-note',
+          day: noteDate.d, month: noteDate.mo, date: noteDate.when, title: note.type === 'baseline' ? 'Starting tally' : (note.type === 'status' ? 'Status note' : 'Discord note'),
+          meta: note.text, sourcePostedAt: note.sourcePostedAt || '', confidence: '', chips: [], members: noteMembers,
+          hasMembers: noteMembers.length > 0, hasSourceNote: false, sourceNote: '',
+          toggle: bind('toggleDiscordRecord', { id: entry.id }), aria: note.type + ', ' + fmtDate(note.date).when + ', ' + note.text
+        });
+        return;
+      }
+      const event = entry.event;
+      const eventDate = fmtDate(event.date);
+      const states = archiveMembers.map((member) => {
+        const status = event.attendance && event.attendance[member.id] ? event.attendance[member.id].status : 'unknown';
+        const source = event.attendance && event.attendance[member.id] ? event.attendance[member.id] : {};
+        const statusText = status === 'present' ? 'Present' : (status === 'absent' ? 'Absent' : 'Unknown');
+        return {
+          id: member.id, name: member.name, initial: member.name[0], status: status,
+          statusText: statusText, cls: status === 'present' ? 'here' : (status === 'absent' ? 'gone' : 'unknown'),
+          strikesText: source.strikes == null ? 'No tally in source' : source.strikes + ' strikes after event',
+          beerText: source.beerMarkers || 'No beer marker in source snapshot',
+          tip: member.name + ': ' + statusText + (source.strikes == null ? '' : ', ' + source.strikes + ' strikes') + (source.beerMarkers ? ', ' + source.beerMarkers : '')
+        };
+      });
+      const presentCount = states.filter((m) => m.status === 'present').length;
+      const absentCount = states.filter((m) => m.status === 'absent').length;
+      const unknownCount = states.filter((m) => m.status === 'unknown').length;
+      const eventMeta = [event.activity, event.game, event.location].filter(Boolean).join(' · ');
+      archiveRows.push({
+        ...eventShareView(ctx.S, event.id, true, bind),
+        isHead: false, isRow: true, isNote: false, isEvent: true, id: event.id, open: ctx.S.openId === event.id,
+        rowCls: ctx.S.openId === event.id ? 'open' : '', dotCls: 'archive-event',
+        day: eventDate.d, month: eventDate.mo, date: eventDate.when, title: event.title, eventMeta: eventMeta, hasEventMeta: !!eventMeta,
+        countText: presentCount + ' present · ' + absentCount + ' absent · ' + unknownCount + ' unknown',
+        confidence: confidenceLabel(event.dateConfidence), sourcePostedAt: event.sourcePostedAt || '',
+        chips: states.map((m) => ({ initial: m.initial, cls: m.cls, tip: m.tip })),
+        members: states, hasMembers: states.length > 0, hasSourceNote: !!event.sourceNote, sourceNote: event.sourceNote || '',
+        toggle: bind('toggleDiscordRecord', { id: event.id }),
+        aria: event.title + ', ' + fmtDate(event.date).when + ', ' + presentCount + ' present, ' + absentCount + ' absent, ' + unknownCount + ' unknown'
+      });
+    });
+    return {
+      historyModes: [
+        { key: 'live', label: 'Gatherings', cls: historyMode === 'live' ? 'on' : '', on: historyMode === 'live', pick: bind('setHistoryMode', { mode: 'live' }) },
+        { key: 'discord', label: 'Discord records', cls: historyMode === 'discord' ? 'on' : '', on: historyMode === 'discord', pick: bind('setHistoryMode', { mode: 'discord' }) }
+      ],
+      showLiveHistory: historyMode === 'live', showDiscordHistory: historyMode === 'discord',
+      discordHistory: archiveRows, discordHistoryEmpty: (ctx.S.discordEvents || []).length === 0 && (ctx.S.discordNotes || []).length === 0,
+      discordCount: (ctx.S.discordEvents || []).length,
+      histFilters: histFilters, history: history, historyEmpty: rows.length === 0
+    };
+  },
+
+  member(ctx, bind) {
+    const C = ctx.C;
+    const mm = ctx.mem.find((x) => x.id === ctx.S.memberId) || ctx.mem[0];
+    const yOf = (v) => 100 - Math.max(2, Math.min(98, v * 100));
+    const pts = (arr) => arr.map((v, i) => (C.count > 1 ? (i / (C.count - 1)) * 300 : 150).toFixed(1) + ',' + yOf(v).toFixed(1)).join(' ');
+    const acts = Object.keys(mm.byActivity).map((k) => ({ k: k, v: Math.round(mm.byActivity[k].p * 100 / mm.byActivity[k].t), t: mm.byActivity[k].t })).sort((a, b) => b.v - a.v || b.t - a.t);
+    const CIRC = 2 * Math.PI * 42;
+    const goTo = (sid) => bind('openGathering', { id: sid });
+
+    /* streaks drawn on the strip: runs of consecutive presence */
+    const runs = [];
+    let run = null;
+    mm.cells.forEach((c, i) => {
+      if (c.here) { if (!run) { run = { start: i, len: 0 }; runs.push(run); } run.len++; } else run = null;
+    });
+    const lastHere = mm.cells.length > 0 && mm.cells[mm.cells.length - 1].here;
+    const current = lastHere ? runs[runs.length - 1] : null;
+    let best = null;
+    runs.forEach((r) => { if (!best || r.len >= best.len) best = r; });
+    const inRun = (r, i) => !!r && i >= r.start && i < r.start + r.len;
+    const endOf = (r, i) => !!r && i === r.start + r.len - 1;
+
+    /* direct labels at the right end of the trend lines; nudged apart if they collide */
+    const lastMe = mm.series.length ? mm.series[mm.series.length - 1] : 0;
+    const lastAll = C.groupSeries.length ? C.groupSeries[C.groupSeries.length - 1] : 0;
+    let topMe = yOf(lastMe); let topAll = yOf(lastAll);
+    const GAP = 14;
+    if (Math.abs(topMe - topAll) < GAP) {
+      const mid = (topMe + topAll) / 2;
+      const meAbove = topMe <= topAll;
+      topMe = Math.max(4, Math.min(96, mid + (meAbove ? -GAP / 2 : GAP / 2)));
+      topAll = Math.max(4, Math.min(96, mid + (meAbove ? GAP / 2 : -GAP / 2)));
+    }
+
+    return {
+      switcher: ctx.mem.map((m) => ({ id: m.id, name: m.name, initial: m.initial, on: m.id === mm.id, cls: m.id === mm.id ? 'on' : '', pick: bind('openMember', { id: m.id }) })),
+      mv: {
+        id: mm.id, name: mm.name, pctText: mm.pctText, strikes: mm.strikes, owed: mm.owed, strikeLabel: mm.strikeLabel, pints: mm.pints,
+        pintLabel: mm.earned.length ? plural(mm.earned.length, 'beer', 'beers') + ' earned: ' + mm.owed + ' owed, ' + mm.fulfilled + ' settled' : 'No beers earned',
+        shift: liquidShift(mm.strikes), liqCls: liquidClass(mm.strikes),
+        dash: ((mm.pct || 0) / 100 * CIRC).toFixed(1) + ' ' + CIRC.toFixed(1),
+        fraction: C.count ? mm.attended + '/' + C.count : '',
+        pctLabel: mm.pctText + ' attendance, ' + mm.attended + ' of ' + C.count + ' gatherings, ' + mm.missed + ' missed',
+        hasData: C.count > 0, noData: C.count === 0, hasLine: C.count > 1,
+        line: pts(mm.series), avg: pts(C.groupSeries),
+        endMe: { top: topMe.toFixed(1), text: Math.round(lastMe * 100) + '%' },
+        endAll: { top: topAll.toFixed(1), text: Math.round(lastAll * 100) + '%' },
+        trendLabel: 'Attendance over time: ' + mm.name + ' ' + Math.round(lastMe * 100) + '%, group ' + Math.round(lastAll * 100) + '%',
+        stripLabel: 'Attendance by gathering. Current streak ' + mm.streak + ', best ' + mm.best,
+        cells: mm.cells.map((c, i) => {
+          const isCur = inRun(current, i);
+          const isBest = inRun(best, i);
+          const num = endOf(current, i) ? current.len : (endOf(best, i) ? best.len : null);
+          return {
+            sid: c.sid, cls: cellCls(c) + (isCur ? ' streak' : '') + (isBest ? ' best' : ''),
+            isGone: !c.here && !c.beer, isBeer: c.beer, hasNum: num != null, num: num,
+            tip: fmtDate(c.date).when + ' · ' + c.activity + ' · ' + outcomeText(c),
+            go: goTo(c.sid)
+          };
+        }),
+        acts: acts.map((a) => ({ name: a.k, pct: a.v + '%', w: a.v + '%', aria: a.k + ': ' + a.v + '% of ' + plural(a.t, 'gathering', 'gatherings') })),
+        hist: [...mm.cells].reverse().map((c) => ({
+          sid: c.sid, cls: cellCls(c), isGone: !c.here && !c.beer, isBeer: c.beer, activity: c.activity, when: fmtDate(c.date).when,
+          tip: c.activity + ', ' + fmtDate(c.date).when + ', ' + outcomeText(c), go: goTo(c.sid)
+        }))
+      }
+    };
+  }
+};
+
+
+/* ───────────── 6. COMPONENT (thin glue) ───────────── */
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = initialState(false);
+    this.dispatch = this.dispatch.bind(this);
+    this.bind = (name, payload) => () => this.dispatch(name, payload);
+    const field = (name) => (e) => this.dispatch('setField', { field: name, value: e.target.value });
+    this.fields = {
+      setDate: field('date'), setActivity: field('activity'), setNotes: field('notes'),
+      setGameChoice: field('gameChoice'), setGameOther: field('gameOther'),
+      setLocationChoice: field('locationChoice'), setLocationOther: field('locationOther'),
+      refreshData: () => { this.dispatch('closeMenu'); this.loadServerState(); }
+    };
+  }
+
+  /* Single entry point for every user intent. See ACTIONS above. */
+  dispatch(name, payload) {
+    if (name === 'copyWeeklyRecap') {
+      this.copyWeeklyRecap(payload);
+      return;
+    }
+    if (name === 'selectShareFallback') {
+      this.selectShareFallback();
+      return;
+    }
+    if (['saveGathering', 'deleteGathering', 'settleBeer', 'undoBeer', 'startSeason'].includes(name)) {
+      this.persistAction(name, payload || {});
+      return;
+    }
+    const action = ACTIONS[name];
+    if (!action) { console.warn('[tribunal] unknown action', name); return; }
+    const result = action(this.state, payload || {}) || {};
+    if (result.patch) this.setState(result.patch);
+    if (result.toast) this.showToast(result.toast.text, !!result.toast.pint);
+  }
+
+  async copyWeeklyRecap(payload) {
+    const selected = payload && payload.id != null ? eventForShare(this.state, payload.id, payload.archive) : null;
+    const share = payload && payload.id != null ? {
+      id: payload.id, complete: shareAttendanceComplete(selected),
+      message: shareAttendanceComplete(selected) ? shareMessage(selected) : '',
+      blockedText: 'Complete attendance for this event before sharing.'
+    } : buildContext(this.state).share;
+    if (!share.complete || !share.message) {
+      this.showToast(share.blockedText || 'There is no completed gathering to share.', false);
+      return;
+    }
+    if (this._shareTimer) clearTimeout(this._shareTimer);
+    try {
+      const clipboard = typeof navigator !== 'undefined' ? navigator.clipboard : null;
+      if (!clipboard || typeof clipboard.writeText !== 'function') throw new Error('Clipboard API unavailable');
+      await clipboard.writeText(share.message);
+      this.setState({ share: { status: 'copied', text: '', error: '', id: share.id } });
+      this._shareTimer = setTimeout(() => {
+        const current = this.state.share || {};
+        if (current.id === share.id && current.status === 'copied') this.setState({ share: { status: 'idle', text: '', error: '', id: null } });
+      }, 2000);
+    } catch (error) {
+      this.setState({ share: { status: 'fallback', text: share.message, error: 'Clipboard access was unavailable. Select the message below and copy it manually.', id: share.id } });
+    }
+  }
+
+  selectShareFallback() {
+    const field = document.querySelector('[data-share-fallback]');
+    if (field) {
+      field.focus();
+      field.select();
+    }
+  }
+
+  showToast(text, pint) {
+    if (this._toastTimer) clearTimeout(this._toastTimer);
+    this.setState({ toast: { text: text, pint: pint } });
+    this._toastTimer = setTimeout(() => this.setState({ toast: null }), 3600);
+  }
+
+  /* Agent API + Escape-to-close. Nothing here mutates state except through dispatch(). */
+  componentDidMount() {
+    this._onKey = (e) => { if (e.key === 'Escape' && this.state.menu) this.dispatch('closeMenu'); };
+    document.addEventListener('keydown', this._onKey);
+    const snap = () => snapshotOf(buildContext(this.state));
+    this._api = {
+      actions: Object.keys(ACTIONS).concat(['copyWeeklyRecap', 'selectShareFallback']),
+      dispatch: (name, payload) => { this.dispatch(name, payload); return snap(); },
+      snapshot: snap,
+      state: () => JSON.parse(JSON.stringify(this.state))
+    };
+    window.tribunal = this._api;
+    this.loadServerState();
+  }
+
+  async loadServerState() {
+    try {
+      const prefetched = window.__brotimeStatePromise;
+      window.__brotimeStatePromise = null;
+      const data = prefetched ? await prefetched : await (async () => {
+        const response = await fetch('/api/state', { credentials: 'same-origin', cache: 'no-store' });
+        const body = await response.json();
+        if (!response.ok) throw new Error(body.error || 'Could not load the live tracker.');
+        return body;
+      })();
+      const existing = this.state;
+      const maxId = Math.max(0, ...data.seasons.flatMap((s) => s.sessions.map((x) => Number(x.id) || 0)));
+      this.setState({
+        ...existing,
+        seasons: data.seasons,
+        discordMembers: data.discordMembers || [],
+        discordEvents: data.discordEvents || [],
+        discordNotes: data.discordNotes || [],
+        nextId: maxId
+      });
+    } catch (error) {
+      this.showToast(error.message || 'Could not connect to the live tracker.', false);
+    }
+  }
+
+  async persistAction(name, payload) {
+    const S = this.state;
+    if (name === 'deleteGathering' && !S.confirmDel) {
+      const arm = ACTIONS.deleteGathering(S, payload || {});
+      if (arm.patch) this.setState(arm.patch);
+      return;
+    }
+    if (name === 'saveGathering') {
+      if (!isFormComplete(S.form)) return;
+      if (findDuplicate(currentSeason(S), S.form)) {
+        this.showToast('A gathering with that date and activity already exists.', false);
+        return;
+      }
+    }
+    let url = '';
+    let method = 'POST';
+    let body = null;
+    if (name === 'saveGathering') {
+      const f = S.form;
+      url = f.editId == null ? '/api/gatherings' : '/api/gatherings/' + encodeURIComponent(f.editId);
+      method = f.editId == null ? 'POST' : 'PUT';
+      body = {
+        date: f.date,
+        activity: f.activity,
+        game: f.activity.trim().toLowerCase() === 'video games' ? selectedGame(f) : '',
+        location: selectedLocation(f),
+        notes: f.notes,
+        attendance: f.att
+      };
+    } else if (name === 'deleteGathering') {
+      url = '/api/gatherings/' + encodeURIComponent(S.form.editId);
+      method = 'DELETE';
+    } else if (name === 'settleBeer') {
+      url = '/api/payments';
+      body = { memberId: payload.id };
+    } else if (name === 'undoBeer') {
+      url = '/api/payments/reverse';
+      body = { memberId: payload.id };
+    } else if (name === 'startSeason') {
+      url = '/api/seasons';
+    } else {
+      return;
+    }
+    if (this._mutationPending) return;
+    this._mutationPending = true;
+    try {
+      const response = await fetch(url, {
+        method,
+        credentials: 'same-origin',
+        headers: body ? { 'content-type': 'application/json' } : {},
+        body: body ? JSON.stringify(body) : undefined
+      });
+      const result = await response.json();
+      if (!response.ok) {
+        const error = new Error(result.error || 'The change could not be saved.');
+        error.status = response.status;
+        throw error;
+      }
+      await this.loadServerState();
+      if (name === 'saveGathering') this.setState({ view: 'history', openId: result.id, histFilter: 'all', confirmDel: false, form: blankForm(this.state.today) });
+      if (name === 'deleteGathering') this.setState({ view: 'history', openId: null, confirmDel: false, form: blankForm(this.state.today) });
+      if (name === 'startSeason') this.setState({ view: 'board', viewId: null, menu: null, confirmNew: false, form: blankForm(this.state.today) });
+      this.showToast(result.message || 'Saved.', false);
+    } catch (error) {
+      this.showToast(error.message || 'The change could not be saved.', false);
+    } finally {
+      this._mutationPending = false;
+    }
+  }
+
+  componentWillUnmount() {
+    if (this._onKey) document.removeEventListener('keydown', this._onKey);
+    if (this._toastTimer) clearTimeout(this._toastTimer);
+    if (this._shareTimer) clearTimeout(this._shareTimer);
+    if (window.tribunal === this._api) delete window.tribunal;
+  }
+
+  /* Only the shell and the active view are computed each render. */
+  renderVals() {
+    const ctx = buildContext(this.state);
+    const viewSelector = SELECTORS[ctx.view] || SELECTORS.board;
+    return {
+      ...SELECTORS.shell(ctx, this.bind),
+      ...viewSelector(ctx, this.bind),
+      ...this.fields
+    };
+  }
+}
+</script>
+
+
+</body></html>

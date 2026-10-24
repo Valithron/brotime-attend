@@ -17,7 +17,7 @@ class Component extends DCLogic {
   /* Single entry point for every user intent. See ACTIONS above. */
   dispatch(name, payload) {
     if (name === 'copyWeeklyRecap') {
-      this.copyWeeklyRecap();
+      this.copyWeeklyRecap(payload);
       return;
     }
     if (name === 'selectShareFallback') {
@@ -35,8 +35,13 @@ class Component extends DCLogic {
     if (result.toast) this.showToast(result.toast.text, !!result.toast.pint);
   }
 
-  async copyWeeklyRecap() {
-    const share = buildContext(this.state).share;
+  async copyWeeklyRecap(payload) {
+    const selected = payload && payload.id != null ? eventForShare(this.state, payload.id, payload.archive) : null;
+    const share = payload && payload.id != null ? {
+      id: payload.id, complete: shareAttendanceComplete(selected),
+      message: shareAttendanceComplete(selected) ? shareMessage(selected) : '',
+      blockedText: 'Complete attendance for this event before sharing.'
+    } : buildContext(this.state).share;
     if (!share.complete || !share.message) {
       this.showToast(share.blockedText || 'There is no completed gathering to share.', false);
       return;
@@ -48,7 +53,7 @@ class Component extends DCLogic {
       await clipboard.writeText(share.message);
       this.setState({ share: { status: 'copied', text: '', error: '', id: share.id } });
       this._shareTimer = setTimeout(() => {
-        const current = buildContext(this.state).share;
+        const current = this.state.share || {};
         if (current.id === share.id && current.status === 'copied') this.setState({ share: { status: 'idle', text: '', error: '', id: null } });
       }, 2000);
     } catch (error) {
@@ -87,9 +92,14 @@ class Component extends DCLogic {
 
   async loadServerState() {
     try {
-      const stateResponse = await fetch('/api/state', { credentials: 'same-origin', cache: 'no-store' });
-      const data = await stateResponse.json();
-      if (!stateResponse.ok) throw new Error(data.error || 'Could not load the live tracker.');
+      const prefetched = window.__brotimeStatePromise;
+      window.__brotimeStatePromise = null;
+      const data = prefetched ? await prefetched : await (async () => {
+        const response = await fetch('/api/state', { credentials: 'same-origin', cache: 'no-store' });
+        const body = await response.json();
+        if (!response.ok) throw new Error(body.error || 'Could not load the live tracker.');
+        return body;
+      })();
       const existing = this.state;
       const maxId = Math.max(0, ...data.seasons.flatMap((s) => s.sessions.map((x) => Number(x.id) || 0)));
       this.setState({

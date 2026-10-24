@@ -30,6 +30,32 @@ function shareDate(iso) {
   return SHARE_MONTHS[month - 1] + ' ' + day + ', ' + parts[0];
 }
 
+function eventForShare(S, id, archive) {
+  if (!archive) return S.seasons.flatMap(season => season.sessions).find(event => event.id === id);
+  const event = (S.discordEvents || []).find(event => event.id === id);
+  if (!event) return null;
+  const att = Object.fromEntries(MEMBERS.map(member => {
+    const status = event.attendance && event.attendance[member.id] && event.attendance[member.id].status;
+    return [member.id, status === 'present' ? true : status === 'absent' ? false : undefined];
+  }));
+  return { ...event, att };
+}
+
+function eventShareView(S, id, archive, bind) {
+  const session = eventForShare(S, id, archive);
+  const saved = S.share || {};
+  const same = saved.id === id;
+  return {
+    copyRecap: bind('copyWeeklyRecap', { id, archive }),
+    recapLabel: same && saved.status === 'copied' ? 'Copied' : 'Copy event recap',
+    recapDisabled: !shareAttendanceComplete(session),
+    recapBlocked: !shareAttendanceComplete(session),
+    recapFallback: same && saved.status === 'fallback',
+    recapText: same ? saved.text || '' : '',
+    selectRecap: bind('selectShareFallback')
+  };
+}
+
 function shareMembers() { return DISPLAY_MEMBERS; }
 
 function shareAttendanceComplete(session) {
@@ -130,6 +156,7 @@ function sessionRow(ctx, bind, r) {
   const away = orderedOutcomes.filter((o) => !o.here).map((o) => o.name + (o.beer ? ' (beer earned)' : ''));
   const eventMeta = [r.s.activity.toLowerCase() === 'video games' ? r.s.game : '', r.s.location].filter(Boolean).join(' · ');
   return {
+    ...eventShareView(ctx.S, r.s.id, false, bind),
     isRow: true, isHead: false, label: '', id: r.s.id, wd: d.wd, d: d.d, mo: d.mo, when: d.when,
     activity: r.s.activity, eventMeta: eventMeta, hasEventMeta: !!eventMeta, location: r.s.location || '',
     notes: r.s.notes, hasNotes: !!r.s.notes, allHere: allHere,
@@ -421,6 +448,7 @@ const SELECTORS = {
       const unknownCount = states.filter((m) => m.status === 'unknown').length;
       const eventMeta = [event.activity, event.game, event.location].filter(Boolean).join(' · ');
       archiveRows.push({
+        ...eventShareView(ctx.S, event.id, true, bind),
         isHead: false, isRow: true, isNote: false, isEvent: true, id: event.id, open: ctx.S.openId === event.id,
         rowCls: ctx.S.openId === event.id ? 'open' : '', dotCls: 'archive-event',
         day: eventDate.d, month: eventDate.mo, date: eventDate.when, title: event.title, eventMeta: eventMeta, hasEventMeta: !!eventMeta,

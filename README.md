@@ -47,3 +47,7 @@ Run the focused D1 API checks with Node.js 24 or newer:
 ```sh
 node --test scripts/d1-api.test.mjs
 ```
+
+### Static page generation
+
+After editing `src/template.html`, `src/app.css`, or `src/app/*.js`, run `node scripts/build-site.mjs` and include the updated `index.html` and generated `assets/` files in the commit. Cloudflare still serves the repository root without a build command. The browser receives the assembled page, versioned local runtime/fonts/CSS, and starts loading live attendance immediately. Keep old hashed assets available for existing tabs.

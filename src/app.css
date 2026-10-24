@@ -562,3 +562,6 @@ button.mx-label:hover{color:var(--am-lt)}
   *,*::before,*::after{animation:none!important;transition:none!important}
 }
 
+
+.event-share{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:0 16px 14px}
+.event-share .share-fallback{flex-basis:100%}

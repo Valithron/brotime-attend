@@ -162,3 +162,24 @@ test("the fallback field is bound as a selectable exact-message value", () => {
   const template = fs.readFileSync(path.join(root, "src", "template.html"), "utf8");
   assert.match(template, /<textarea[^>]+data-share-fallback[^>]+value="\{\{shareFallbackText\}\}"/);
 });
+
+test('sharing a History event selects its saved results and blocks unknown archived attendance', async () => {
+  let copied;
+  const context = makeContext({ navigator: { clipboard: { writeText: async text => { copied = text; } } } });
+  const component = new context.ComponentForTest({});
+  const old = session(2, '2026-09-06', { id: 10, game: 'Minecraft', location: "Adam's House" });
+  component.state.seasons[0].sessions = [old, session(5)];
+  await component.copyWeeklyRecap({ id: 10 });
+  assert.match(copied, /^BroTime · Sep 6, 2026\nGaming · Minecraft · Adam's House/);
+  assert.match(copied, /2\/5/);
+  context.navigator.clipboard.writeText = async () => { throw Error('denied'); };
+  await component.copyWeeklyRecap({ id: 10 });
+  assert.equal(component.state.share.text, copied);
+  component.state.discordEvents = [{ ...old, id: 'archived', attendance: Object.fromEntries(ids.map(id => [id, { status: 'present' }])) }];
+  await component.copyWeeklyRecap({ id: 'archived', archive: true });
+  assert.match(component.state.share.text, /5\/5/);
+  component.state.discordEvents[0].attendance.a.status = 'unknown';
+  assert.equal(context.shareAttendanceComplete(context.eventForShare(component.state, 'archived', true)), false);
+  clearTimeout(component._shareTimer);
+  clearTimeout(component._toastTimer);
+});
