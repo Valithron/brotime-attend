@@ -1,7 +1,7 @@
 /* ───────────── 4. ACTIONS (the only state transitions) ───────────── */
 function currentSeason(S) { return S.seasons.find((s) => !s.closed) || S.seasons[S.seasons.length - 1]; }
 function viewedSeason(S) { return S.viewId != null ? (S.seasons.find((s) => s.id === S.viewId) || currentSeason(S)) : currentSeason(S); }
-function canEditNow(S) { return !viewedSeason(S).closed; }
+function canEditNow(S) { return !S.dataRefreshing && !viewedSeason(S).closed; }
 function mapCurrent(S, fn) { const id = currentSeason(S).id; return S.seasons.map((s) => (s.id === id ? fn(s) : s)); }
 function memberName(id) { return MEMBERS.find((m) => m.id === id).name; }
 

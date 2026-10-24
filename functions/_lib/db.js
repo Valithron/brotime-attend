@@ -1,13 +1,13 @@
 import { ApiError } from "./http.js";
 
-export async function loadAppState(db) {
+export async function loadAppState(db, { liveOnly = false } = {}) {
   const [seasonRows, memberRows, attendanceRows, paymentRows, discordRows, discordNoteRows] = await Promise.all([
-    db.prepare("SELECT id, name, closed, imported, is_current FROM seasons ORDER BY id").all(),
+    db.prepare("SELECT id, name, closed, imported, is_current FROM seasons" + (liveOnly ? " WHERE imported = 0" : "") + " ORDER BY id").all(),
     db.prepare("SELECT id, name, is_active FROM members ORDER BY sort_order").all(),
-    db.prepare("SELECT g.id, g.season_id, g.date, g.activity, g.notes, g.game, g.location, a.member_id, a.present FROM gatherings g LEFT JOIN attendance a ON a.gathering_id = g.id ORDER BY g.date, g.id, a.member_id").all(),
+    db.prepare("SELECT g.id, g.season_id, g.date, g.activity, g.notes, g.game, g.location, a.member_id, a.present FROM gatherings g LEFT JOIN attendance a ON a.gathering_id = g.id" + (liveOnly ? " WHERE g.season_id IN (SELECT id FROM seasons WHERE imported = 0)" : "") + " ORDER BY g.date, g.id, a.member_id").all(),
     db.prepare("SELECT season_id, member_id, paid_on FROM beer_payments WHERE reversed_at IS NULL ORDER BY paid_on, id").all(),
-    loadDiscordRecords(db),
-    loadDiscordNotes(db)
+    liveOnly ? Promise.resolve([]) : loadDiscordRecords(db),
+    liveOnly ? Promise.resolve([]) : loadDiscordNotes(db)
   ]);
   const allMembers = memberRows.results || [];
   const members = allMembers.filter((member) => member.is_active == null || Number(member.is_active) !== 0);

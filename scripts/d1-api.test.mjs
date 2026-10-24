@@ -266,3 +266,16 @@ test("the live tracker still loads before the Discord import migration is run", 
   assert.equal(state.discordEvents.length, 0);
   assert.equal(state.members.length, 5);
 });
+
+test('the lightweight startup request excludes imported gatherings and archive queries', async () => {
+  const queries = [];
+  const db = { prepare(sql) { queries.push(sql); return { all: async () => ({ results: sql.includes('FROM seasons') && !sql.includes('FROM gatherings') ? [{ id: 1, name: '2026', closed: 0, imported: 0, is_current: 1 }] : [] }) }; } };
+  const response = await onRequest({ request: new Request('https://brotime-attend.pages.dev/api/state?scope=live'), env: env(db) });
+  const data = await response.json();
+  assert.equal(response.status, 200);
+  assert.equal(data.currentSeasonId, 1);
+  assert.deepEqual(data.discordEvents, []);
+  assert.equal(queries.some(sql => sql.includes('discord_record_metadata')), false);
+  assert.equal(queries.some(sql => sql.includes('discord_archive_notes')), false);
+  assert.ok(queries.some(sql => sql.includes('WHERE imported = 0')));
+});

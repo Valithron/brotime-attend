@@ -96,7 +96,7 @@ async function handle(request, env) {
   const url = new URL(request.url);
   const path = url.pathname.replace(/\/+$/, "") || "/";
   if (path === "/api/state" && request.method === "GET") {
-    return json(await loadAppState(env.DB));
+    return json(await loadAppState(env.DB, { liveOnly: url.searchParams.get("scope") === "live" }));
   }
   if (!path.startsWith("/api/")) throw new ApiError(404, "Route not found.");
   if (path === "/api/gatherings" && request.method === "POST") return writeGathering(request, env);

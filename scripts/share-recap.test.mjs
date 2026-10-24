@@ -183,3 +183,27 @@ test('sharing a History event selects its saved results and blocks unknown archi
   clearTimeout(component._shareTimer);
   clearTimeout(component._toastTimer);
 });
+
+test('saved attendance renders immediately, then fresh server results replace it before sharing', async () => {
+  let stored;
+  let copied = '';
+  const season = { id: 1, name: '2026', closed: false, imported: false, sessions: [session(2)], paid: { s: [], a: [], j: [], n: [], i: [] } };
+  const fresh = { seasons: [{ ...season, sessions: [session(5)] }] };
+  const context = makeContext({
+    window: { localStorage: { getItem: () => JSON.stringify({ seasons: [season] }), setItem: (_, text) => { stored = text; } } },
+    fetch: async () => ({ ok: true, json: async () => fresh }),
+    navigator: { clipboard: { writeText: async text => { copied = text; } } }
+  });
+  const component = new context.ComponentForTest({});
+  assert.equal(component.state.seasons[0].sessions[0].att.j, false);
+  assert.equal(component.state.dataRefreshing, true);
+  await component.copyWeeklyRecap();
+  assert.equal(copied, '');
+  await component.loadServerState();
+  assert.equal(component.state.dataRefreshing, false);
+  await component.copyWeeklyRecap();
+  assert.match(copied, /5\/5/);
+  assert.equal(JSON.parse(stored).seasons[0].sessions[0].att.j, true);
+  clearTimeout(component._shareTimer);
+  clearTimeout(component._toastTimer);
+});

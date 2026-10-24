@@ -109,6 +109,7 @@
   </aside>
 
   <main class="content">
+    <sc-if value="{{dataRefreshing}}"><div class="sync-status" role="status">Showing saved attendance · Updating…</div></sc-if>
 
     <!-- ============ BOARD ============ -->
     <sc-if value="{{isBoard}}" hint-placeholder-val="{{ true }}">

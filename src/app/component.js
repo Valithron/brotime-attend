@@ -3,6 +3,13 @@ class Component extends DCLogic {
   constructor(props) {
     super(props);
     this.state = initialState(false);
+    try {
+      const saved = JSON.parse(window.localStorage.getItem('brotime-live-v1'));
+      if (saved && Array.isArray(saved.seasons) && saved.seasons.length && saved.seasons.every(s => Array.isArray(s.sessions) && s.paid)) {
+        this.state.seasons = saved.seasons;
+        this.state.dataRefreshing = true;
+      }
+    } catch (_) { /* Storage can be unavailable in private browsing. */ }
     this.dispatch = this.dispatch.bind(this);
     this.bind = (name, payload) => () => this.dispatch(name, payload);
     const field = (name) => (e) => this.dispatch('setField', { field: name, value: e.target.value });
@@ -36,6 +43,7 @@ class Component extends DCLogic {
   }
 
   async copyWeeklyRecap(payload) {
+    if (this.state.dataRefreshing) { this.showToast('Attendance is updating. Try again shortly.', false); return; }
     const selected = payload && payload.id != null ? eventForShare(this.state, payload.id, payload.archive) : null;
     const share = payload && payload.id != null ? {
       id: payload.id, complete: shareAttendanceComplete(selected),
@@ -87,10 +95,13 @@ class Component extends DCLogic {
       state: () => JSON.parse(JSON.stringify(this.state))
     };
     window.tribunal = this._api;
-    this.loadServerState();
+    this.loadServerState().then(() => {
+      this._archiveTimer = setTimeout(() => this.loadServerState(), 0);
+    });
   }
 
   async loadServerState() {
+    const version = this._loadVersion = (this._loadVersion || 0) + 1;
     try {
       const prefetched = window.__brotimeStatePromise;
       window.__brotimeStatePromise = null;
@@ -100,10 +111,13 @@ class Component extends DCLogic {
         if (!response.ok) throw new Error(body.error || 'Could not load the live tracker.');
         return body;
       })();
+      if (version !== this._loadVersion) return;
       const existing = this.state;
+      try { window.localStorage.setItem('brotime-live-v1', JSON.stringify({ seasons: data.seasons.filter(s => !s.imported) })); } catch (_) {}
       const maxId = Math.max(0, ...data.seasons.flatMap((s) => s.sessions.map((x) => Number(x.id) || 0)));
       this.setState({
         ...existing,
+        dataRefreshing: false,
         seasons: data.seasons,
         discordMembers: data.discordMembers || [],
         discordEvents: data.discordEvents || [],
@@ -116,6 +130,7 @@ class Component extends DCLogic {
   }
 
   async persistAction(name, payload) {
+    if (this.state.dataRefreshing) { this.showToast("Attendance is updating. Try again shortly.", false); return; }
     const S = this.state;
     if (name === 'deleteGathering' && !S.confirmDel) {
       const arm = ACTIONS.deleteGathering(S, payload || {});
@@ -189,6 +204,8 @@ class Component extends DCLogic {
     if (this._onKey) document.removeEventListener('keydown', this._onKey);
     if (this._toastTimer) clearTimeout(this._toastTimer);
     if (this._shareTimer) clearTimeout(this._shareTimer);
+    if (this._archiveTimer) clearTimeout(this._archiveTimer);
+    this._loadVersion = (this._loadVersion || 0) + 1;
     if (window.tribunal === this._api) delete window.tribunal;
   }
 
@@ -199,7 +216,8 @@ class Component extends DCLogic {
     return {
       ...SELECTORS.shell(ctx, this.bind),
       ...viewSelector(ctx, this.bind),
-      ...this.fields
+      ...this.fields,
+      dataRefreshing: !!this.state.dataRefreshing
     };
   }
 }
