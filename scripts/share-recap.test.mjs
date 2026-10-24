@@ -52,6 +52,7 @@ test("the mug has fixed dimensions, alphabetical bottom-up filling, and correct 
     assert.deepEqual(mug.slice(4, 9).map((row) => row.slice(12)), ["|  \\", "|   |", "|   |", "|__/", "|"]);
     assert.deepEqual(mug.slice(4, 9).map((row) => row.slice(3, 12).trim()).filter(Boolean), names.slice(0, count));
     assert.doesNotMatch(message, /John/);
+    assert.ok(message.endsWith("<https://brotime719.com/>"));
     for (const row of mug.slice(4, 9)) assert.equal(row.slice(3, 12).length, 9);
     if (count < 5) assert.match(message, new RegExp(`Out: ${names.slice(count).join(", ")}`));
     else assert.doesNotMatch(message, /\nOut:/);
@@ -121,7 +122,7 @@ test("the recap uses saved date and metadata, ignores future gatherings, and blo
     "",
     "Out: Julian",
     "",
-    "https://brotime719.com/"
+    "<https://brotime719.com/>"
   ].join("\n"));
 });
 

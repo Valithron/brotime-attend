@@ -57,3 +57,5 @@ Startup uses one combined runtime script and inline CSS. `/api/state?scope=live`
 ### Approved Discord share format
 
 The bubbly pub-sketch mug is the approved share design. Preserve its three-line bubbly head, wavy rim, rounded handle, and heavy base. It has five fixed name rows with a nine-character interior, filled alphabetically from the bottom. Keep the whole drawing and attendance count in one Discord code block. Weekly and History recaps use the same renderer. Change the artwork only when explicitly requested.
+
+Shared recap URLs are wrapped as `<https://brotime719.com/>` to suppress Discord link previews while keeping the URL clickable.

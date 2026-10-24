@@ -1614,7 +1614,7 @@ function shareMessage(session) {
   if (metadata) lines.push(metadata);
   lines.push('', '```', shareMug(session), '```', '');
   if (absent.length) lines.push('Out: ' + absent.join(', '), '');
-  lines.push(SHARE_URL);
+  lines.push('<' + SHARE_URL + '>');
   return lines.join('\n');
 }
 
