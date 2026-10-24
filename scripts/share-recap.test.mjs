@@ -96,7 +96,7 @@ test("the recap uses saved date and metadata, ignores future gatherings, and blo
     "",
     "Out: Julian",
     "",
-    "https://brotime-attend.pages.dev/"
+    "https://brotime719.com/"
   ].join("\n"));
 });
 

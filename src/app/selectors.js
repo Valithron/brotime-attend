@@ -17,7 +17,7 @@ function cellCls(c) { return c.here ? 'here' : (c.beer ? 'beer' : 'gone'); }
 function outcomeText(c) { return c.here ? 'present' : (c.beer ? 'absent, beer earned' : 'absent'); }
 function plural(n, one, many) { return n + ' ' + (n === 1 ? one : many); }
 
-const SHARE_URL = 'https://brotime-attend.pages.dev/';
+const SHARE_URL = 'https://brotime719.com/';
 const SHARE_MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 /* Share dates are date-only values. Format the stored parts directly so the
