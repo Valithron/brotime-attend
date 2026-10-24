@@ -1,7 +1,20 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
   <title>BroTime Attendance</title>
-  <rect width="64" height="64" rx="14" fill="#13100c"/>
-  <path d="M14 12h36l-4.5 39.5a5 5 0 0 1-5 4.5H23.5a5 5 0 0 1-5-4.5z" fill="#f2b24c"/>
-  <path d="M14.5 23h35" fill="none" stroke="#13100c" stroke-width="4"/>
-  <path d="M24 8v7M40 8v7" fill="none" stroke="#ffc566" stroke-linecap="round" stroke-width="4"/>
+  <defs>
+    <clipPath id="glassClip">
+      <path d="M8 6H72L63 112Q62.6 116 58.5 116H21.5Q17.4 116 17 112Z"/>
+    </clipPath>
+  </defs>
+  <rect width="128" height="128" rx="26" fill="#13100c"/>
+  <!-- The Board's glass, foam, and graduations at its three-strike fill level. -->
+  <g transform="translate(24 2)">
+    <g clip-path="url(#glassClip)">
+      <g transform="translate(0 43)">
+        <rect x="0" y="8" width="80" height="116" fill="#f2b24c"/>
+        <path d="M0 9V5.5Q5 2.5 10 5.5T20 5.5T30 5.5T40 5.5T50 5.5T60 5.5T70 5.5T80 5.5V9Z" fill="#fff3d6"/>
+      </g>
+      <path d="M0 29.6H80M0 51.2H80M0 72.8H80M0 94.4H80" fill="none" stroke="#cfc5ae" stroke-opacity=".22" stroke-width="1.2" stroke-dasharray="3 3"/>
+    </g>
+    <path d="M8 6H72L63 112Q62.6 116 58.5 116H21.5Q17.4 116 17 112Z" fill="none" stroke="#cfc5ae" stroke-width="2.2" stroke-linejoin="round"/>
+  </g>
 </svg>
