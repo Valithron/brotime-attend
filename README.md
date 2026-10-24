@@ -1,4 +1,4 @@
-# Brotime Attendance Tribunal
+# BroTime Attendance
 
 A public attendance and beer-obligation tracker for five members: Sterling, Adam, Julian, Nathan, and Isaiah.
 
