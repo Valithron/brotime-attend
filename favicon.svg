@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <title>BroTime Attendance</title>
+  <rect width="64" height="64" rx="14" fill="#13100c"/>
+  <path d="M14 12h36l-4.5 39.5a5 5 0 0 1-5 4.5H23.5a5 5 0 0 1-5-4.5z" fill="#f2b24c"/>
+  <path d="M14.5 23h35" fill="none" stroke="#13100c" stroke-width="4"/>
+  <path d="M24 8v7M40 8v7" fill="none" stroke="#ffc566" stroke-linecap="round" stroke-width="4"/>
+</svg>
