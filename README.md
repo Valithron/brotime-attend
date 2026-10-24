@@ -30,6 +30,8 @@ Open `http://localhost:8000`. The source runner fetches its files over HTTP, so 
 
 The live app reads the current year and its attendance from Cloudflare D1. Gatherings record a category, game when the category is Video Games, and a location. Gathering edits, removals, year starts, and beer payments are written to D1 and reload from the server.
 
+The Board includes a manual Copy weekly recap control. It formats the latest completed gathering as a compact Discord message with the fixed attendance mug, absent-member list, saved event details, and the public site link. It uses the browser clipboard only and shows the exact message in a selectable field if clipboard access fails.
+
 History has a separate, read-only Discord records view for 68 gatherings from September 2024 through April 2026, plus the opening tally and follow-up notes. Attendance is reconstructed from consecutive strike snapshots where possible; each record also keeps the original strike and beer markers. Dates inferred from weekly updates and attendance that cannot be established are labeled. These records live in closed imported years and do not change the current tracker's attendance, strikes, or beer totals.
 
 Anyone with the public Pages URL can view and edit the tracker. It has no sign-in gate.

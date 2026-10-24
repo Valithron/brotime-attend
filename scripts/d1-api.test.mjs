@@ -170,7 +170,31 @@ test("D1 state loading preserves the event's game and location", async () => {
   assert.equal(state.seasons[0].sessions[0].att.s, true);
   assert.equal(state.seasons[0].sessions[0].game, "War Dogs");
   assert.equal(state.seasons[0].sessions[0].location, "Studio");
+  assert.equal(state.seasons[0].sessions[0].attendanceComplete, false);
   assert.deepEqual(state.seasons[0].paid.a, ["2026-10-24"]);
+});
+
+test("D1 state marks a gathering incomplete when an active attendance row is missing", async () => {
+  const currentMembers = ["s", "a", "j", "n", "i"].map((id) => ({ id, name: id, is_active: 1 }));
+  const rows = currentMembers.slice(0, 4).map((member) => ({
+    id: 21, season_id: 1, date: "2026-10-24", activity: "Poker", game: "", location: "Studio", notes: "", member_id: member.id, present: 1
+  }));
+  const db = {
+    prepare(sql) {
+      return {
+        all: async () => {
+          if (sql.includes("discord_record_metadata")) return { results: [] };
+          if (sql.includes("discord_archive_notes")) return { results: [] };
+          if (sql.includes("FROM seasons")) return { results: [{ id: 1, name: "2026", closed: 0, imported: 0, is_current: 1 }] };
+          if (sql.includes("FROM members")) return { results: currentMembers };
+          if (sql.includes("FROM gatherings")) return { results: rows };
+          return { results: [] };
+        }
+      };
+    }
+  };
+  const state = await loadAppState(db);
+  assert.equal(state.seasons[0].sessions[0].attendanceComplete, false);
 });
 
 test("Discord records keep the historical six-person data separate from active members", async () => {

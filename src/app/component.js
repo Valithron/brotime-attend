@@ -16,6 +16,14 @@ class Component extends DCLogic {
 
   /* Single entry point for every user intent. See ACTIONS above. */
   dispatch(name, payload) {
+    if (name === 'copyWeeklyRecap') {
+      this.copyWeeklyRecap();
+      return;
+    }
+    if (name === 'selectShareFallback') {
+      this.selectShareFallback();
+      return;
+    }
     if (['saveGathering', 'deleteGathering', 'settleBeer', 'undoBeer', 'startSeason'].includes(name)) {
       this.persistAction(name, payload || {});
       return;
@@ -25,6 +33,35 @@ class Component extends DCLogic {
     const result = action(this.state, payload || {}) || {};
     if (result.patch) this.setState(result.patch);
     if (result.toast) this.showToast(result.toast.text, !!result.toast.pint);
+  }
+
+  async copyWeeklyRecap() {
+    const share = buildContext(this.state).share;
+    if (!share.complete || !share.message) {
+      this.showToast(share.blockedText || 'There is no completed gathering to share.', false);
+      return;
+    }
+    if (this._shareTimer) clearTimeout(this._shareTimer);
+    try {
+      const clipboard = typeof navigator !== 'undefined' ? navigator.clipboard : null;
+      if (!clipboard || typeof clipboard.writeText !== 'function') throw new Error('Clipboard API unavailable');
+      await clipboard.writeText(share.message);
+      this.setState({ share: { status: 'copied', text: '', error: '', id: share.id } });
+      this._shareTimer = setTimeout(() => {
+        const current = buildContext(this.state).share;
+        if (current.id === share.id && current.status === 'copied') this.setState({ share: { status: 'idle', text: '', error: '', id: null } });
+      }, 2000);
+    } catch (error) {
+      this.setState({ share: { status: 'fallback', text: share.message, error: 'Clipboard access was unavailable. Select the message below and copy it manually.', id: share.id } });
+    }
+  }
+
+  selectShareFallback() {
+    const field = document.querySelector('[data-share-fallback]');
+    if (field) {
+      field.focus();
+      field.select();
+    }
   }
 
   showToast(text, pint) {
@@ -39,7 +76,7 @@ class Component extends DCLogic {
     document.addEventListener('keydown', this._onKey);
     const snap = () => snapshotOf(buildContext(this.state));
     this._api = {
-      actions: Object.keys(ACTIONS),
+      actions: Object.keys(ACTIONS).concat(['copyWeeklyRecap', 'selectShareFallback']),
       dispatch: (name, payload) => { this.dispatch(name, payload); return snap(); },
       snapshot: snap,
       state: () => JSON.parse(JSON.stringify(this.state))
@@ -141,6 +178,7 @@ class Component extends DCLogic {
   componentWillUnmount() {
     if (this._onKey) document.removeEventListener('keydown', this._onKey);
     if (this._toastTimer) clearTimeout(this._toastTimer);
+    if (this._shareTimer) clearTimeout(this._shareTimer);
     if (window.tribunal === this._api) delete window.tribunal;
   }
 

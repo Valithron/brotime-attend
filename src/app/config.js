@@ -18,7 +18,7 @@
 
    DATA SHAPES
      Season   { id, name, closed, imported, sessions:[Session], paid:{memberId:[isoDate]} }
-     Session  { id:number, date:'YYYY-MM-DD', activity, game, location, notes, att:{memberId:boolean} }
+     Session  { id:number, date:'YYYY-MM-DD', activity, game, location, notes, att:{memberId:boolean}, attendanceComplete:boolean }
      Discord  { date, activity, game, location, attendance:{memberId:{status,strikes,beerMarkers}} }
    State    { seasons, viewId|null, view, memberId, histFilter, historyMode,
                 ledgerFilter, discordMembers, discordEvents, discordNotes,
@@ -64,7 +64,7 @@
        setAttendance {id,value:boolean}                setAllAttendance {value}
        startEdit {id}          cancelEdit              saveGathering
        deleteGathering (call twice: arm, then confirm) settleBeer {id}
-       undoBeer {id}
+       undoBeer {id}           copyWeeklyRecap          selectShareFallback
    ===================================================================== */
 
 /* ───────────── 1. CONFIG ───────────── */

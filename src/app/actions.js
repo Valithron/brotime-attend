@@ -61,7 +61,7 @@ const ACTIONS = {
     if (!isFormComplete(f) || findDuplicate(currentSeason(S), f)) return {};
     const id = f.editId || S.nextId + 1;
     const activity = f.activity.trim();
-    const session = { id: id, date: f.date, activity: activity, game: activity.toLowerCase() === 'video games' ? selectedGame(f) : '', location: selectedLocation(f), notes: f.notes.trim(), att: { ...f.att } };
+    const session = { id: id, date: f.date, activity: activity, game: activity.toLowerCase() === 'video games' ? selectedGame(f) : '', location: selectedLocation(f), notes: f.notes.trim(), att: { ...f.att }, attendanceComplete: true };
     const seasons = mapCurrent(S, (s) => ({ ...s, sessions: f.editId ? s.sessions.map((x) => (x.id === id ? session : x)) : [...s.sessions, session] }));
     const C = computeSeason(seasons.find((s) => !s.closed));
     const row = C.rows.find((r) => r.s.id === id);

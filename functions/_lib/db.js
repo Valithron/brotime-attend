@@ -23,12 +23,18 @@ export async function loadAppState(db) {
   for (const row of attendanceRows.results || []) {
     let gathering = gatherings.get(row.id);
     if (!gathering) {
-      gathering = { id: row.id, seasonId: row.season_id, session: { id: row.id, date: row.date, activity: row.activity, game: row.game || "", location: row.location || "", notes: row.notes || "", att: Object.fromEntries(members.map((member) => [member.id, false])) } };
+      gathering = { id: row.id, seasonId: row.season_id, seenMembers: new Set(), session: { id: row.id, date: row.date, activity: row.activity, game: row.game || "", location: row.location || "", notes: row.notes || "", att: Object.fromEntries(members.map((member) => [member.id, false])) } };
       gatherings.set(row.id, gathering);
       const season = seasons.get(row.season_id);
       if (season) season.sessions.push(gathering.session);
     }
-    if (row.member_id && Object.hasOwn(gathering.session.att, row.member_id)) gathering.session.att[row.member_id] = !!row.present;
+    if (row.member_id && Object.hasOwn(gathering.session.att, row.member_id)) {
+      gathering.seenMembers.add(row.member_id);
+      gathering.session.att[row.member_id] = !!row.present;
+    }
+  }
+  for (const gathering of gatherings.values()) {
+    gathering.session.attendanceComplete = members.every((member) => gathering.seenMembers.has(member.id));
   }
   for (const row of paymentRows.results || []) {
     const season = seasons.get(row.season_id);

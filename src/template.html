@@ -162,6 +162,24 @@
             </div>
           </div>
 
+          <sc-if value="{{hasShareGathering}}" hint-placeholder-val="{{ false }}">
+            <section class="share-panel" aria-label="Weekly recap">
+              <div class="share-top">
+                <div class="share-copy">
+                  <span class="share-kicker">Latest gathering</span>
+                  <span class="share-date">{{shareDate}}</span>
+                </div>
+                <button class="btn pri" disabled="{{shareDisabled}}" sc-camel-on-click="{{copyWeeklyRecap}}" aria-label="{{shareAria}}" data-action="copy-weekly-recap">{{shareButtonLabel}}</button>
+              </div>
+              <sc-if value="{{shareBlocked}}" hint-placeholder-val="{{ false }}"><div class="share-blocked" role="status">{{shareBlockedText}}</div></sc-if>
+              <sc-if value="{{shareFallbackVisible}}" hint-placeholder-val="{{ false }}">
+                <div class="share-error" role="alert">{{shareFallbackError}}</div>
+                <textarea class="share-fallback" data-share-fallback readonly spellcheck="false" aria-label="Weekly recap to copy" value="{{shareFallbackText}}"></textarea>
+                <button class="btn" sc-camel-on-click="{{selectShareFallback}}" data-action="select-share-fallback">Select message</button>
+              </sc-if>
+            </section>
+          </sc-if>
+
           <div class="list">
             <sc-for list="{{recent}}" as="r" hint-placeholder-count="5">
               <button class="row-head" sc-camel-on-click="{{r.openBoard}}" aria-label="{{r.aria}}" data-action="open-gathering" data-gathering="{{r.id}}">

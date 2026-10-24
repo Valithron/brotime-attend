@@ -16,7 +16,8 @@ function makeSessions(start, masks, activities, firstId, notes) {
     return {
       id: firstId + k,
       date: new Date(Date.UTC(start[0], start[1], start[2] + 7 * k)).toISOString().slice(0, 10),
-      activity: activity, game: activity === 'Video Games' ? 'War Dogs' : '', location: 'Studio', notes: notes[k] || '', att: att
+      activity: activity, game: activity === 'Video Games' ? 'War Dogs' : '', location: 'Studio', notes: notes[k] || '', att: att,
+      attendanceComplete: true
     };
   });
 }
@@ -46,6 +47,7 @@ function initialState(demo) {
     viewId: null, view: 'board', memberId: 's',
     histFilter: 'all', historyMode: 'live', ledgerFilter: 'owed', openId: null, menu: null,
     confirmNew: false, confirmDel: false, toast: null,
+    share: { status: 'idle', text: '', error: '', id: null },
     form: blankForm(today), nextId: 5000, today: today
   };
 }

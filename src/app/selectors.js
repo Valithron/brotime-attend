@@ -17,12 +17,93 @@ function cellCls(c) { return c.here ? 'here' : (c.beer ? 'beer' : 'gone'); }
 function outcomeText(c) { return c.here ? 'present' : (c.beer ? 'absent, beer earned' : 'absent'); }
 function plural(n, one, many) { return n + ' ' + (n === 1 ? one : many); }
 
+const SHARE_URL = 'https://brotime-attend.pages.dev/';
+const SHARE_MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+/* Share dates are date-only values. Format the stored parts directly so the
+   recap never crosses a day boundary because of a timezone conversion. */
+function shareDate(iso) {
+  const parts = String(iso || '').split('-');
+  const month = Number(parts[1]);
+  const day = Number(parts[2]);
+  if (parts.length !== 3 || !parts[0] || !Number.isInteger(month) || !Number.isInteger(day) || month < 1 || month > 12 || day < 1 || day > 31) return '';
+  return SHARE_MONTHS[month - 1] + ' ' + day + ', ' + parts[0];
+}
+
+function shareMembers() { return [...MEMBERS].sort((a, b) => a.name.localeCompare(b.name)); }
+
+function shareAttendanceComplete(session) {
+  if (!session || session.attendanceComplete === false) return false;
+  return MEMBERS.every((member) => session.att && typeof session.att[member.id] === 'boolean');
+}
+
+function shareNames(session, present) {
+  const attendance = session && session.att ? session.att : {};
+  return shareMembers().filter((member) => typeof attendance[member.id] === 'boolean' && attendance[member.id] === present).map((member) => member.name);
+}
+
+function shareMug(session) {
+  const present = shareNames(session, true);
+  const blankRows = MEMBERS.length - present.length;
+  const edges = ['├─╮', '│ │', '├─╯', '│', '│'];
+  const rows = edges.map((edge, index) => {
+    const name = index < blankRows ? '' : present[index - blankRows];
+    const interior = name ? (' ' + name).slice(0, 10).padEnd(10, ' ') : '          ';
+    return '│' + interior + edge;
+  });
+  return ['╭──────────╮', ...rows, '╰──────────╯ ' + present.length + '/' + MEMBERS.length].join('\n');
+}
+
+function shareMessage(session) {
+  const activity = String(session.activity || '').trim();
+  const game = String(session.game || '').trim();
+  const location = String(session.location || '').trim();
+  const metadata = [activity, game, location].filter(Boolean).join(' · ');
+  const absent = shareNames(session, false);
+  const lines = ['BroTime · ' + shareDate(session.date)];
+  if (metadata) lines.push(metadata);
+  lines.push('', '```', shareMug(session), '```', '');
+  if (absent.length) lines.push('Out: ' + absent.join(', '), '');
+  lines.push(SHARE_URL);
+  return lines.join('\n');
+}
+
+function buildShareContext(S, season) {
+  /* A future row is a scheduled gathering until all five active attendance
+     values are recorded. Ignore that unrecorded row, but keep a future row
+     that already has complete results eligible as the latest saved record. */
+  const sessions = sortSessions(season.sessions).filter((session) => !S.today || session.date <= S.today || shareAttendanceComplete(session));
+  const session = sessions.length ? sessions[sessions.length - 1] : null;
+  const complete = shareAttendanceComplete(session);
+  const saved = S.share || {};
+  const sameGathering = !!session && saved.id === session.id;
+  const status = sameGathering ? (saved.status || 'idle') : 'idle';
+  return {
+    session: session,
+    id: session ? session.id : null,
+    hasGathering: !!session,
+    complete: complete,
+    blocked: !!session && !complete,
+    date: session ? shareDate(session.date) : '',
+    message: complete ? shareMessage(session) : '',
+    status: status,
+    text: sameGathering ? (saved.text || '') : '',
+    error: sameGathering ? (saved.error || '') : '',
+    buttonLabel: status === 'copied' ? 'Copied' : 'Copy weekly recap',
+    disabled: !complete,
+    fallbackVisible: status === 'fallback' && !!saved.text,
+    blockedText: session ? 'Complete attendance for ' + shareDate(session.date) + ' before sharing.' : '',
+    aria: complete ? 'Copy weekly recap for ' + shareDate(session.date) : (session ? 'Complete attendance for ' + shareDate(session.date) + ' before sharing' : 'No completed gathering to share')
+  };
+}
+
 function buildContext(S) {
   const season = viewedSeason(S);
   const C = computeSeason(season);
   const L = ledgerFor(season, C);
   const canEdit = canEditNow(S);
   const view = (S.view === 'record' && !canEdit) ? 'board' : S.view;
+  const share = buildShareContext(S, season);
   const mem = MEMBERS.map((m) => {
     const x = C.members[m.id];
     const l = L[m.id];
@@ -37,7 +118,7 @@ function buildContext(S) {
     fulfilled: mem.reduce((a, m) => a + m.fulfilled, 0)
   };
   totals.owed = totals.earned - totals.fulfilled;
-  return { S: S, season: season, C: C, L: L, canEdit: canEdit, view: view, mem: mem, totals: totals };
+  return { S: S, season: season, C: C, L: L, canEdit: canEdit, view: view, mem: mem, totals: totals, share: share };
 }
 
 function sessionRow(ctx, bind, r) {
@@ -153,7 +234,19 @@ const SELECTORS = {
     return {
       seats: seats, matrix: { cols: cols, rows: rows },
       recent: [...C.rows].reverse().slice(0, 5).map((r) => sessionRow(ctx, bind, r)),
-      hasSessions: C.count > 0, noSessions: C.count === 0
+      hasSessions: C.count > 0, noSessions: C.count === 0,
+      hasShareGathering: ctx.share.hasGathering,
+      shareDate: ctx.share.date,
+      shareDisabled: ctx.share.disabled,
+      shareBlocked: ctx.share.blocked,
+      shareBlockedText: ctx.share.blockedText,
+      shareButtonLabel: ctx.share.buttonLabel,
+      shareFallbackVisible: ctx.share.fallbackVisible,
+      shareFallbackText: ctx.share.text,
+      shareFallbackError: ctx.share.error,
+      shareAria: ctx.share.aria,
+      copyWeeklyRecap: bind('copyWeeklyRecap'),
+      selectShareFallback: bind('selectShareFallback')
     };
   },
 
