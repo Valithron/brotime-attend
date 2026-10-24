@@ -76,6 +76,9 @@ const MEMBERS = [
   { id: 'n', name: 'Nathan' },
   { id: 'i', name: 'Isaiah' }
 ];
+/* Keep the canonical data order above for imported masks and calculations.
+   Every people-facing list uses this alphabetical display order instead. */
+const DISPLAY_MEMBERS = [...MEMBERS].sort((a, b) => a.name.localeCompare(b.name));
 const DEFAULT_ACTIVITIES = ['Video Games', 'Poker', 'Disc golf', 'Board games', 'Movie night'];
 const GAME_OPTIONS = ['War Dogs', 'Counter-Strike 2', 'Minecraft', 'Other'];
 const LOCATION_OPTIONS = ['Studio', "Sterling's House", "Adam's House", "Julian's House", "Nathan's House", "Isaiah's House", 'Restaurant', 'Other'];

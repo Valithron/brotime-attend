@@ -22,7 +22,7 @@ function makeContext(overrides = {}) {
   };
   const source = appFiles.map((file) => fs.readFileSync(path.join(root, "src", "app", file), "utf8")).join("\n\n");
   vm.createContext(context);
-  vm.runInContext(source + "\nthis.ComponentForTest = Component;", context);
+  vm.runInContext(source + "\nthis.ComponentForTest = Component; this.SelectorsForTest = SELECTORS; this.sessionRowForTest = sessionRow;", context);
   return context;
 }
 
@@ -56,6 +56,28 @@ test("the mug has fixed dimensions, alphabetical bottom-up filling, and correct 
     if (count < 5) assert.match(message, new RegExp(`Out: ${names.slice(count).join(", ")}`));
     else assert.doesNotMatch(message, /\nOut:/);
   }
+});
+
+test("people-facing views use one alphabetical member order", () => {
+  const context = makeContext();
+  const state = context.initialState(false);
+  state.today = "2026-10-24";
+  state.seasons = [{ id: 1, name: "2026", closed: false, imported: false, sessions: [session(5)], paid: { s: [], a: [], j: [], n: [], i: [] } }];
+  state.discordMembers = [
+    { id: "s", name: "Sterling" }, { id: "a", name: "Adam" }, { id: "j", name: "Julian" },
+    { id: "n", name: "Nathan" }, { id: "i", name: "Isaiah" }, { id: "john", name: "John" }
+  ];
+  state.discordEvents = [{ id: 1, date: "2025-01-01", title: "Old gathering", activity: "Other", game: "", location: "", attendance: {} }];
+  const ctx = context.buildContext(state);
+  const bind = () => () => {};
+  const expected = ["Adam", "Isaiah", "Julian", "Nathan", "Sterling"];
+
+  assert.deepEqual(Array.from(ctx.mem, (m) => m.name), expected);
+  assert.deepEqual(Array.from(context.SelectorsForTest.record(ctx, bind).roll, (m) => m.name), expected);
+  assert.deepEqual(Array.from(context.SelectorsForTest.history(ctx, bind).histFilters.slice(1), (m) => m.label), expected);
+  assert.deepEqual(Array.from(context.sessionRowForTest(ctx, bind, ctx.C.rows[0]).chips, (m) => m.initial), ["A", "I", "J", "N", "S"]);
+  const archiveEvent = context.SelectorsForTest.history(ctx, bind).discordHistory.find((row) => row.isEvent);
+  assert.deepEqual(Array.from(archiveEvent.members, (m) => m.name), ["Adam", "Isaiah", "John", "Julian", "Nathan", "Sterling"]);
 });
 
 test("the recap uses saved date and metadata, ignores future gatherings, and blocks incomplete attendance", () => {

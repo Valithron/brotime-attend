@@ -30,7 +30,7 @@ function shareDate(iso) {
   return SHARE_MONTHS[month - 1] + ' ' + day + ', ' + parts[0];
 }
 
-function shareMembers() { return [...MEMBERS].sort((a, b) => a.name.localeCompare(b.name)); }
+function shareMembers() { return DISPLAY_MEMBERS; }
 
 function shareAttendanceComplete(session) {
   if (!session || session.attendanceComplete === false) return false;
@@ -104,7 +104,7 @@ function buildContext(S) {
   const canEdit = canEditNow(S);
   const view = (S.view === 'record' && !canEdit) ? 'board' : S.view;
   const share = buildShareContext(S, season);
-  const mem = MEMBERS.map((m) => {
+  const mem = DISPLAY_MEMBERS.map((m) => {
     const x = C.members[m.id];
     const l = L[m.id];
     const pct = C.count ? Math.round(x.attended * 100 / C.count) : null;
@@ -126,7 +126,8 @@ function sessionRow(ctx, bind, r) {
   const open = ctx.S.openId === r.s.id;
   const anyBeer = r.outcomes.some((o) => o.beer);
   const allHere = r.present === MEMBERS.length;
-  const away = r.outcomes.filter((o) => !o.here).map((o) => o.name + (o.beer ? ' (beer earned)' : ''));
+  const orderedOutcomes = [...r.outcomes].sort((a, b) => a.name.localeCompare(b.name));
+  const away = orderedOutcomes.filter((o) => !o.here).map((o) => o.name + (o.beer ? ' (beer earned)' : ''));
   const eventMeta = [r.s.activity.toLowerCase() === 'video games' ? r.s.game : '', r.s.location].filter(Boolean).join(' · ');
   return {
     isRow: true, isHead: false, label: '', id: r.s.id, wd: d.wd, d: d.d, mo: d.mo, when: d.when,
@@ -134,8 +135,8 @@ function sessionRow(ctx, bind, r) {
     notes: r.s.notes, hasNotes: !!r.s.notes, allHere: allHere,
     open: open, canEdit: ctx.canEdit, rowCls: open ? 'open' : '', dotCls: anyBeer ? 'beer' : (allHere ? 'full' : ''),
     aria: r.s.activity + (eventMeta ? ', ' + eventMeta : '') + ', ' + d.wd + ' ' + d.when + ', ' + (allHere ? 'everyone present' : 'absent: ' + away.join(', ')),
-    chips: r.outcomes.map((o) => ({ initial: o.initial, cls: cellCls(o), tip: o.name + ' ' + outcomeText(o) })),
-    effects: r.outcomes.filter((o) => !o.here).map((o) => ({
+    chips: orderedOutcomes.map((o) => ({ initial: o.initial, cls: cellCls(o), tip: o.name + ' ' + outcomeText(o) })),
+    effects: orderedOutcomes.filter((o) => !o.here).map((o) => ({
       id: o.id, name: o.name, beer: o.beer, pips: pipsFor(o.strikes, o.beer),
       aria: o.name + (o.beer ? ' reached ' + STRIKE_LIMIT + ' strikes and earned a beer' : ' now at ' + o.strikes + ' of ' + STRIKE_LIMIT + ' strikes')
     })),
@@ -254,7 +255,7 @@ const SELECTORS = {
     const S = ctx.S;
     const f = S.form;
     const base = strikesBefore(ctx.season, f.date, f.editId);
-    const roll = MEMBERS.map((m) => {
+    const roll = DISPLAY_MEMBERS.map((m) => {
       const v = f.att[m.id];
       const from = base[m.id];
       const absent = v === false;
@@ -359,8 +360,8 @@ const SELECTORS = {
       history.push(sessionRow(ctx, bind, r));
     });
     const histFilters = [{ key: 'all', label: 'All', aria: 'All gatherings', on: hf === 'all', hasAvatar: false, initial: '', cls: hf === 'all' ? 'on' : '', pick: bind('filterHistory', { id: 'all' }) }]
-      .concat(MEMBERS.map((m) => ({ key: m.id, label: m.name, aria: 'Gatherings missed by ' + m.name, on: hf === m.id, hasAvatar: true, initial: m.name[0], cls: hf === m.id ? 'on' : '', pick: bind('filterHistory', { id: m.id }) })));
-    const archiveMembers = ctx.S.discordMembers || [];
+      .concat(DISPLAY_MEMBERS.map((m) => ({ key: m.id, label: m.name, aria: 'Gatherings missed by ' + m.name, on: hf === m.id, hasAvatar: true, initial: m.name[0], cls: hf === m.id ? 'on' : '', pick: bind('filterHistory', { id: m.id }) })));
+    const archiveMembers = [...(ctx.S.discordMembers || [])].sort((a, b) => a.name.localeCompare(b.name));
     const archiveRows = [];
     const entries = [
       ...(ctx.S.discordEvents || []).map((event) => ({ kind: 'event', date: event.date, id: event.id, event: event })),
