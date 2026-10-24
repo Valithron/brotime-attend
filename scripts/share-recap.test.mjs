@@ -46,13 +46,13 @@ test("the mug has fixed dimensions, alphabetical bottom-up filling, and correct 
     const message = share.message;
     assert.match(message, /^BroTime · Oct 18, 2026\nGaming · WARDOGS · Discord\n\n```/);
     const mug = message.split("```")[1].split("\n").slice(1, -1);
-    assert.equal(mug.length, 7);
-    assert.equal(mug[0], "╭──────────╮");
-    assert.equal(mug[6], `╰──────────╯ ${count}/5`);
-    assert.deepEqual(mug.slice(1, 6).map((row) => row.slice(11)), ["├─╮", "│ │", "├─╯", "│", "│"]);
-    assert.deepEqual(mug.slice(1, 6).map((row) => row.slice(1, 11).trim()).filter(Boolean), names.slice(0, count));
+    assert.equal(mug.length, 10);
+    assert.deepEqual(mug.slice(0, 4), ["      o  °", "   .oOo.oOo.", "  ( o  O  o )", "  |~~~~~~~~~|__"]);
+    assert.equal(mug[9], `  '=========' ${count}/5`);
+    assert.deepEqual(mug.slice(4, 9).map((row) => row.slice(12)), ["|  \\", "|   |", "|   |", "|__/", "|"]);
+    assert.deepEqual(mug.slice(4, 9).map((row) => row.slice(3, 12).trim()).filter(Boolean), names.slice(0, count));
     assert.doesNotMatch(message, /John/);
-    for (const row of mug.slice(1, 6)) assert.equal(row.slice(1, 11).length, 10);
+    for (const row of mug.slice(4, 9)) assert.equal(row.slice(3, 12).length, 9);
     if (count < 5) assert.match(message, new RegExp(`Out: ${names.slice(count).join(", ")}`));
     else assert.doesNotMatch(message, /\nOut:/);
   }
@@ -107,13 +107,16 @@ test("the recap uses saved date and metadata, ignores future gatherings, and blo
     "Gaming · WARDOGS · Discord",
     "",
     "```",
-    "╭──────────╮",
-    "│          ├─╮",
-    "│ Adam     │ │",
-    "│ Isaiah   ├─╯",
-    "│ Nathan   │",
-    "│ Sterling │",
-    "╰──────────╯ 4/5",
+    "      o  °",
+    "   .oOo.oOo.",
+    "  ( o  O  o )",
+    "  |~~~~~~~~~|__",
+    "  |         |  \\",
+    "  | Adam    |   |",
+    "  | Isaiah  |   |",
+    "  | Nathan  |__/",
+    "  | Sterling|",
+    "  '=========' 4/5",
     "```",
     "",
     "Out: Julian",

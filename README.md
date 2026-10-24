@@ -53,3 +53,7 @@ node --test scripts/d1-api.test.mjs
 After editing `src/template.html`, `src/app.css`, or `src/app/*.js`, run `node scripts/build-site.mjs` and include the updated `index.html` and generated `assets/` files in the commit. Cloudflare still serves the repository root without a build command. The browser receives the assembled page, versioned local runtime/fonts/CSS, and starts loading live attendance immediately. Keep old hashed assets available for existing tabs.
 
 Startup uses one combined runtime script and inline CSS. `/api/state?scope=live` returns non-imported years without the Discord archive; the complete archive loads after the first live update. A local saved view is marked as updating and cannot be shared or edited until live attendance refreshes. Static routes bypass Pages Functions through `_routes.json`. HTML has a 60-second browser cache; hashed assets remain immutable.
+
+### Approved Discord share format
+
+The bubbly pub-sketch mug is the approved share design. Preserve its three-line bubbly head, wavy rim, rounded handle, and heavy base. It has five fixed name rows with a nine-character interior, filled alphabetically from the bottom. Keep the whole drawing and attendance count in one Discord code block. Weekly and History recaps use the same renderer. Change the artwork only when explicitly requested.

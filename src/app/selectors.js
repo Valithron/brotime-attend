@@ -68,16 +68,17 @@ function shareNames(session, present) {
   return shareMembers().filter((member) => typeof attendance[member.id] === 'boolean' && attendance[member.id] === present).map((member) => member.name);
 }
 
+/* Approved BroTime share art. Keep this silhouette and five bottom-filled rows. */
 function shareMug(session) {
   const present = shareNames(session, true);
   const blankRows = MEMBERS.length - present.length;
-  const edges = ['├─╮', '│ │', '├─╯', '│', '│'];
+  const edges = ['|  \\', '|   |', '|   |', '|__/', '|'];
   const rows = edges.map((edge, index) => {
     const name = index < blankRows ? '' : present[index - blankRows];
-    const interior = name ? (' ' + name).slice(0, 10).padEnd(10, ' ') : '          ';
-    return '│' + interior + edge;
+    const interior = name ? (' ' + name).padEnd(9, ' ') : '         ';
+    return '  |' + interior + edge;
   });
-  return ['╭──────────╮', ...rows, '╰──────────╯ ' + present.length + '/' + MEMBERS.length].join('\n');
+  return ['      o  °', '   .oOo.oOo.', '  ( o  O  o )', '  |~~~~~~~~~|__', ...rows, "  '=========' " + present.length + '/' + MEMBERS.length].join('\n');
 }
 
 function shareMessage(session) {
