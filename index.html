@@ -1591,17 +1591,40 @@ function shareNames(session, present) {
   return shareMembers().filter((member) => typeof attendance[member.id] === 'boolean' && attendance[member.id] === present).map((member) => member.name);
 }
 
-/* Approved BroTime share art. Keep this silhouette and five bottom-filled rows. */
+/* BroTime share mug: one attendance-specific head/fill treatment over a fixed
+   glass silhouette. Every design has five interior rows; names fill upward. */
 function shareMug(session) {
   const present = shareNames(session, true);
-  const blankRows = MEMBERS.length - present.length;
+  const count = present.length;
   const edges = ['|  \\', '|   |', '|   |', '|__/', '|'];
-  const rows = edges.map((edge, index) => {
-    const name = index < blankRows ? '' : present[index - blankRows];
-    const interior = name ? (' ' + name).padEnd(9, ' ') : '         ';
-    return '  |' + interior + edge;
-  });
-  return ['      o  °', '   .oOo.oOo.', '  ( o  O  o )', '  |~~~~~~~~~|__', ...rows, "  '=========' " + present.length + '/' + MEMBERS.length].join('\n');
+  const empty = '         ';
+  const row = (interior, edge) => '  |' + interior + edge;
+  const nameRow = (name) => (' ' + name).padEnd(9, ' ');
+  let head = [];
+  let contents = [];
+
+  if (count === 5) {
+    head = ['      o  °', '   .oOo.oOo.', '  ( o  O  o )', '  |~~~~~~~~~|__'];
+    contents = present.map(nameRow);
+  } else if (count === 4) {
+    head = ['       °', '    .oOo.', '  |~~~~~~~~~|__'];
+    contents = [empty, ...present.map(nameRow)];
+  } else if (count === 3) {
+    head = ['  | .o.o.o. |__'];
+    contents = [empty, empty, ...present.map(nameRow)];
+  } else if (count === 2) {
+    head = ['  |         |__'];
+    contents = [empty, empty, '~o~~~~o~~', ...present.map(nameRow)];
+  } else if (count === 1) {
+    head = ['  |         |__'];
+    contents = [empty, empty, empty, '~~~~o~~~~', ...present.map(nameRow)];
+  } else {
+    head = ['  |         |__'];
+    contents = [empty, empty, empty, '   o  °  ', '  .oOo.  '];
+  }
+
+  const rows = contents.map((interior, index) => row(interior, edges[index]));
+  return [...head, ...rows, "  '========='", '      ' + count + '/' + MEMBERS.length].join('\n');
 }
 
 function shareMessage(session) {

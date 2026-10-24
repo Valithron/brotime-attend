@@ -38,22 +38,30 @@ function shareFor(context, sessions) {
   return context.buildShareContext({ today: "2026-10-24", share: { status: "idle", text: "", error: "", id: null } }, { sessions });
 }
 
-test("the mug has fixed dimensions, alphabetical bottom-up filling, and correct absences at every level", () => {
+test("the attendance mug uses the matching art, five interior rows, and bottom-up names at every level", () => {
   const context = makeContext();
-  for (let count = 0; count <= 5; count++) {
+  const expected = [
+    [0, ["  |         |__", "  |         |  \\", "  |         |   |", "  |         |   |", "  |   o  °  |__/", "  |  .oOo.  |", "  '========='", "      0/5"]],
+    [1, ["  |         |__", "  |         |  \\", "  |         |   |", "  |         |   |", "  |~~~~o~~~~|__/", "  | Adam    |", "  '========='", "      1/5"]],
+    [2, ["  |         |__", "  |         |  \\", "  |         |   |", "  |~o~~~~o~~|   |", "  | Adam    |__/", "  | Isaiah  |", "  '========='", "      2/5"]],
+    [3, ["  | .o.o.o. |__", "  |         |  \\", "  |         |   |", "  | Adam    |   |", "  | Isaiah  |__/", "  | Julian  |", "  '========='", "      3/5"]],
+    [4, ["       °", "    .oOo.", "  |~~~~~~~~~|__", "  |         |  \\", "  | Adam    |   |", "  | Isaiah  |   |", "  | Julian  |__/", "  | Nathan  |", "  '========='", "      4/5"]],
+    [5, ["      o  °", "   .oOo.oOo.", "  ( o  O  o )", "  |~~~~~~~~~|__", "  | Adam    |  \\", "  | Isaiah  |   |", "  | Julian  |   |", "  | Nathan  |__/", "  | Sterling|", "  '========='", "      5/5"]]
+  ];
+
+  for (const [count, expectedMug] of expected) {
     const share = shareFor(context, [session(count)]);
     assert.equal(share.complete, true);
     const message = share.message;
     assert.match(message, /^BroTime · Oct 18, 2026\nGaming · WARDOGS · Discord\n\n```/);
     const mug = message.split("```")[1].split("\n").slice(1, -1);
-    assert.equal(mug.length, 10);
-    assert.deepEqual(mug.slice(0, 4), ["      o  °", "   .oOo.oOo.", "  ( o  O  o )", "  |~~~~~~~~~|__"]);
-    assert.equal(mug[9], `  '=========' ${count}/5`);
-    assert.deepEqual(mug.slice(4, 9).map((row) => row.slice(12)), ["|  \\", "|   |", "|   |", "|__/", "|"]);
-    assert.deepEqual(mug.slice(4, 9).map((row) => row.slice(3, 12).trim()).filter(Boolean), names.slice(0, count));
-    assert.doesNotMatch(message, /John/);
+    assert.deepEqual(mug, expectedMug, `${count}/5 art`);
+
+    const bodyRows = mug.slice(-7, -2);
+    assert.equal(bodyRows.length, 5, `${count}/5 has five body rows`);
+    assert.deepEqual(bodyRows.map((line) => line.slice(3, 12).trim()).filter((inside) => names.includes(inside)), names.slice(0, count));
     assert.ok(message.endsWith("<https://brotime719.com/>"));
-    for (const row of mug.slice(4, 9)) assert.equal(row.slice(3, 12).length, 9);
+    assert.doesNotMatch(message, /John/);
     if (count < 5) assert.match(message, new RegExp(`Out: ${names.slice(count).join(", ")}`));
     else assert.doesNotMatch(message, /\nOut:/);
   }
@@ -108,16 +116,16 @@ test("the recap uses saved date and metadata, ignores future gatherings, and blo
     "Gaming · WARDOGS · Discord",
     "",
     "```",
-    "      o  °",
-    "   .oOo.oOo.",
-    "  ( o  O  o )",
+    "       °",
+    "    .oOo.",
     "  |~~~~~~~~~|__",
     "  |         |  \\",
     "  | Adam    |   |",
     "  | Isaiah  |   |",
     "  | Nathan  |__/",
     "  | Sterling|",
-    "  '=========' 4/5",
+    "  '========='",
+    "      4/5",
     "```",
     "",
     "Out: Julian",
