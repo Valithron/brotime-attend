@@ -68,6 +68,25 @@ function shareNames(session, present) {
   return shareMembers().filter((member) => typeof attendance[member.id] === 'boolean' && attendance[member.id] === present).map((member) => member.name);
 }
 
+function shareDebtText(season, session) {
+  if (!season || season.imported) return 'Beer debt: not tracked';
+  const ordered = sortSessions(season.sessions);
+  const eventIndex = ordered.findIndex((event) => event.id === session.id);
+  if (eventIndex < 0) return 'Beer debt: not tracked';
+  const throughEvent = ordered.slice(0, eventIndex + 1);
+  const C = computeSeason({ ...season, sessions: throughEvent });
+  const paid = Object.fromEntries(MEMBERS.map((member) => [
+    member.id,
+    (season.paid && season.paid[member.id] || []).filter((date) => date <= session.date)
+  ]));
+  const ledger = ledgerFor({ paid }, C);
+  const owing = shareMembers()
+    .map((member) => ({ name: member.name, owed: ledger[member.id].owed }))
+    .filter((member) => member.owed > 0)
+    .map((member) => member.name + ' owes ' + plural(member.owed, 'beer', 'beers'));
+  return 'Beer debt: ' + (owing.length ? owing.join(', ') : 'none');
+}
+
 /* BroTime share mug: one attendance-specific head/fill treatment over a fixed
    glass silhouette. Every design has five interior rows; names fill upward. */
 function shareMug(session) {
@@ -104,7 +123,7 @@ function shareMug(session) {
   return [...head, ...rows, "  '========='", '      ' + count + '/' + MEMBERS.length].join('\n');
 }
 
-function shareMessage(session) {
+function shareMessage(session, season) {
   const activity = String(session.activity || '').trim();
   const game = String(session.game || '').trim();
   const location = String(session.location || '').trim();
@@ -114,6 +133,7 @@ function shareMessage(session) {
   if (metadata) lines.push(metadata);
   lines.push('', '```', shareMug(session), '```', '');
   if (absent.length) lines.push('Out: ' + absent.join(', '), '');
+  lines.push(shareDebtText(season, session), '');
   lines.push('<' + SHARE_URL + '>');
   return lines.join('\n');
 }
@@ -135,7 +155,7 @@ function buildShareContext(S, season) {
     complete: complete,
     blocked: !!session && !complete,
     date: session ? shareDate(session.date) : '',
-    message: complete ? shareMessage(session) : '',
+    message: complete ? shareMessage(session, season) : '',
     status: status,
     text: sameGathering ? (saved.text || '') : '',
     error: sameGathering ? (saved.error || '') : '',

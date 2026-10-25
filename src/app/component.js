@@ -45,9 +45,12 @@ class Component extends DCLogic {
   async copyWeeklyRecap(payload) {
     if (this.state.dataRefreshing) { this.showToast('Attendance is updating. Try again shortly.', false); return; }
     const selected = payload && payload.id != null ? eventForShare(this.state, payload.id, payload.archive) : null;
+    const selectedSeason = payload && payload.id != null && !payload.archive
+      ? this.state.seasons.find((season) => season.sessions.some((event) => event.id === payload.id))
+      : null;
     const share = payload && payload.id != null ? {
       id: payload.id, complete: shareAttendanceComplete(selected),
-      message: shareAttendanceComplete(selected) ? shareMessage(selected) : '',
+      message: shareAttendanceComplete(selected) ? shareMessage(selected, selectedSeason) : '',
       blockedText: 'Complete attendance for this event before sharing.'
     } : buildContext(this.state).share;
     if (!share.complete || !share.message) {

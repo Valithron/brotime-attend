@@ -34,8 +34,8 @@ function session(count, date = "2026-10-18", extra = {}) {
   return { id: 1, date, activity: "Gaming", game: "WARDOGS", location: "Discord", notes: "", att, attendanceComplete: true, ...extra };
 }
 
-function shareFor(context, sessions) {
-  return context.buildShareContext({ today: "2026-10-24", share: { status: "idle", text: "", error: "", id: null } }, { sessions });
+function shareFor(context, sessions, paid = {}) {
+  return context.buildShareContext({ today: "2026-10-24", share: { status: "idle", text: "", error: "", id: null } }, { sessions, paid });
 }
 
 test("the attendance mug uses the matching art, five interior rows, and bottom-up names at every level", () => {
@@ -61,6 +61,7 @@ test("the attendance mug uses the matching art, five interior rows, and bottom-u
     assert.equal(bodyRows.length, 5, `${count}/5 has five body rows`);
     assert.deepEqual(bodyRows.map((line) => line.slice(3, 12).trim()).filter((inside) => names.includes(inside)), names.slice(0, count));
     assert.ok(message.endsWith("<https://brotime719.com/>"));
+    assert.match(message, /\nBeer debt: none\n/);
     assert.doesNotMatch(message, /John/);
     if (count < 5) assert.match(message, new RegExp(`Out: ${names.slice(count).join(", ")}`));
     else assert.doesNotMatch(message, /\nOut:/);
@@ -130,8 +131,34 @@ test("the recap uses saved date and metadata, ignores future gatherings, and blo
     "",
     "Out: Julian",
     "",
+    "Beer debt: none",
+    "",
     "<https://brotime719.com/>"
   ].join("\n"));
+});
+
+test("shared history events show beer debt as of that event date", async () => {
+  let copied = "";
+  const context = makeContext({ navigator: { clipboard: { writeText: async (text) => { copied = text; } } } });
+  const dates = ["2026-09-01", "2026-09-08", "2026-09-15", "2026-09-22", "2026-09-29"];
+  const sessions = dates.map((date, index) => session(5, date, {
+    id: index + 1,
+    att: { a: false, i: true, j: true, n: true, s: true }
+  }));
+  sessions.push(session(5, "2026-10-06", { id: 6 }));
+  const season = {
+    id: "cur", name: "2026", closed: false, imported: false, sessions,
+    paid: { a: ["2026-10-06"], i: [], j: [], n: [], s: [] }
+  };
+  const component = new context.ComponentForTest({});
+  component.state = { ...context.initialState(false), seasons: [season], today: "2026-10-24" };
+
+  await component.copyWeeklyRecap({ id: 5 });
+  assert.match(copied, /Beer debt: Adam owes 1 beer/);
+  await component.copyWeeklyRecap({ id: 6 });
+  assert.match(copied, /Beer debt: none/);
+  clearTimeout(component._shareTimer);
+  clearTimeout(component._toastTimer);
 });
 
 test("clipboard success changes the button state and failure exposes the exact message", async () => {
